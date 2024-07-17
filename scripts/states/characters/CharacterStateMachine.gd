@@ -1,6 +1,6 @@
 # Generic state machine. Initializes states and delegates engine callbacks
 # (_physics_process, _unhandled_input) to the active state.
-class_name StateMachine
+class_name CharacterStateMachine
 extends Node
 
 # Emitted when transitioning to a new state.
@@ -10,8 +10,8 @@ signal transitioned(state_name)
 @export var initial_state = NodePath()
 
 # The current active state. At the start of the game, we get the `initial_state`.
-@onready var state: State = get_node(initial_state)
-var previousState: State
+@onready var state: StateBase = get_node(initial_state)
+var previousState: StateBase
 
 
 func _ready() -> void:

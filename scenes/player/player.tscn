@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://6n2wgches1ia"]
+
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_y3w28"]
+[ext_resource type="Texture2D" uid="uid://dorrmsbd0vg42" path="res://icon.svg" id="2_koyij"]
+[ext_resource type="Script" path="res://scripts/states/characters/CharacterStateMachine.gd" id="3_h6vkd"]
+[ext_resource type="Script" path="res://scripts/states/characters/player/PlayerIdleState.gd" id="4_df0j4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfew3"]
+size = Vector2(122, 122)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kb3yf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_koyij")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_y3w28")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lfew3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kb3yf")
+animation = &"Idle"
+
+[node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -126.0
+offset_right = -88.0
+offset_bottom = -86.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3.19942, 3.10907)
+mouse_filter = 2
+color = Color(0, 1, 0, 0.403922)
+
+[node name="CharacterStateMachine" type="Node" parent="."]
+script = ExtResource("3_h6vkd")
+
+[node name="Idle" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("4_df0j4")
