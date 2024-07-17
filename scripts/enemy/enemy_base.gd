@@ -1,4 +1,4 @@
-extends Node
+extends CharacterBody2D
 class_name Enemy
 
 @onready var collision_shape = $CollisionShape2D

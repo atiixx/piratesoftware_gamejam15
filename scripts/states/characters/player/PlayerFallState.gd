@@ -13,12 +13,10 @@ func update(_delta: float) -> void:
 
 # Virtual function. Corresponds to the `_physics_process()` callback.
 func physics_update(_delta: float) -> void:
-	if(Input.is_action_just_pressed("jump") and player.velocity.y < 0):
-		state_machine.transition_to("Jump")
-	if(!player.is_on_floor() and player.velocity.y > 0):
-		state_machine.transition_to("Fall")
-	if(player.velocity.x != 0):
+	if(player.is_on_floor() and player.velocity.x > 0):
 		state_machine.transition_to("Walking")
+	if(player.is_on_floor() and player.velocity.x == 0):
+		state_machine.transition_to("Idle")
 
 
 # Virtual function. Called by the state machine upon changing the active state. The `msg` parameter
