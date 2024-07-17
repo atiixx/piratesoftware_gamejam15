@@ -1,8 +1,8 @@
 extends Node
-class_name Player
+class_name Enemy
 
 @onready var collision_shape = $CollisionShape2D
-@onready var sprite = $Sprite2D
+@onready var sprite = $AnimatedSprite2D
 
 
 # Called when the node enters the scene tree for the first time.
