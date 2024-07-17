@@ -47,6 +47,7 @@ color = Color(0, 1, 0, 0.403922)
 
 [node name="CharacterStateMachine" type="Node" parent="."]
 script = ExtResource("3_h6vkd")
+initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("4_df0j4")
