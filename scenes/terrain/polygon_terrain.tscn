@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://srkw64ecilf1"]
+
+[ext_resource type="Script" path="res://scripts/terrain/polygon_terrain.gd" id="1_r861n"]
+[ext_resource type="Shader" path="res://shaders/terrain/polygon_terrain.gdshader" id="2_jg5os"]
+[ext_resource type="Texture2D" uid="uid://dorrmsbd0vg42" path="res://icon.svg" id="3_ryemj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oew4f"]
+shader = ExtResource("2_jg5os")
+
+[node name="PolygonTerrain" type="StaticBody2D"]
+script = ExtResource("1_r861n")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 1)
+
+[node name="Line2D" type="Line2D" parent="."]
+material = SubResource("ShaderMaterial_oew4f")
+closed = true
+texture = ExtResource("3_ryemj")
+texture_mode = 1
+joint_mode = 2
