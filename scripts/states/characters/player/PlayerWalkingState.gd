@@ -16,10 +16,13 @@ func physics_update(_delta: float) -> void:
 	if(Input.is_action_just_pressed("jump") and player.velocity.y < 0):
 		state_machine.transition_to("Jump")
 		player.anim_tree_playback.travel("Jump")
-	if(!player.is_on_floor() and player.velocity.y > 0):
+	if(!player.is_on_floor() and player.velocity.y > 0 and !player.is_on_wall()):
 		state_machine.transition_to("Fall")
 		player.anim_tree_playback.travel("Fall")
-	if(player.velocity.x == 0):
+	if(player.is_on_wall()):
+		state_machine.transition_to("Wall")
+		player.anim_tree_playback.travel("Wall")
+	if(player.is_on_floor() and player.velocity.x == 0 and !player.is_on_wall()):
 		state_machine.transition_to("Idle")
 		player.anim_tree_playback.travel("Idle")
 

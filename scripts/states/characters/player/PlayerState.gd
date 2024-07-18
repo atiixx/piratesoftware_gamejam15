@@ -7,6 +7,7 @@ extends StateBase
 var player: Player
 var wait_for_animation: bool = false
 
+		
 func _ready() -> void:
 	# The states are children of the `Player` node so their `_ready()` callback will execute first.
 	# That's why we wait for the `owner` to be ready first.
