@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbo31gy0t2y52"]
+
+[ext_resource type="Script" path="res://scripts/terrain/grass.gd" id="1_hy57x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ujyqd"]
+
+[sub_resource type="Curve" id="Curve_1rf67"]
+_data = [Vector2(0, 1), 0.0, -1.25311, 0, 0, Vector2(1, 0), -0.702403, 0.0, 0, 0]
+point_count = 2
+
+[node name="Grass" type="Line2D"]
+material = SubResource("ShaderMaterial_ujyqd")
+points = PackedVector2Array(0, 0, 4.72325, -4.0485, 8.097, -8.097, 10.1213, -12.1455, 10.796, -16.194)
+width = 7.98
+width_curve = SubResource("Curve_1rf67")
+script = ExtResource("1_hy57x")
+surface_normal = Vector2(1, 0)
+length = 26.99
