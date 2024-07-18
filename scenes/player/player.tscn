@@ -37,39 +37,6 @@ tracks/0/keys = {
 "values": [ExtResource("2_glryq"), ExtResource("3_v2sxa"), ExtResource("4_3quwx")]
 }
 
-[sub_resource type="Animation" id="Animation_sipai"]
-resource_name = "Walk"
-length = 0.2
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [ExtResource("5_xhapd"), ExtResource("6_8pijl")]
-}
-
-[sub_resource type="Animation" id="Animation_molko"]
-resource_name = "WalkStart"
-length = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [ExtResource("7_wo5kk"), ExtResource("8_34l0x")]
-}
-
 [sub_resource type="Animation" id="Animation_nmc7u"]
 resource_name = "Jump"
 length = 0.5
@@ -101,6 +68,39 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [ExtResource("6_1midm"), ExtResource("7_esbxa")]
+}
+
+[sub_resource type="Animation" id="Animation_sipai"]
+resource_name = "Walk"
+length = 0.2
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("5_xhapd"), ExtResource("6_8pijl")]
+}
+
+[sub_resource type="Animation" id="Animation_molko"]
+resource_name = "WalkStart"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("7_wo5kk"), ExtResource("8_34l0x")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4vww3"]
@@ -208,7 +208,7 @@ position = Vector2(0, 14)
 shape = SubResource("RectangleShape2D_lfew3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("6_8pijl")
+texture = ExtResource("4_3quwx")
 
 [node name="CharacterStateMachine" type="Node" parent="."]
 script = ExtResource("3_h6vkd")

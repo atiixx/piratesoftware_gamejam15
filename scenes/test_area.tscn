@@ -1,17 +1,72 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwnqr56buo87y"]
+[gd_scene load_steps=11 format=3 uid="uid://dwnqr56buo87y"]
 
+[ext_resource type="Texture2D" uid="uid://clhkxk2kg33i3" path="res://art/2d_lights_and_shadows_neutral_point_light.webp" id="1_mdrwf"]
 [ext_resource type="PackedScene" uid="uid://6n2wgches1ia" path="res://scenes/player/player.tscn" id="1_vnexx"]
+[ext_resource type="Texture2D" uid="uid://dorrmsbd0vg42" path="res://icon.svg" id="2_dl6bu"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_uqggf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dki53"]
 size = Vector2(1253.96, 95.7001)
 
-[sub_resource type="QuadMesh" id="QuadMesh_uqggf"]
+[sub_resource type="LabelSettings" id="LabelSettings_n6vtn"]
+font_color = Color(1, 1, 1, 0.145098)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2dnlu"]
+cull_mode = 2
+polygon = PackedVector2Array(17.3052, -86.0858, -17.589, -86.0858, -18.4401, 90.2513, 18.1563, 90.2513)
+
+[sub_resource type="Animation" id="Animation_gqc07"]
+resource_name = "swing"
+length = 0.8
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(4423, 451), Vector2(4458, 471), Vector2(4551, 488), Vector2(4642, 477), Vector2(4674, 457)]
+}
+
+[sub_resource type="Animation" id="Animation_wuh4j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4423, 451)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xpok5"]
+_data = {
+"RESET": SubResource("Animation_wuh4j"),
+"swing": SubResource("Animation_gqc07")
+}
 
 [node name="TestArea" type="Node2D"]
 
 [node name="Map" type="Node" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Map"]
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="Map/StaticBody2D"]
+self_modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+z_index = -10
+position = Vector2(6350, -1654)
+scale = Vector2(4757, -5127.7)
+mesh = SubResource("QuadMesh_uqggf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/StaticBody2D"]
 position = Vector2(24708, 964)
@@ -129,6 +184,56 @@ position = Vector2(-1.53903, 3.32645)
 scale = Vector2(1245.5, 102.353)
 mesh = SubResource("QuadMesh_uqggf")
 
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="Map/StaticBody2D"]
+position = Vector2(4150, -1122)
+rotation = 1.56035
+scale = Vector2(2.42445, -3.41603)
+shape = SubResource("RectangleShape2D_dki53")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Map/StaticBody2D/CollisionShape2D12"]
+self_modulate = Color(0.167097, 0.161905, 0.0988529, 1)
+show_behind_parent = true
+position = Vector2(-1.53903, 3.32645)
+scale = Vector2(1245.5, 102.353)
+mesh = SubResource("QuadMesh_uqggf")
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="Map/StaticBody2D"]
+position = Vector2(6286, -877)
+rotation = 1.56035
+scale = Vector2(2.42445, -3.41603)
+shape = SubResource("RectangleShape2D_dki53")
+
+[node name="PointLight2D" type="PointLight2D" parent="Map"]
+position = Vector2(4570, 207)
+energy = 7.62
+shadow_enabled = true
+texture = ExtResource("1_mdrwf")
+texture_scale = 4.59
+
+[node name="Label" type="Label" parent="Map"]
+offset_left = 4393.0
+offset_top = 142.0
+offset_right = 4505.0
+offset_bottom = 165.0
+text = "Its scary time!!"
+label_settings = SubResource("LabelSettings_n6vtn")
+
+[node name="Sprite2D" type="Sprite2D" parent="Map"]
+position = Vector2(4423, 451)
+scale = Vector2(0.519124, 0.519124)
+texture = ExtResource("2_dl6bu")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Map/Sprite2D"]
+position = Vector2(1, -5)
+scale = Vector2(3.52495, 0.720211)
+occluder = SubResource("OccluderPolygon2D_2dnlu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Map/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_xpok5")
+}
+autoplay = "swing"
+
 [node name="Player" parent="." instance=ExtResource("1_vnexx")]
-position = Vector2(223, 81)
+position = Vector2(3247, 276)
 scale = Vector2(0.28, 0.28)
