@@ -15,10 +15,13 @@ func update(_delta: float) -> void:
 func physics_update(_delta: float) -> void:
 	if(Input.is_action_just_pressed("jump") and player.velocity.y < 0):
 		state_machine.transition_to("Jump")
+		player.anim_tree_playback.travel("Jump")
 	if(!player.is_on_floor() and player.velocity.y > 0):
 		state_machine.transition_to("Fall")
+		player.anim_tree_playback.travel("Fall")
 	if(player.velocity.x != 0):
 		state_machine.transition_to("Walking")
+		player.anim_tree_playback.travel("Walk")
 
 
 # Virtual function. Called by the state machine upon changing the active state. The `msg` parameter
@@ -31,3 +34,4 @@ func enter(_msg := {}) -> void:
 # to clean up the state.
 func exit() -> void:
 	pass
+

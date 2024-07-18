@@ -130,3 +130,5 @@ scale = Vector2(1245.5, 102.353)
 mesh = SubResource("QuadMesh_uqggf")
 
 [node name="Player" parent="." instance=ExtResource("1_vnexx")]
+position = Vector2(223, 81)
+scale = Vector2(0.28, 0.28)

@@ -5,7 +5,7 @@ extends StateBase
 
 # Typed reference to the player node.
 var player: Player
-
+var wait_for_animation: bool = false
 
 func _ready() -> void:
 	# The states are children of the `Player` node so their `_ready()` callback will execute first.
