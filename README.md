@@ -23,7 +23,7 @@ Entwickelt in Godot v.4.2.2
 ## Das Team
 
 - Jan Zimmermann (Wenn er nicht krank ist)
-- Ciro Cascone (Wenn er nicht Bachelorarbeit macht)
+- Ciro Cascone (Wenn er nicht Bachelorarbeit macht und heiße chicks klärt und raucht und gerade beschäftigt ist mega cool zu sein)
 - Martin Seiler (Der größte Komponist unserer Zeit)
 - Daniel Michel (Der einzige **wirkliche** Entwickler)#
 - Greg
