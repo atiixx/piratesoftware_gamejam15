@@ -24,6 +24,9 @@ float intensify(float value, float amount) {
 	return (1.0 - pow(1.0 - a, amount)) * s * 0.5 + 0.5;
 }
 
+uniform float scale : hint_range(0, 10);
+uniform float sharpening : hint_range(1, 10);
+uniform vec4 color;
 varying vec2 pos;
 
 void vertex() {
@@ -35,11 +38,11 @@ void fragment() {
 	float clamped_distance = max(distance, 0);
 	float factor = 1.0 - pow(1.0 - clamped_distance, 3);
 	float inverseFacctor = 1.0 - pow(clamped_distance, 2);
-	float value = noise(pos.xy * 0.1);
+	float value = noise(pos.xy * scale);
 
 	float intensity = 1.0 - (1.0 - (value * inverseFacctor)) * factor;
-	intensity = intensify(intensity, 3.0);
-	COLOR = vec4(0.0, 0.0, 0.0, intensity);
+	intensity = intensify(intensity, sharpening);
+	COLOR = vec4(color.xyz, intensity);
 }
 
 
