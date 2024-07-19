@@ -26,11 +26,9 @@ func _ready() -> void:
 	assert(player != null)
 
 func handle_basic_movement(delta):
-	
-
 	#fast fall
 	if Input.is_action_just_pressed("down"):
-		player.gravity = player.base_gravity * 2
+		player.gravity = player.base_gravity * 1.7
 	elif Input.is_action_just_released("down"):
 		player.gravity = player.base_gravity
 	
@@ -45,6 +43,8 @@ func handle_basic_movement(delta):
 	#remove control of player shortly after walldash for smoother walldash
 	if wall_dash and player.velocity.y < player.jump_speed / 3:
 		pass
+	elif player.is_attacking:
+		player.velocity = lerp(player.velocity, Vector2.ZERO, 0.1)
 	else:
 		#Acceleration and Deceleration
 		if direction < 0:
