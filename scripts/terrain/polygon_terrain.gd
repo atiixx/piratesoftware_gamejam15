@@ -14,10 +14,10 @@
 @onready var surface_line: Line2D = $Line2D
 @onready var detail_container: Node2D = $DetailContainer
 
-
+var old_polygon: PackedVector2Array
 var time_to_update_polygon: float = 0;
 
-var grass = preload("res://scenes/terrain/grass.tscn")
+var grass = preload("res://scenes/terrain/surface_grass.tscn")
 
 func _ready():
 	collider_polygon = get_node_or_null("CollisionPolygon2D")
@@ -30,7 +30,7 @@ func _process(delta):
 		time_to_update_polygon -= delta
 		if time_to_update_polygon < 0:
 			update_polygon()
-			time_to_update_polygon = 0.5
+			time_to_update_polygon = 0.1
 
 func flip_collider_polygon():
 	if not collider_polygon:
@@ -48,7 +48,11 @@ func update_color():
 func update_polygon():
 	if not collider_polygon:
 		return
+	if old_polygon:
+		if old_polygon == collider_polygon.polygon:
+			return
 	var polygon = collider_polygon.polygon
+	old_polygon = PackedVector2Array(polygon)
 	drawn_polygon.polygon = polygon
 	surface_line.points = polygon
 	update_details()
@@ -70,15 +74,10 @@ func update_details():
 		if normal.dot(Vector2.UP) > 0.8:
 			surface_lines.push_back(current)
 			surface_lines.push_back(next)
-			for j in range(int(along.length() / 20.0)):
-				var percent = rng.randf_range(0, 1)
-				var pos = current + along * percent
-				var g = grass.instantiate() as Grass
-				g.surface_normal = normal
-				g.position = pos
-				# g.default_color = color
-				g.length = rng.randf_range(30, 50)
-				detail_container.add_child(g)
+			var g = grass.instantiate() as SurfaceGrass
+			g.position = current
+			g.end = next - current
+			detail_container.add_child(g)
 
 		line_normals.push_back(normal)
 
