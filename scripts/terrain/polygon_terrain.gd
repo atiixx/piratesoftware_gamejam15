@@ -4,13 +4,40 @@
 	set(new_color):
 		color = new_color
 		update_color()
+@export var flip_polygon = false:
+	set(new_state):
+		flip_polygon = new_state
+		flip_collider_polygon()
 
-@onready var collider_polygon: CollisionPolygon2D = $CollisionPolygon2D
+@onready var collider_polygon: CollisionPolygon2D
 @onready var drawn_polygon: Polygon2D = $Polygon2D
 @onready var surface_line: Line2D = $Line2D
 @onready var detail_container: Node2D = $DetailContainer
 
+
+var time_to_update_polygon: float = 0;
+
 var grass = preload("res://scenes/terrain/grass.tscn")
+
+func _ready():
+	collider_polygon = get_node_or_null("CollisionPolygon2D")
+	surface_line.material = surface_line.material.duplicate()
+	update_polygon()
+	update_color()
+
+func _process(delta):
+	if Engine.is_editor_hint():
+		time_to_update_polygon -= delta
+		if time_to_update_polygon < 0:
+			update_polygon()
+			time_to_update_polygon = 0.5
+
+func flip_collider_polygon():
+	if not collider_polygon:
+		return
+	var polygon = collider_polygon.polygon
+	polygon.reverse()
+	collider_polygon.polygon = polygon
 
 func update_color():
 	if self.is_node_ready():
@@ -40,7 +67,7 @@ func update_details():
 		var next = polygon[(i + 1) % polygon.size()]
 		var along = next - current
 		var normal = along.rotated(deg_to_rad(-90)).normalized()
-		if normal.dot(Vector2.UP) > 0.9:
+		if normal.dot(Vector2.UP) > 0.8:
 			surface_lines.push_back(current)
 			surface_lines.push_back(next)
 			for j in range(int(along.length() / 20.0)):
@@ -49,21 +76,14 @@ func update_details():
 				var g = grass.instantiate() as Grass
 				g.surface_normal = normal
 				g.position = pos
-				g.default_color = color
+				# g.default_color = color
 				g.length = rng.randf_range(30, 50)
 				detail_container.add_child(g)
 
 		line_normals.push_back(normal)
 
-func _ready():
-	update_polygon()
-	update_color()
-
-func _process(_delta):
-	if Engine.is_editor_hint():
-		update_polygon()
-
 func _get_configuration_warnings():
+	collider_polygon = get_node_or_null("CollisionPolygon2D")
 	if not collider_polygon:
 		return ["This node requires a CollisionPolygon2D as child node."]
 	if collider_polygon.transform != Transform2D():
