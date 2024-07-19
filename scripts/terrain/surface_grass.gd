@@ -19,6 +19,8 @@ func _ready():
 	setup_grass()
 
 func _process(delta):
+	if Engine.is_editor_hint():
+		return
 	var global_pos = global_position
 	for i in range(grass_positions.size()):
 		var pos = global_pos + grass_positions[i]
