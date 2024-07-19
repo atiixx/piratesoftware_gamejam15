@@ -42,3 +42,4 @@ func check_for_transitions():
 	if(player.is_on_wall_only() and get_wall_press_state() != WALL_DIRECTION.NONE):
 		state_machine.transition_to("Wall")
 		player.anim_tree_playback.travel("Wall")
+

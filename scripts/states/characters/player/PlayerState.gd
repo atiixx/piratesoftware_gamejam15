@@ -26,8 +26,7 @@ func _ready() -> void:
 	assert(player != null)
 
 func handle_basic_movement(delta):
-	# Add the gravity.
-	player.velocity.y += player.gravity * delta
+	
 
 	#fast fall
 	if Input.is_action_just_pressed("down"):

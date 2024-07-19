@@ -214,7 +214,7 @@ scale = Vector2(1245.5, 102.353)
 mesh = SubResource("QuadMesh_uqggf")
 
 [node name="CollisionShape2D15" type="CollisionShape2D" parent="Map/StaticBody2D"]
-position = Vector2(668, -576)
+position = Vector2(668, -601)
 rotation = 1.5708
 scale = Vector2(1.87068, -2.43535)
 shape = SubResource("RectangleShape2D_dki53")
@@ -222,8 +222,8 @@ shape = SubResource("RectangleShape2D_dki53")
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Map/StaticBody2D/CollisionShape2D15"]
 self_modulate = Color(0.167097, 0.161905, 0.0988529, 1)
 show_behind_parent = true
-position = Vector2(-1.53903, 3.32645)
-scale = Vector2(1245.5, 102.353)
+position = Vector2(4.8111, 0.410616)
+scale = Vector2(1249.49, 94.9737)
 mesh = SubResource("QuadMesh_uqggf")
 
 [node name="CollisionShape2D12" type="CollisionShape2D" parent="Map/StaticBody2D"]

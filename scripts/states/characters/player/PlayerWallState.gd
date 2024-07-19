@@ -49,6 +49,9 @@ func check_for_transition():
 		state_machine.transition_to("Jump")
 		player.anim_tree_playback.travel("Jump")
 	if(get_wall_press_state() == WALL_DIRECTION.NONE):
+		if(player.velocity.y < 0):
+			state_machine.transition_to("Jump", {"no_boost": true})
+			player.anim_tree_playback.travel("Jump")
 		if(!player.is_on_floor() and player.velocity.y > 0):
 			state_machine.transition_to("Fall")
 			player.anim_tree_playback.travel("Fall")

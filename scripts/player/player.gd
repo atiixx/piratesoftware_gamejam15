@@ -4,10 +4,12 @@ class_name Player
 @export var speed = 400.0
 @export var jump_speed = -700.0
 @onready var anim_tree_playback:AnimationNodeStateMachinePlayback = $Animations/AnimationTree["parameters/playback"]
+@onready var anim_player: AnimationPlayer = $Animations/AnimationPlayer
 @onready var sprite := $Sprite2D
 @onready var collision_shape = $CollisionShape2D
 @onready var l_wall_collision_shape = $WallCollisionShape2DLeft
 @onready var r_wall_collision_shape = $WallCollisionShape2DRight
+@onready var slide_collision_shape = $SlideCollisionShape2D
 var acc := 200
 
 # Get the gravity from the project settings so you can sync with rigid body nodes.
@@ -24,5 +26,6 @@ func _process(delta):
 
 
 func _physics_process(delta):
-	pass
+	# Add the gravity.
+	velocity.y += gravity * delta
 	
