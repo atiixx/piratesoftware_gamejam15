@@ -54,7 +54,7 @@ func check_for_transition():
 	if(player.is_on_wall_only() and get_wall_press_state() != WALL_DIRECTION.NONE):
 		state_machine.transition_to("Wall")
 		player.anim_tree_playback.travel("Wall")
-	if(player.is_on_floor() and !(Input.is_action_pressed("left") or Input.is_action_pressed("right")) and player.velocity.x == 0 and !player.is_on_wall()):
+	if(!(Input.is_action_pressed("left") or Input.is_action_pressed("right")) and player.velocity.x == 0):
 		state_machine.transition_to("Idle")
 		player.anim_tree_playback.travel("Idle")
 
