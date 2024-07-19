@@ -63,6 +63,7 @@ _data = {
 }
 
 [node name="TestArea" type="Node2D"]
+position = Vector2(218, 26)
 
 [node name="Map" type="Node" parent="."]
 
@@ -212,6 +213,19 @@ position = Vector2(-1.53903, 3.32645)
 scale = Vector2(1245.5, 102.353)
 mesh = SubResource("QuadMesh_uqggf")
 
+[node name="CollisionShape2D15" type="CollisionShape2D" parent="Map/StaticBody2D"]
+position = Vector2(668, -576)
+rotation = 1.5708
+scale = Vector2(1.87068, -2.43535)
+shape = SubResource("RectangleShape2D_dki53")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Map/StaticBody2D/CollisionShape2D15"]
+self_modulate = Color(0.167097, 0.161905, 0.0988529, 1)
+show_behind_parent = true
+position = Vector2(-1.53903, 3.32645)
+scale = Vector2(1245.5, 102.353)
+mesh = SubResource("QuadMesh_uqggf")
+
 [node name="CollisionShape2D12" type="CollisionShape2D" parent="Map/StaticBody2D"]
 position = Vector2(4150, -1122)
 rotation = 1.56035
@@ -273,4 +287,4 @@ energy = 0.93
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_vnexx")]
-position = Vector2(3222, 138)
+position = Vector2(1048, -254)

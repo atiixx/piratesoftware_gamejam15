@@ -238,14 +238,14 @@ states/WalkEnd/position = Vector2(320, 287)
 states/WalkStart/node = SubResource("AnimationNodeAnimation_lp6d6")
 states/WalkStart/position = Vector2(198, 287)
 states/Wall/node = SubResource("AnimationNodeAnimation_hmor2")
-states/Wall/position = Vector2(536, 87)
+states/Wall/position = Vector2(490, 127)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_nvxts"), "WalkStart", "Walk", SubResource("AnimationNodeStateMachineTransition_istqd"), "Idle", "WalkStart", SubResource("AnimationNodeStateMachineTransition_n4im7"), "Walk", "WalkEnd", SubResource("AnimationNodeStateMachineTransition_30qf2"), "WalkEnd", "Idle", SubResource("AnimationNodeStateMachineTransition_4thnb"), "JumpStart", "Jump", SubResource("AnimationNodeStateMachineTransition_opfuw"), "Idle", "JumpStart", SubResource("AnimationNodeStateMachineTransition_aj3g6"), "JumpEnd", "Idle", SubResource("AnimationNodeStateMachineTransition_fgshy"), "Walk", "JumpStart", SubResource("AnimationNodeStateMachineTransition_ayimj"), "JumpEnd", "Walk", SubResource("AnimationNodeStateMachineTransition_07yre"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_l1mvx"), "Walk", "Fall", SubResource("AnimationNodeStateMachineTransition_45c5c"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_4ps5y"), "Fall", "JumpEnd", SubResource("AnimationNodeStateMachineTransition_lkwuh"), "Wall", "Fall", SubResource("AnimationNodeStateMachineTransition_fs4hv"), "Wall", "Jump", SubResource("AnimationNodeStateMachineTransition_34s3w"), "Wall", "Walk", SubResource("AnimationNodeStateMachineTransition_5cv26"), "Wall", "Idle", SubResource("AnimationNodeStateMachineTransition_exk20"), "Idle", "Wall", SubResource("AnimationNodeStateMachineTransition_vb6s6"), "Fall", "Wall", SubResource("AnimationNodeStateMachineTransition_aosfh"), "Walk", "Wall", SubResource("AnimationNodeStateMachineTransition_qrbnf"), "Jump", "Wall", SubResource("AnimationNodeStateMachineTransition_7auke")]
+graph_offset = Vector2(22, 59)
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(2, 0)
 scale = Vector2(0.25, 0.25)
 floor_snap_length = 9.0
-safe_margin = 0.1
 script = ExtResource("1_y3w28")
 speed = 750.0
 
@@ -255,19 +255,19 @@ scale = Vector2(2.06358, 1.08584)
 shape = SubResource("RectangleShape2D_lfew3")
 
 [node name="WallCollisionShape2DLeft" type="CollisionShape2D" parent="."]
-position = Vector2(-71.866, 4)
+position = Vector2(-68, 4)
 scale = Vector2(9.15291, -21.6378)
 shape = SubResource("RectangleShape2D_orqac")
 disabled = true
 
 [node name="WallCollisionShape2DRight" type="CollisionShape2D" parent="."]
-position = Vector2(72, 4)
+position = Vector2(68, 4)
 scale = Vector2(9.15291, -21.6378)
 shape = SubResource("RectangleShape2D_orqac")
 disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("4_3quwx")
+texture = ExtResource("2_gce7p")
 
 [node name="CharacterStateMachine" type="Node" parent="."]
 script = ExtResource("3_h6vkd")
@@ -308,15 +308,3 @@ libraries = {
 root_node = NodePath("../..")
 tree_root = SubResource("AnimationNodeStateMachine_bcaem")
 anim_player = NodePath("../AnimationPlayer")
-
-[node name="WalldetectorLeft" type="RayCast2D" parent="."]
-position = Vector2(-8, 0)
-rotation = 1.5708
-scale = Vector2(4, 4)
-target_position = Vector2(0, 75)
-
-[node name="WalldetectorRight" type="RayCast2D" parent="."]
-position = Vector2(-8, 0)
-rotation = -1.5708
-scale = Vector2(4, 4)
-target_position = Vector2(0, 75)
