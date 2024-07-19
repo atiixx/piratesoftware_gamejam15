@@ -22,7 +22,6 @@ func physics_update(_delta: float) -> void:
 # Virtual function. Called by the state machine upon changing the active state. The `msg` parameter
 # is a dictionary with arbitrary data the state can use to initialize itself.
 func enter(_msg := {}) -> void:
-	print("Jump")
 	if !_msg.has("no_boost"):	
 		player.velocity.y = player.jump_speed
 	match get_wall_press_state():

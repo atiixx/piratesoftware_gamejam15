@@ -309,7 +309,7 @@ shape = SubResource("RectangleShape2D_orqac")
 disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_glryq")
+texture = ExtResource("3_v2sxa")
 
 [node name="CharacterStateMachine" type="Node" parent="."]
 script = ExtResource("3_h6vkd")
