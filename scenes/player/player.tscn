@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=3 uid="uid://6n2wgches1ia"]
+[gd_scene load_steps=103 format=3 uid="uid://6n2wgches1ia"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_y3w28"]
 [ext_resource type="Texture2D" uid="uid://nu10fcvmpwba" path="res://art/character/Slide/Slide.png" id="2_87pik"]
@@ -43,6 +43,9 @@ size = Vector2(9.68615, 5.79865)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y8ycd"]
 size = Vector2(10.161, 6.52347)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a6y4r"]
+size = Vector2(94, 56)
 
 [sub_resource type="Animation" id="Animation_wvj73"]
 resource_name = "Attack"
@@ -595,11 +598,8 @@ disabled = true
 debug_color = Color(0.984236, 0, 0.345506, 0.42)
 
 [node name="SlideCollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(-4, 91.411)
-scale = Vector2(14.1129, -12.0378)
-shape = SubResource("RectangleShape2D_orqac")
-disabled = true
+position = Vector2(0, 22)
+shape = SubResource("RectangleShape2D_a6y4r")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -2)
