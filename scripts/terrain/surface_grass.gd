@@ -1,6 +1,8 @@
 @tool extends Node2D
 class_name SurfaceGrass
 
+@onready var enabler: VisibleOnScreenEnabler2D = $VisibleOnScreenEnabler2D
+
 @export var end: Vector2 = Vector2(100, 0):
 	set(new_end):
 		end = new_end
@@ -26,7 +28,7 @@ func _process(delta):
 		var pos = global_pos + grass_positions[i]
 		var angle = grass_angles[i]
 		var spring_force = -angle * 5
-		var dampen_force = grass_velocities[i] * grass_velocities[i] * -sign(grass_velocities[i]) * 0.4
+		var dampen_force = grass_velocities[i] * grass_velocities[i] * - sign(grass_velocities[i]) * 0.4
 		var wind_strength = (noise(Vector2(pos.x * 0.001, Time.get_ticks_msec() * 0.00005)) - 0.5) * 50
 		var direction = Vector2.from_angle(angle)
 		var wind_force = Vector2(wind_strength, 0).dot(direction)
@@ -36,6 +38,14 @@ func _process(delta):
 	queue_redraw()
 
 func setup_grass():
+	if enabler:
+		var rect_padding: float = 100;
+		enabler.rect = Rect2(
+			min(0, end.x) - rect_padding,
+			min(0, end.y) - rect_padding,
+			abs(end.x) + 2 * rect_padding,
+			abs(end.y) + 2 * rect_padding
+		)
 	grass_positions = []
 	grass_angles = []
 	grass_velocities = []
@@ -56,13 +66,13 @@ func setup_grass():
 
 func _draw():
 	var point_count = 5
-	var normal = (end.rotated(deg_to_rad(-90)).normalized() * Vector2.DOWN).normalized()
+	var normal = (end.rotated(deg_to_rad( - 90)).normalized() * Vector2.DOWN).normalized()
 	for i in range(grass_positions.size()):
 		var pos = grass_positions[i]
 		var angle = grass_angles[i]
 		var size = grass_sizes[i]
 		# var velocity = grass_velocities[i]
-		var direction = Vector2.from_angle(angle + deg_to_rad(-90))
+		var direction = Vector2.from_angle(angle + deg_to_rad( - 90))
 		var current_pos = Vector2(pos)
 		var center_points = []
 		for j in range(point_count):
@@ -89,17 +99,12 @@ func _draw():
 
 	pass
 
-
-
-
-
-
 func random(uv: Vector2):
 	uv = Vector2(
 		uv.dot(Vector2(127.1, 311.7)),
 		uv.dot(Vector2(269.5, 183.3))
 	)
-	return Vector2(-1.0, -1.0) + 2.0 * vec_frac(Vector2(sin(uv.x), sin(uv.y)) * 43758.5453123);
+	return Vector2( - 1.0, -1.0) + 2.0 * vec_frac(Vector2(sin(uv.x), sin(uv.y)) * 43758.5453123);
 
 func frac(val: float):
 	return val - int(val)
