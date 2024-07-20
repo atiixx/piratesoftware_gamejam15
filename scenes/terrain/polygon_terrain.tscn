@@ -1,28 +1,36 @@
-[gd_scene load_steps=5 format=3 uid="uid://srkw64ecilf1"]
+[gd_scene load_steps=6 format=3 uid="uid://srkw64ecilf1"]
 
 [ext_resource type="Script" path="res://scripts/terrain/polygon_terrain.gd" id="1_r861n"]
 [ext_resource type="Shader" path="res://shaders/terrain/polygon_terrain.gdshader" id="2_jg5os"]
-[ext_resource type="Texture2D" uid="uid://dorrmsbd0vg42" path="res://icon.svg" id="3_ryemj"]
+[ext_resource type="Shader" path="res://shaders/terrain/polygon_inside.gdshader" id="2_x36is"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2dbhp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5xsxa"]
+shader = ExtResource("2_x36is")
+shader_parameter/color = null
+shader_parameter/highlight_color = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8mknq"]
 shader = ExtResource("2_jg5os")
+shader_parameter/color = null
+shader_parameter/highlight_color = null
 shader_parameter/scale = 0.03
 shader_parameter/sharpening = 10.0
-shader_parameter/color = null
 
 [node name="PolygonTerrain" type="StaticBody2D"]
 script = ExtResource("1_r861n")
+color = Color(0.08, 0.0712, 0.0624, 1)
+highlight_color = Color(0.12, 0.102, 0.084, 1)
 flip_polygon = true
 
 [node name="DetailContainer" type="Node2D" parent="."]
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(0, 0, 0, 1)
+material = SubResource("ShaderMaterial_5xsxa")
+color = Color(0.08, 0.0712, 0.0624, 1)
 
 [node name="Line2D" type="Line2D" parent="."]
-material = SubResource("ShaderMaterial_2dbhp")
+material = SubResource("ShaderMaterial_8mknq")
 closed = true
 width = 30.0
-texture = ExtResource("3_ryemj")
 texture_mode = 2
 joint_mode = 2

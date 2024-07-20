@@ -3,6 +3,7 @@ class_name SurfaceGrass
 
 @onready var enabler: VisibleOnScreenEnabler2D = $VisibleOnScreenEnabler2D
 
+@export var color: Color = Color.BLACK
 @export var end: Vector2 = Vector2(100, 0):
 	set(new_end):
 		end = new_end
@@ -39,7 +40,7 @@ func _process(delta):
 
 func setup_grass():
 	if enabler:
-		var rect_padding: float = 100;
+		var rect_padding: float = 100
 		enabler.rect = Rect2(
 			min(0, end.x) - rect_padding,
 			min(0, end.y) - rect_padding,
@@ -95,7 +96,7 @@ func _draw():
 			var offset = size.x * 0.5 * (1 - (j / (point_count - 1.0)))
 			polygon.push_back(current + tangent * offset)
 			polygon.push_front(current - tangent * offset)
-		draw_colored_polygon(PackedVector2Array(polygon), Color.BLACK)
+		draw_colored_polygon(PackedVector2Array(polygon), color)
 
 	pass
 
@@ -104,7 +105,7 @@ func random(uv: Vector2):
 		uv.dot(Vector2(127.1, 311.7)),
 		uv.dot(Vector2(269.5, 183.3))
 	)
-	return Vector2( - 1.0, -1.0) + 2.0 * vec_frac(Vector2(sin(uv.x), sin(uv.y)) * 43758.5453123);
+	return Vector2( - 1.0, -1.0) + 2.0 * vec_frac(Vector2(sin(uv.x), sin(uv.y)) * 43758.5453123)
 
 func frac(val: float):
 	return val - int(val)

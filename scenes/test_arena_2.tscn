@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c48akcwerbxxg"]
+
+[ext_resource type="PackedScene" uid="uid://srkw64ecilf1" path="res://scenes/terrain/polygon_terrain.tscn" id="1_6cgiy"]
+[ext_resource type="PackedScene" uid="uid://6n2wgches1ia" path="res://scenes/player/player.tscn" id="2_oxmw1"]
+
+[node name="TestArena2" type="Node2D"]
+
+[node name="PolygonTerrain" parent="." instance=ExtResource("1_6cgiy")]
+position = Vector2(363, 193)
+flip_polygon = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PolygonTerrain"]
+polygon = PackedVector2Array(-1630, 2057, -2219, -168, -2134, -1775, -598, -2405, 1650, -2477, 3602, -2581, 4226, -2341, 4282, -1813, 4114, -1205, 3698, -533, 2966, -55, 2604, 48, 2386, 76, 2179, 44, 1928, -41, 1607, -287, 1226, -829, 637, -1400, -374, -1383, -409, -1349, -393, -226, -364, -198, 232, -171, 451, -96, 915, 19, 1195, 27, 1578, 132, 1838, 233, 2206, 251, 2651, 228, 2918, 164, 3217, 104, 3445, 78, 3705, 104, 3928, 112, 4152, 89, 4423, 2, 4700, -110, 4892, -189, 5071, -294, 5239, -371, 5498, -447, 5781, -506, 5977, -514, 6136, -492, 6320, -447, 6531, -414, 6870, -270, 7451, -113, 7883, -37, 8439, 18, 8646, -134, 8960, -516, 9235, -1282, 9731, -2218, 10747, -1778, 10948.7, -707.435, 12136, -163, 12407, 2193, 7567.79, 2223.8, 2246, 2200, 195, 2183)
+
+[node name="Player" parent="." instance=ExtResource("2_oxmw1")]
+position = Vector2(6396, -520)
