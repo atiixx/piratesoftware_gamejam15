@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=3 uid="uid://6n2wgches1ia"]
+[gd_scene load_steps=108 format=3 uid="uid://6n2wgches1ia"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_y3w28"]
 [ext_resource type="Texture2D" uid="uid://nu10fcvmpwba" path="res://art/character/Slide/Slide.png" id="2_87pik"]
@@ -22,6 +22,11 @@
 [ext_resource type="Script" path="res://scripts/states/characters/player/PlayerFallState.gd" id="7_yrxr1"]
 [ext_resource type="Script" path="res://scripts/states/characters/player/PlayerWallState.gd" id="8_6wpxx"]
 [ext_resource type="Texture2D" uid="uid://bqe0avfkfvya5" path="res://art/character/Walk/walk1.png" id="8_34l0x"]
+[ext_resource type="Script" path="res://scripts/states/characters/player/modes/ModeStateMachine.gd" id="12_kpybu"]
+[ext_resource type="Script" path="res://scripts/states/characters/player/modes/BasicModeState.gd" id="13_7q07r"]
+[ext_resource type="Script" path="res://scripts/states/characters/player/modes/SkeletonModeState.gd" id="14_vlh21"]
+[ext_resource type="Script" path="res://scripts/states/characters/player/modes/SpiderModeState.gd" id="15_u2kuf"]
+[ext_resource type="Script" path="res://scripts/states/characters/player/modes/StoneModeState.gd" id="16_xnyk7"]
 [ext_resource type="Texture2D" uid="uid://cqqydlsf81226" path="res://art/character/Attack/attack2.png" id="21_vawyp"]
 [ext_resource type="Texture2D" uid="uid://dj44mncmtu4aq" path="res://art/character/Attack/attack3.png" id="22_2d40g"]
 [ext_resource type="Texture2D" uid="uid://utoelingev28" path="res://art/character/Attack/attack4.png" id="23_a5co6"]
@@ -640,6 +645,22 @@ script = ExtResource("7_yrxr1")
 
 [node name="Wall" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("8_6wpxx")
+
+[node name="ModeStateMachine" type="Node" parent="."]
+script = ExtResource("12_kpybu")
+initial_state = NodePath("Basic")
+
+[node name="Basic" type="Node" parent="ModeStateMachine"]
+script = ExtResource("13_7q07r")
+
+[node name="Skeleton" type="Node" parent="ModeStateMachine"]
+script = ExtResource("14_vlh21")
+
+[node name="Spider" type="Node" parent="ModeStateMachine"]
+script = ExtResource("15_u2kuf")
+
+[node name="Stone" type="Node" parent="ModeStateMachine"]
+script = ExtResource("16_xnyk7")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -81)
