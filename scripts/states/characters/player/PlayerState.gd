@@ -5,8 +5,6 @@ extends StateBase
 
 # Typed reference to the player node.
 var player: Player
-var wall_dash := false
-
 
 func _ready() -> void:
 	# The states are children of the `Player` node so their `_ready()` callback will execute first.
@@ -35,8 +33,9 @@ func handle_basic_movement(delta):
 
 	var direction = Input.get_axis("left", "right")
 	
+	
 	#remove control of player shortly after walldash for smoother walldash
-	if wall_dash and player.velocity.y < player.jump_speed / 3:
+	if player.wall_dash and player.velocity.y < player.jump_speed / 3:
 		pass
 	elif player.is_attacking:
 		player.velocity = lerp(player.velocity, Vector2.ZERO, 0.1)
@@ -72,16 +71,14 @@ func handle_slope_rotation():
 
 # Returns direction of Wall via WALL_DIRECTION Enum if player is pressed against a wall
 func get_wall_press_state():
-	if player.is_on_wall_only():
-		var collision = player.get_last_slide_collision()
-		var direction = Input.get_axis("left", "right")
-		if collision:
-			var normal = collision.get_normal()
-			if normal.x > 0 and direction < 0: 
-				return Enums.WALL_DIRECTION.LEFT
-			elif normal.x < 0 and direction > 0:  # Colliding with a wall on the left
-				return Enums.WALL_DIRECTION.RIGHT
-	
+	var direction = Input.get_axis("left", "right")
+	if player.l_up_wall_raycast.is_colliding() and player.l_down_wall_raycast.is_colliding():
+		if direction < 0: 
+			return Enums.WALL_DIRECTION.LEFT
+	elif player.r_up_wall_raycast.is_colliding() and player.r_down_wall_raycast.is_colliding():
+		if direction > 0:
+			return Enums.WALL_DIRECTION.RIGHT
+
 	return Enums.WALL_DIRECTION.NONE
 
 # Returns direction of Wall via WALL_DIRECTION Enum if player is standing next to a wall
