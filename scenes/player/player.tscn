@@ -34,8 +34,8 @@
 [ext_resource type="Texture2D" uid="uid://blksbr7k6xhyq" path="res://art/character/DownAttack/downattack3.png" id="27_echa3"]
 [ext_resource type="Texture2D" uid="uid://c2yo1eufcewkd" path="res://art/character/DownAttack/downattack4.png" id="28_sj6nu"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfew3"]
-size = Vector2(94, 100)
+[sub_resource type="CircleShape2D" id="CircleShape2D_8oj0n"]
+radius = 50.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_orqac"]
 size = Vector2(60, 100)
@@ -562,10 +562,11 @@ graph_offset = Vector2(22, 59)
 floor_snap_length = 9.0
 script = ExtResource("1_y3w28")
 speed = 750.0
+jump_speed = -1000.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 3.14159
-shape = SubResource("RectangleShape2D_lfew3")
+shape = SubResource("CircleShape2D_8oj0n")
 
 [node name="WallCollisionShape2DLeft" type="CollisionShape2D" parent="."]
 position = Vector2(-17, 0)
@@ -603,13 +604,15 @@ disabled = true
 debug_color = Color(0.984236, 0, 0.345506, 0.42)
 
 [node name="SlideCollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 22)
 shape = SubResource("RectangleShape2D_a6y4r")
+disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -2)
 scale = Vector2(0.24, 0.24)
-texture = ExtResource("3_v2sxa")
+texture = ExtResource("2_glryq")
 
 [node name="AttackSprite2D" type="Sprite2D" parent="Sprite2D"]
 visible = false
@@ -684,5 +687,31 @@ anim_player = NodePath("../AnimationPlayer")
 [node name="AttackCooldown" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="Raycasts" type="Node2D" parent="."]
+
+[node name="FloorDetection" type="RayCast2D" parent="Raycasts"]
+position = Vector2(5, 0)
+target_position = Vector2(0, 80)
+
+[node name="FloorDetection2" type="RayCast2D" parent="Raycasts"]
+position = Vector2(-5, 0)
+target_position = Vector2(0, 80)
+
+[node name="LUpWallDetection" type="RayCast2D" parent="Raycasts"]
+position = Vector2(0, -30)
+target_position = Vector2(-50, 0)
+
+[node name="RUpWallDetection" type="RayCast2D" parent="Raycasts"]
+position = Vector2(0, -30)
+target_position = Vector2(50, 0)
+
+[node name="LDownWallDetection" type="RayCast2D" parent="Raycasts"]
+position = Vector2(0, 30)
+target_position = Vector2(-50, 0)
+
+[node name="RDownWallDetection" type="RayCast2D" parent="Raycasts"]
+position = Vector2(0, 30)
+target_position = Vector2(50, 0)
 
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_cd_timer_timeout"]

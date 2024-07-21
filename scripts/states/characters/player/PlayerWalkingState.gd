@@ -25,6 +25,7 @@ func physics_update(_delta: float) -> void:
 	if !sliding:
 		handle_basic_movement(_delta)
 	player.move_and_slide()
+	handle_slope_rotation()
 	check_for_transition()	
 	
 
@@ -51,7 +52,7 @@ func check_for_transition():
 	if(!player.is_on_floor() and player.velocity.y > 0 and !player.is_on_wall()):
 		state_machine.transition_to("Fall")
 		player.anim_tree_playback.travel("Fall")
-	if(player.is_on_wall_only() and get_wall_press_state() != WALL_DIRECTION.NONE):
+	if(player.is_on_wall_only() and get_wall_press_state() != Enums.WALL_DIRECTION.NONE):
 		state_machine.transition_to("Wall")
 		player.anim_tree_playback.travel("Wall")
 	if(!(Input.is_action_pressed("left") or Input.is_action_pressed("right")) and player.velocity.x == 0):

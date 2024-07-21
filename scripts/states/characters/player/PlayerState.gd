@@ -3,11 +3,6 @@
 class_name PlayerState
 extends StateBase
 
-enum WALL_DIRECTION {
-	NONE,
-	LEFT,
-	RIGHT
-}
 # Typed reference to the player node.
 var player: Player
 var wall_dash := false
@@ -56,6 +51,25 @@ func handle_basic_movement(delta):
 		else:
 			player.velocity.x = lerp(player.velocity.x, 0.0, 1)
 
+
+func handle_slope_rotation():
+	var different_collisions = false
+	if player.floor_raycast.is_colliding() and player.floor_raycast2.is_colliding():
+		var floor_collision_normal1 = player.floor_raycast.get_collision_normal()
+		var floor_collision_normal2 = player.floor_raycast2.get_collision_normal()
+		var normal_distance = (floor_collision_normal1 - floor_collision_normal2).length()
+		different_collisions = normal_distance > 0.05
+		if !different_collisions:
+			player.rotation = lerp(player.rotation, player.floor_raycast.get_collision_normal().angle() + PI / 2, 0.5)
+			player.floor_raycast.rotation = -player.rotation
+			player.floor_raycast2.rotation = -player.rotation
+	
+	if !player.floor_raycast.is_colliding() and !player.floor_raycast2.is_colliding():
+		player.rotation = 0
+		player.floor_raycast.rotation = 0
+		player.floor_raycast2.rotation = 0
+
+
 # Returns direction of Wall via WALL_DIRECTION Enum if player is pressed against a wall
 func get_wall_press_state():
 	if player.is_on_wall_only():
@@ -64,11 +78,11 @@ func get_wall_press_state():
 		if collision:
 			var normal = collision.get_normal()
 			if normal.x > 0 and direction < 0: 
-				return WALL_DIRECTION.LEFT
+				return Enums.WALL_DIRECTION.LEFT
 			elif normal.x < 0 and direction > 0:  # Colliding with a wall on the left
-				return WALL_DIRECTION.RIGHT
+				return Enums.WALL_DIRECTION.RIGHT
 	
-	return WALL_DIRECTION.NONE
+	return Enums.WALL_DIRECTION.NONE
 
 # Returns direction of Wall via WALL_DIRECTION Enum if player is standing next to a wall
 func get_wall_direction():
@@ -77,9 +91,9 @@ func get_wall_direction():
 		if collision:
 			var normal = collision.get_normal()
 			if normal.x > 0:  # Colliding with a wall on the right
-				return WALL_DIRECTION.LEFT
+				return Enums.WALL_DIRECTION.LEFT
 			elif normal.x < 0:  # Colliding with a wall on the left
-				return WALL_DIRECTION.RIGHT
+				return Enums.WALL_DIRECTION.RIGHT
 	
-	return WALL_DIRECTION.NONE
+	return Enums.WALL_DIRECTION.NONE
 	
