@@ -73,10 +73,12 @@ func handle_slope_rotation():
 func get_wall_press_state():
 	var direction = Input.get_axis("left", "right")
 	if player.l_up_wall_raycast.is_colliding() and player.l_down_wall_raycast.is_colliding():
-		if direction < 0: 
+		var normal = player.l_up_wall_raycast.get_collision_normal()
+		if direction < 0 and player.velocity.x <= 0: 
 			return Enums.WALL_DIRECTION.LEFT
 	elif player.r_up_wall_raycast.is_colliding() and player.r_down_wall_raycast.is_colliding():
-		if direction > 0:
+		var normal = player.r_up_wall_raycast.get_collision_normal()
+		if direction > 0 and player.velocity.x >= 0:
 			return Enums.WALL_DIRECTION.RIGHT
 
 	return Enums.WALL_DIRECTION.NONE

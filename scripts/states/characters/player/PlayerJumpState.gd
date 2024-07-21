@@ -48,7 +48,7 @@ func enter(_msg := {}) -> void:
 # Virtual function. Called by the state machine before changing the active state. Use this function
 # to clean up the state.
 func exit() -> void:
-	var jumped = false
+	jumped = false
 	player.wall_dash = false
 
 func check_for_transition():
@@ -58,6 +58,6 @@ func check_for_transition():
 	if((Input.is_action_just_pressed("left") or Input.is_action_just_pressed("right")) and player.is_on_floor() and !player.is_on_wall()):
 		state_machine.transition_to("Walking")
 		player.anim_tree_playback.travel("Walk")
-	if(player.velocity.x == 0 and get_wall_press_state() != Enums.WALL_DIRECTION.NONE):
+	if(get_wall_press_state() != Enums.WALL_DIRECTION.NONE):
 		state_machine.transition_to("Wall")
 		player.anim_tree_playback.travel("Wall")

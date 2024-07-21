@@ -25,6 +25,7 @@ func physics_update(_delta: float) -> void:
 # is a dictionary with arbitrary data the state can use to initialize itself.
 func enter(_msg := {}) -> void:
 	print(name)
+	player.wall_dash = false
 	player.can_attack = false
 	#Check where the wall is
 	match get_wall_press_state():
