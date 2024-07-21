@@ -27,7 +27,11 @@ func update_shader_params():
 	rays_material.set_shader_parameter("glow_strength", light_intensity)
 
 func _process(_delta):
+	var camera = get_viewport().get_camera_2d()
 	if light_rays:
-		var position_on_canvas = (get_global_transform_with_canvas().origin + size * 0.5) / get_viewport_rect().size
+		var position_on_canvas = get_global_transform_with_canvas().origin + size * 0.5
+		if camera:
+			# no clue why this workds (necessary when camera position smoothing is enabled)
+			position_on_canvas += (camera.get_screen_center_position() - camera.get_target_position()) * 0.25
 		var shader_material = light_rays.material as ShaderMaterial
-		shader_material.set_shader_parameter("origin", position_on_canvas)
+		shader_material.set_shader_parameter("origin", position_on_canvas / get_viewport_rect().size)

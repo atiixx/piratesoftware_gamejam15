@@ -7,7 +7,7 @@ uniform float strength_threshold :hint_range(0.0, 1.0) = 0.5;
 uniform vec4 color;
 uniform float glow_strength : hint_range(0.0, 1.0);
 uniform float ray_strength : hint_range(0.05, 0.5);
-const int iterations = 15;
+const int iterations = 25;
 
 void vertex() {
 }
@@ -32,7 +32,7 @@ void fragment() {
 	int i = 0;
 	while (i < iterations) {
 		float distance = length(current - pixel);
-		vec4 value = textureLod(screen_texture, current * SCREEN_PIXEL_SIZE, (last_step_size - 1.0) * 0.0 + 1.0);
+		vec4 value = textureLod(screen_texture, current * SCREEN_PIXEL_SIZE, (last_step_size - 1.0) * 0.3 + 1.0);
 		// vec4 value = texture(screen_texture, current * SCREEN_PIXEL_SIZE);
 
 		float color_intensity = dot(value.xyz, color.xyz) / squared_length_color;
@@ -40,7 +40,7 @@ void fragment() {
 			add_strength += color_intensity * 5.0 * ray_strength * last_step_size / max(distance, 1.0);
 		}
 		// last_step_size = min(last_step_size + 0.3 + travelled * 0.03, 0.2 * (distance_to_center - travelled));
-		last_step_size = min(pow(last_step_size, 10.0) + 0.1, 0.1 * (distance_to_center - travelled));
+		last_step_size = min(pow(last_step_size, 2.0) + 0.1, 0.1 * (distance_to_center - travelled));
 		// last_step_size = min(last_step_size + 1.0, 0.1 * (distance_to_center - travelled));
 		// last_step_size = min(pow(travelled * 0.15, 1.1) * 0.9 + 1.0, 0.3 * (distance_to_center - travelled));
 		// last_step_size = 1.0;

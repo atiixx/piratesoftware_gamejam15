@@ -1,15 +1,15 @@
 [gd_scene load_steps=6 format=3 uid="uid://pfoxyeu4s4cj"]
 
 [ext_resource type="Script" path="res://scripts/light/blurry_light_with_rays.gd" id="1_mdm5r"]
-[ext_resource type="Shader" path="res://scripts/light/blurry_light.gdshader" id="1_ufcqh"]
+[ext_resource type="Shader" path="res://shaders/light/blurry_light.gdshader" id="2_ylvbf"]
 [ext_resource type="Shader" path="res://shaders/light/light_rays_of_color_local.gdshader" id="3_xlknj"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nxkly"]
-shader = ExtResource("1_ufcqh")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xbmw7"]
+shader = ExtResource("2_ylvbf")
 shader_parameter/color = null
 shader_parameter/strength = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fdkw1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s4o84"]
 shader = ExtResource("3_xlknj")
 shader_parameter/origin = Vector2(0, 0)
 shader_parameter/strength_threshold = 0.7
@@ -26,7 +26,7 @@ script = ExtResource("1_mdm5r")
 color = Color(0.668172, 0.596844, 1, 1)
 
 [node name="LightGlow" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_nxkly")
+material = SubResource("ShaderMaterial_xbmw7")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -40,7 +40,7 @@ copy_mode = 2
 
 [node name="LightRays" type="ColorRect" parent="."]
 z_index = 100
-material = SubResource("ShaderMaterial_fdkw1")
+material = SubResource("ShaderMaterial_s4o84")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
