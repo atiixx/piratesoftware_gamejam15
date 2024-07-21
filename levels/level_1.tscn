@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=3 uid="uid://dldtk1vgx8m7r"]
+
+[ext_resource type="PackedScene" uid="uid://srkw64ecilf1" path="res://scenes/terrain/polygon_terrain.tscn" id="1_5qvht"]
+[ext_resource type="Shader" path="res://shaders/terrain/polygon_inside.gdshader" id="2_6pnvf"]
+[ext_resource type="PackedScene" uid="uid://6n2wgches1ia" path="res://scenes/player/player.tscn" id="3_b6xq5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7e4de"]
+shader = ExtResource("2_6pnvf")
+shader_parameter/color = null
+shader_parameter/highlight_color = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ux1jk"]
+shader = ExtResource("2_6pnvf")
+shader_parameter/color = null
+shader_parameter/highlight_color = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6x4hu"]
+shader = ExtResource("2_6pnvf")
+shader_parameter/color = null
+shader_parameter/highlight_color = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6w2mj"]
+shader = ExtResource("2_6pnvf")
+shader_parameter/color = null
+shader_parameter/highlight_color = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0y82l"]
+shader = ExtResource("2_6pnvf")
+shader_parameter/color = null
+shader_parameter/highlight_color = null
+
+[node name="Level1" type="Node2D"]
+
+[node name="Map" type="Node" parent="."]
+
+[node name="Polygon2D2" parent="Map" instance=ExtResource("1_5qvht")]
+material = SubResource("ShaderMaterial_7e4de")
+position = Vector2(0, -203)
+polygon = PackedVector2Array(-68, -753, 2707, -730, 2733, 520, 2444, 520, 2124, 386, 2116.02, 268.142, -89, 276)
+vertex_colors = PackedColorArray(0.151555, 0.141411, 0, 1, 0.851335, 0.144242, 0, 1, 0.857211, 0.849858, 0, 1, 0.401507, 0.990203, 0, 1, 0.0933265, 0.79089, 0, 1, 0.159247, 0.865907, 0, 1, 0.143482, 0.850564, 0, 1)
+
+[node name="Plattform" parent="Map" instance=ExtResource("1_5qvht")]
+material = SubResource("ShaderMaterial_ux1jk")
+position = Vector2(1212, 1012)
+polygon = PackedVector2Array(-150, -40, 150, -40, 150, 40, -150, 40)
+vertex_colors = PackedColorArray(0.146447, 0.146447, 0, 1, 0.853553, 0.146447, 0, 1, 0.853553, 0.853553, 0, 1, 0.146447, 0.853553, 0, 1)
+
+[node name="Plattform4" parent="Map" instance=ExtResource("1_5qvht")]
+material = SubResource("ShaderMaterial_6x4hu")
+position = Vector2(1594, 849)
+polygon = PackedVector2Array(-150, -40, 150, -40, 150, 40, -150, 40)
+vertex_colors = PackedColorArray(0.146447, 0.146447, 0, 1, 0.853553, 0.146447, 0, 1, 0.853553, 0.853553, 0, 1, 0.146447, 0.853553, 0, 1)
+
+[node name="Plattform3" parent="Map" instance=ExtResource("1_5qvht")]
+material = SubResource("ShaderMaterial_6w2mj")
+position = Vector2(2034, 671)
+polygon = PackedVector2Array(-150, -40, 150, -40, 150, 40, -150, 40)
+vertex_colors = PackedColorArray(0.146447, 0.146447, 0, 1, 0.853553, 0.146447, 0, 1, 0.853553, 0.853553, 0, 1, 0.146447, 0.853553, 0, 1)
+
+[node name="Polygon2D" parent="Map" instance=ExtResource("1_5qvht")]
+material = SubResource("ShaderMaterial_0y82l")
+polygon = PackedVector2Array(-1865, -782, -67, -754, -53, 1021, 917, 1017, 919, 1141, 1345, 1359, 2336, 1353, 2344, 528, 2989, 492, 2989, -277, 8475, -320, 8493, 3169, -2161, 3078)
+vertex_colors = PackedColorArray(0.163098, 0.130545, 0, 1, 0.854909, 0.147808, 0, 1, 0.851424, 0.14433, 0, 1, 0.849955, 0.142885, 0, 1, 0.924432, 0.235694, 0, 1, 0.615677, 0.0135652, 0, 1, 0.147091, 0.145803, 0, 1, 0.138399, 0.154682, 0, 1, 0.136729, 0.156439, 0, 1, 0.145064, 0.147835, 0, 1, 0.851248, 0.144157, 0, 1, 0.852955, 0.854151, 0, 1, 0.131732, 0.838199, 0, 1)
+
+[node name="Player" parent="." instance=ExtResource("3_b6xq5")]
+position = Vector2(40, 912)
