@@ -288,4 +288,3 @@ shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_vnexx")]
 position = Vector2(2402, 504)
-jump_speed = -700.0
