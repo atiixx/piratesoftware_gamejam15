@@ -70,20 +70,15 @@ func update_polygon():
 	self.vertex_colors = new_vertex_colors
 
 func update_details():
-	var surface_lines: Array[Vector2] = []
 	for child in detail_container.get_children():
 		child.queue_free()
 
-	var rng = RandomNumberGenerator.new()
-	rng.seed = hash("testing")
 	for i in range(polygon.size()):
 		var current = polygon[i]
 		var next = polygon[(i + 1) % polygon.size()]
 		var along = next - current
 		var normal = along.rotated(deg_to_rad(-90)).normalized()
 		if normal.dot(Vector2.UP) > 0.8:
-			surface_lines.push_back(current)
-			surface_lines.push_back(next)
 			var g = grass.instantiate() as SurfaceGrass
 			g.position = current
 			g.end = next - current
