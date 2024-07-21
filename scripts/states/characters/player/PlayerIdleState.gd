@@ -16,6 +16,8 @@ func physics_update(_delta: float) -> void:
 	handle_basic_movement(_delta)
 	check_for_transitions()
 	player.move_and_slide()
+	handle_slope_rotation()
+
 
 # Virtual function. Called by the state machine upon changing the active state. The `msg` parameter
 # is a dictionary with arbitrary data the state can use to initialize itself.
@@ -38,7 +40,7 @@ func check_for_transitions():
 	if((Input.is_action_just_pressed("left") or Input.is_action_just_pressed("right")) and !player.is_on_wall()):
 		state_machine.transition_to("Walking")
 		player.anim_tree_playback.travel("Walk")
-	if(player.is_on_wall_only() and get_wall_press_state() != WALL_DIRECTION.NONE):
+	if(player.is_on_wall_only() and get_wall_press_state() != Enums.WALL_DIRECTION.NONE):
 		state_machine.transition_to("Wall")
 		player.anim_tree_playback.travel("Wall")
 

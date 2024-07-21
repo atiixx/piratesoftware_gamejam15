@@ -13,6 +13,14 @@ class_name Player
 @onready var down_attack_sprite := $Sprite2D/DownAttackSprite2D
 
 @onready var attack_cd_timer := $AttackCooldown
+@onready var character_state_machine = $CharacterStateMachine
+#Raycasts
+@onready var floor_raycast: RayCast2D = $Raycasts/FloorDetection
+@onready var floor_raycast2: RayCast2D = $Raycasts/FloorDetection2
+@onready var l_up_wall_raycast = $Raycasts/LUpWallDetection
+@onready var r_up_wall_raycast = $Raycasts/RUpWallDetection
+@onready var l_down_wall_raycast = $Raycasts/LDownWallDetection
+@onready var r_down_wall_raycast = $Raycasts/RDownWallDetection
 
 #Collision Shapes
 @onready var collision_shape = $CollisionShape2D
@@ -60,6 +68,7 @@ func _process(delta):
 func _physics_process(delta):
 	# Add the gravity.
 	velocity.y += gravity * delta
+
 	
 func set_attacking(value):
 	is_attacking = value
@@ -68,4 +77,5 @@ func set_attacking(value):
 		
 
 func _on_cd_timer_timeout():
-	can_attack = true
+	if character_state_machine.state.name != "Wall":
+		can_attack = true

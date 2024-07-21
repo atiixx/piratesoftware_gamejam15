@@ -4,10 +4,12 @@
 [ext_resource type="Shader" path="res://shaders/terrain/polygon_terrain.gdshader" id="2_jg5os"]
 [ext_resource type="Shader" path="res://shaders/terrain/polygon_inside.gdshader" id="2_x36is"]
 
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xx6ie"]
 shader = ExtResource("2_x36is")
 shader_parameter/color = null
 shader_parameter/highlight_color = null
+
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vb0oa"]
 shader = ExtResource("2_jg5os")
