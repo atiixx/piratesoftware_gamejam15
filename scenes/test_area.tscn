@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://dwnqr56buo87y"]
+[gd_scene load_steps=14 format=3 uid="uid://dwnqr56buo87y"]
 
 [ext_resource type="Texture2D" uid="uid://clhkxk2kg33i3" path="res://art/2d_lights_and_shadows_neutral_point_light.webp" id="1_mdrwf"]
 [ext_resource type="PackedScene" uid="uid://6n2wgches1ia" path="res://scenes/player/player.tscn" id="1_vnexx"]
 [ext_resource type="Texture2D" uid="uid://dorrmsbd0vg42" path="res://icon.svg" id="2_dl6bu"]
+[ext_resource type="AudioStream" uid="uid://dyncm577jbe4u" path="res://music/OrganTest2.wav" id="4_j6lto"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_uqggf"]
 
@@ -289,3 +290,8 @@ shadow_enabled = true
 [node name="Player" parent="." instance=ExtResource("1_vnexx")]
 position = Vector2(2402, 504)
 jump_speed = -700.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_j6lto")
+volume_db = -12.504
+autoplay = true
