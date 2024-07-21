@@ -67,7 +67,7 @@ func setup_grass():
 
 func _draw():
 	var point_count = 5
-	var normal = (end.rotated(deg_to_rad( - 90)).normalized() * Vector2.DOWN).normalized()
+	var normal = (end.rotated(deg_to_rad( - 90)).normalized() + Vector2.UP).normalized()
 	for i in range(grass_positions.size()):
 		var pos = grass_positions[i]
 		var angle = grass_angles[i]
