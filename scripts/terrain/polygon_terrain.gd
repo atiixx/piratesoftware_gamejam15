@@ -8,10 +8,6 @@
 	set(new_color):
 		highlight_color = new_color
 		update_color()
-@export var flip_polygon = false:
-	set(new_state):
-		flip_polygon = new_state
-		flip_collider_polygon()
 
 @onready var collider_polygon: CollisionPolygon2D = $StaticBody2D/CollisionPolygon2D
 @onready var surface_line: Line2D = $Line2D
@@ -35,11 +31,23 @@ func _process(delta):
 			update_polygon()
 			time_to_update_polygon = 0.1
 
-func flip_collider_polygon():
+func flip_polygon():
 	if Engine.is_editor_hint():
-		var pol = polygon
-		pol.reverse()
-		polygon = pol
+		var dir := 0.0
+		for i in range(polygon.size()):
+			var previous = polygon[i - 1]
+			var current = polygon[i]
+			var next = polygon[(i + 1) % polygon.size()]
+			var to_curr = (current - previous).normalized()
+			var to_next = (next - current).normalized()
+			var angle_sign = asin(to_next.cross(to_curr))
+			var angle = acos(to_next.dot(to_curr)) * sign(angle_sign)
+			dir += angle
+		var is_roughly_one_rotation = abs(abs(dir) - PI * 2) < 0.1
+		if is_roughly_one_rotation and dir > 0:
+			var pol = polygon
+			pol.reverse()
+			polygon = pol
 
 func update_color():
 	if self.is_node_ready():
@@ -53,6 +61,7 @@ func update_color():
 func update_polygon():
 	if old_polygon and old_polygon == self.polygon:
 		return
+	flip_polygon()
 	old_polygon = PackedVector2Array(polygon)
 	collider_polygon.polygon = polygon
 	surface_line.points = polygon
