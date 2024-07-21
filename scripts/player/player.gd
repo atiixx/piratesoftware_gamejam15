@@ -17,10 +17,10 @@ class_name Player
 #Raycasts
 @onready var floor_raycast: RayCast2D = $Raycasts/FloorDetection
 @onready var floor_raycast2: RayCast2D = $Raycasts/FloorDetection2
-@onready var l_up_wall_raycast = $Raycasts/LUpWallDetection
-@onready var r_up_wall_raycast = $Raycasts/RUpWallDetection
-@onready var l_down_wall_raycast = $Raycasts/LDownWallDetection
-@onready var r_down_wall_raycast = $Raycasts/RDownWallDetection
+@onready var l_up_wall_raycast: RayCast2D = $Raycasts/LUpWallDetection
+@onready var r_up_wall_raycast: RayCast2D = $Raycasts/RUpWallDetection
+@onready var l_down_wall_raycast: RayCast2D = $Raycasts/LDownWallDetection
+@onready var r_down_wall_raycast: RayCast2D = $Raycasts/RDownWallDetection
 
 #Collision Shapes
 @onready var collision_shape = $CollisionShape2D
@@ -32,7 +32,7 @@ class_name Player
 var is_attacking := false
 var can_attack := true
 var acc := 200
-
+var wall_dash := false
 # Get the gravity from the project settings so you can sync with rigid body nodes.
 var base_gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
 var gravity = base_gravity
