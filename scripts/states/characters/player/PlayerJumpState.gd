@@ -17,12 +17,14 @@ func update(_delta: float) -> void:
 func physics_update(_delta: float) -> void:
 	if !jumped:
 		jumped = true
-		player.velocity.y = player.jump_speed
 		if player.wall_dash:
 			if left:
-				player.velocity.x += 1000
+				player.velocity = Vector2(1000, player.jump_speed)
 			else:
-				player.velocity.x -= 1000
+				player.velocity = Vector2(-1000, player.jump_speed)
+		else:
+			print("bing")
+			player.velocity.y = player.jump_speed
 	handle_basic_movement(_delta)
 	player.move_and_slide()
 	check_for_transition()
