@@ -11,11 +11,8 @@ func update(_delta: float) -> void:
 func physics_update(_delta: float) -> void:	
 	handle_basic_movement(_delta)
 	#Slide up on Wall
-	if player.velocity.y < 0:
-		player.velocity.y += 20
-	
-	#slower slide down wall	
-	player.gravity = player.base_gravity * 0.2
+	if player.velocity.y > 0:
+		player.gravity = player.base_gravity * 0.2
 	player.move_and_slide()
 	check_for_transition()
 	handle_slope_rotation()
@@ -72,6 +69,9 @@ func check_for_transition():
 		state_machine.transition_to("Jump")
 		player.anim_tree_playback.travel("Jump")
 	if(get_wall_press_state() == Enums.WALL_DIRECTION.NONE):
+		if(Input.is_action_just_pressed("jump") or player.velocity.y < 0):
+			state_machine.transition_to("Jump")
+			player.anim_tree_playback.travel("Jump")
 		if(!player.is_on_floor() and player.velocity.y > 0):
 			state_machine.transition_to("Fall")
 			player.anim_tree_playback.travel("Fall")
