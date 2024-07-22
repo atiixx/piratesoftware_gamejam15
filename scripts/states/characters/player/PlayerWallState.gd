@@ -25,7 +25,6 @@ func physics_update(_delta: float) -> void:
 # is a dictionary with arbitrary data the state can use to initialize itself.
 func enter(_msg := {}) -> void:
 	print(name)
-	player.wall_dash = false
 	player.can_attack = false
 	#Check where the wall is
 	match get_wall_press_state():
@@ -63,11 +62,14 @@ func exit() -> void:
 
 func check_for_transition():
 	if(Input.is_action_just_pressed("jump")):
-		var from_left:= false
+		var direction = 1
 		match get_wall_press_state():
-			Enums.WALL_DIRECTION.LEFT:
-				from_left = true
-		state_machine.transition_to("Jump", {"from_left": from_left})
+			Enums.WALL_DIRECTION.RIGHT:
+				direction = -1
+		player.can_wallslide = false
+		player.wallslide_cd_timer.start()
+		player.velocity = Vector2(1000 * direction, player.jump_speed)
+		state_machine.transition_to("Jump")
 		player.anim_tree_playback.travel("Jump")
 	if(get_wall_press_state() == Enums.WALL_DIRECTION.NONE):
 		if(!player.is_on_floor() and player.velocity.y > 0):

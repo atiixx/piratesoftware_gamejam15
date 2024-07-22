@@ -35,7 +35,7 @@ func handle_basic_movement(delta):
 	
 	
 	#remove control of player shortly after walldash for smoother walldash
-	if player.wall_dash and player.velocity.y < player.jump_speed / 3:
+	if !player.can_wallslide:
 		pass
 	elif player.is_attacking:
 		player.velocity = lerp(player.velocity, Vector2.ZERO, 0.1)

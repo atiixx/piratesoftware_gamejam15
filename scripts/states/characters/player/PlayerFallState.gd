@@ -39,7 +39,7 @@ func check_for_transition():
 	if(player.is_on_floor()):
 		state_machine.transition_to("Walking")
 		player.anim_tree_playback.travel("Walk")
-	if(player.is_on_wall_only() and get_wall_press_state() != Enums.WALL_DIRECTION.NONE):
+	if(player.can_wallslide and player.is_on_wall_only() and get_wall_press_state() != Enums.WALL_DIRECTION.NONE):
 		state_machine.transition_to("Wall")
 		player.anim_tree_playback.travel("Wall")
 

@@ -13,6 +13,7 @@ class_name Player
 @onready var down_attack_sprite := $Sprite2D/DownAttackSprite2D
 
 @onready var attack_cd_timer := $AttackCooldown
+@onready var wallslide_cd_timer := $WallSlideCooldown
 @onready var character_state_machine = $CharacterStateMachine
 #Raycasts
 @onready var floor_raycast: RayCast2D = $Raycasts/FloorDetection
@@ -32,7 +33,7 @@ class_name Player
 var is_attacking := false
 var can_attack := true
 var acc := 200
-var wall_dash := false
+var can_wallslide := true
 # Get the gravity from the project settings so you can sync with rigid body nodes.
 var base_gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
 var gravity = base_gravity
@@ -79,3 +80,6 @@ func set_attacking(value):
 func _on_cd_timer_timeout():
 	if character_state_machine.state.name != "Wall":
 		can_attack = true
+		
+func _on_wallslide_cd_timer_timeout():
+	can_wallslide = true
