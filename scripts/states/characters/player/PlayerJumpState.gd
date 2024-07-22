@@ -15,16 +15,9 @@ func update(_delta: float) -> void:
 
 # Virtual function. Corresponds to the `_physics_process()` callback.
 func physics_update(_delta: float) -> void:
-	if !jumped:
+	if !jumped and state_machine.previous_state.name != "Wall":
 		jumped = true
-		if player.wall_dash:
-			if left:
-				player.velocity = Vector2(1000, player.jump_speed)
-			else:
-				player.velocity = Vector2(-1000, player.jump_speed)
-		else:
-			print("bing")
-			player.velocity.y = player.jump_speed
+		player.velocity.y = player.jump_speed
 	handle_basic_movement(_delta)
 	player.move_and_slide()
 	check_for_transition()
@@ -38,7 +31,6 @@ func enter(_msg := {}) -> void:
 	jumped = false
 	print(name)
 	if state_machine.previous_state.name == "Wall":
-		player.wall_dash = true
 		if _msg.get("from_left"):
 			left = true			
 		else:
@@ -51,7 +43,6 @@ func enter(_msg := {}) -> void:
 # to clean up the state.
 func exit() -> void:
 	jumped = false
-	player.wall_dash = false
 
 func check_for_transition():
 	if(!player.is_on_floor() and player.velocity.y > 0 and get_wall_press_state() == Enums.WALL_DIRECTION.NONE):
@@ -60,6 +51,7 @@ func check_for_transition():
 	if((Input.is_action_just_pressed("left") or Input.is_action_just_pressed("right")) and player.is_on_floor() and !player.is_on_wall()):
 		state_machine.transition_to("Walking")
 		player.anim_tree_playback.travel("Walk")
-	if(get_wall_press_state() != Enums.WALL_DIRECTION.NONE):
+	if(player.can_wallslide and get_wall_press_state() != Enums.WALL_DIRECTION.NONE):
+		print("can wallslide: ", player.can_wallslide)
 		state_machine.transition_to("Wall")
 		player.anim_tree_playback.travel("Wall")
