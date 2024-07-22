@@ -4,62 +4,62 @@
 [ext_resource type="PackedScene" uid="uid://6n2wgches1ia" path="res://scenes/player/player.tscn" id="2_oxmw1"]
 [ext_resource type="Shader" path="res://shaders/terrain/polygon_inside.gdshader" id="2_s15xa"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_h8xoi"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qp20k"]
 shader = ExtResource("2_s15xa")
 shader_parameter/color = null
 shader_parameter/highlight_color = null
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lt13n"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o2t1l"]
 shader = ExtResource("2_s15xa")
 shader_parameter/color = null
 shader_parameter/highlight_color = null
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bkrsu"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uqb2q"]
 shader = ExtResource("2_s15xa")
 shader_parameter/color = null
 shader_parameter/highlight_color = null
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g3v2j"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ioy86"]
 shader = ExtResource("2_s15xa")
 shader_parameter/color = null
 shader_parameter/highlight_color = null
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jy0v0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nq1in"]
 shader = ExtResource("2_s15xa")
 shader_parameter/color = null
 shader_parameter/highlight_color = null
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4hsyg"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4xnr0"]
 shader = ExtResource("2_s15xa")
 shader_parameter/color = null
 shader_parameter/highlight_color = null
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rnjao"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_blqhr"]
 shader = ExtResource("2_s15xa")
 shader_parameter/color = null
 shader_parameter/highlight_color = null
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_36ao2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f7qkh"]
 shader = ExtResource("2_s15xa")
 shader_parameter/color = null
 shader_parameter/highlight_color = null
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uy44r"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_07ad1"]
 shader = ExtResource("2_s15xa")
 shader_parameter/color = null
 shader_parameter/highlight_color = null
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fyj8x"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j4yfn"]
 shader = ExtResource("2_s15xa")
 shader_parameter/color = null
 shader_parameter/highlight_color = null
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ywvq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xe078"]
 shader = ExtResource("2_s15xa")
 shader_parameter/color = null
 shader_parameter/highlight_color = null
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8i62w"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jeskl"]
 shader = ExtResource("2_s15xa")
 shader_parameter/color = null
 shader_parameter/highlight_color = null
@@ -70,73 +70,73 @@ shader_parameter/highlight_color = null
 position = Vector2(6403, -476)
 
 [node name="PolygonTerrain" parent="." instance=ExtResource("1_6cgiy")]
-material = SubResource("ShaderMaterial_h8xoi")
+material = SubResource("ShaderMaterial_qp20k")
 position = Vector2(363, 193)
 polygon = PackedVector2Array(-1630, 2057, -2219, -168, -2134, -1775, -598, -2405, 1650, -2477, 3602, -2581, 4226, -2341, 4282, -1813, 4114, -1205, 3698, -533, 2966, -55, 2604, 48, 2386, 76, 2179, 44, 1928, -41, 1607, -287, 1226, -829, 637, -1400, -374, -1383, -409, -1349, -393, -226, -364, -198, 232, -171, 451, -96, 915, 19, 1195, 27, 1578, 132, 1838, 233, 2206, 251, 2651, 228, 2918, 164, 3217, 104, 3445, 78, 3705, 104, 3928, 112, 4152, 89, 4423, 2, 4700, -110, 4892, -189, 5071, -294, 5239, -371, 5498, -447, 5781, -506, 5977, -514, 6136, -492, 6320, -447, 6531, -414, 6870, -270, 7451, -113, 7883, -37, 8439, 18, 8646, -134, 8960, -516, 9235, -1282, 9673, -1306, 9680, -1369, 9813, -1357, 9918, -1377, 10215, -1437, 10382, -1914, 10864, -1958, 12136, -163, 12407, 2193, 7567.79, 2223.8, 2246, 2200, 195, 2183)
 vertex_colors = PackedColorArray(0.181549, 0.885473, 0, 1, 0.00264835, 0.551394, 0, 1, 0.0922503, 0.210621, 0, 1, 0.395465, 0.0110497, 0, 1, 0.478695, 0.000454128, 0, 1, 0.578164, 0.00614747, 0, 1, 0.896632, 0.195562, 0, 1, 0.998322, 0.540935, 0, 1, 0.958171, 0.700198, 0, 1, 0.857802, 0.849254, 0, 1, 0.707456, 0.954931, 0, 1, 0.600546, 0.989786, 0, 1, 0.493592, 0.999959, 0, 1, 0.381173, 0.985675, 0, 1, 0.264597, 0.941118, 0, 1, 0.139242, 0.846199, 0, 1, 0.119781, 0.824705, 0, 1, 0.31615, 0.964972, 0, 1, 0.691878, 0.961717, 0, 1, 0.961916, 0.691398, 0, 1, 0.95884, 0.301341, 0, 1, 0.697728, 0.0407574, 0, 1, 0.593255, 0.00877351, 0, 1, 0.641273, 0.0203733, 0, 1, 0.56767, 0.00460038, 0, 1, 0.573765, 0.0054712, 0, 1, 0.656832, 0.0252329, 0, 1, 0.604082, 0.010953, 0, 1, 0.499309, 4.76837e-07, 0, 1, 0.42852, 0.00513572, 0, 1, 0.39252, 0.0116885, 0, 1, 0.422419, 0.00605547, 0, 1, 0.496531, 1.20103e-05, 0, 1, 0.533856, 0.00114757, 0, 1, 0.483388, 0.000276029, 0, 1, 0.397492, 0.0106207, 0, 1, 0.329755, 0.0298759, 0, 1, 0.31116, 0.0370321, 0, 1, 0.277836, 0.0520678, 0, 1, 0.269052, 0.0565331, 0, 1, 0.32499, 0.0316291, 0, 1, 0.378489, 0.0149896, 0, 1, 0.438573, 0.00378764, 0, 1, 0.524165, 0.000584304, 0, 1, 0.593778, 0.00887313, 0, 1, 0.598109, 0.00971985, 0, 1, 0.637415, 0.0192535, 0, 1, 0.663346, 0.0274346, 0, 1, 0.608642, 0.0119459, 0, 1, 0.567975, 0.00464213, 0, 1, 0.367893, 0.0177679, 0, 1, 0.156234, 0.136923, 0, 1, 0.0651844, 0.253149, 0, 1, 0.20123, 0.0990804, 0, 1, 0.156468, 0.136701, 0, 1, 0.183633, 0.112815, 0, 1, 0.47545, 0.00060305, 0, 1, 0.403716, 0.00935829, 0, 1, 0.171556, 0.123006, 0, 1, 0.192443, 0.105781, 0, 1, 0.709177, 0.0458579, 0, 1, 0.966971, 0.321287, 0, 1, 0.874265, 0.831551, 0, 1, 0.500473, 1, 0, 1, 0.49681, 0.99999, 0, 1, 0.4807, 0.999627, 0, 1)
 
 [node name="Polygon2D2" parent="." instance=ExtResource("1_6cgiy")]
-material = SubResource("ShaderMaterial_lt13n")
+material = SubResource("ShaderMaterial_o2t1l")
 position = Vector2(8397, -90)
 polygon = PackedVector2Array(36, 24, 32, 63, -239, 49, -247, 11)
 vertex_colors = PackedColorArray(0.878743, 0.173574, 0, 1, 0.825343, 0.879673, 0, 1, 0.175048, 0.880008, 0, 1, 0.119065, 0.176135, 0, 1)
 
 [node name="Polygon2D3" parent="." instance=ExtResource("1_6cgiy")]
-material = SubResource("ShaderMaterial_bkrsu")
+material = SubResource("ShaderMaterial_uqb2q")
 position = Vector2(8829, 55)
 polygon = PackedVector2Array(81, -6, 66, 46, -239, 49, -247, 11)
 vertex_colors = PackedColorArray(0.89164, 0.189166, 0, 1, 0.802552, 0.898073, 0, 1, 0.186876, 0.889812, 0, 1, 0.103707, 0.19512, 0, 1)
 
 [node name="Polygon2D4" parent="." instance=ExtResource("1_6cgiy")]
-material = SubResource("ShaderMaterial_g3v2j")
+material = SubResource("ShaderMaterial_ioy86")
 position = Vector2(8817, -707)
 polygon = PackedVector2Array(81, -6, 66, 46, -239, 49, -247, 11)
 vertex_colors = PackedColorArray(0.89164, 0.189166, 0, 1, 0.802552, 0.898073, 0, 1, 0.186876, 0.889812, 0, 1, 0.103707, 0.19512, 0, 1)
 
 [node name="Polygon2D5" parent="." instance=ExtResource("1_6cgiy")]
-material = SubResource("ShaderMaterial_jy0v0")
+material = SubResource("ShaderMaterial_nq1in")
 position = Vector2(8382, -357)
 polygon = PackedVector2Array(36, 24, 32, 63, -239, 49, -247, 11)
 vertex_colors = PackedColorArray(0.878743, 0.173574, 0, 1, 0.825343, 0.879673, 0, 1, 0.175048, 0.880008, 0, 1, 0.119065, 0.176135, 0, 1)
 
 [node name="Polygon2D6" parent="." instance=ExtResource("1_6cgiy")]
-material = SubResource("ShaderMaterial_4hsyg")
+material = SubResource("ShaderMaterial_4xnr0")
 position = Vector2(8361, -611)
 polygon = PackedVector2Array(36, 24, 32, 63, -239, 49, -247, 11)
 vertex_colors = PackedColorArray(0.878743, 0.173574, 0, 1, 0.825343, 0.879673, 0, 1, 0.175048, 0.880008, 0, 1, 0.119065, 0.176135, 0, 1)
 
 [node name="Polygon2D7" parent="." instance=ExtResource("1_6cgiy")]
-material = SubResource("ShaderMaterial_rnjao")
+material = SubResource("ShaderMaterial_blqhr")
 position = Vector2(8826, -224)
 polygon = PackedVector2Array(81, -6, 66, 46, -239, 49, -247, 11)
 vertex_colors = PackedColorArray(0.89164, 0.189166, 0, 1, 0.802552, 0.898073, 0, 1, 0.186876, 0.889812, 0, 1, 0.103707, 0.19512, 0, 1)
 
 [node name="Polygon2D8" parent="." instance=ExtResource("1_6cgiy")]
-material = SubResource("ShaderMaterial_36ao2")
+material = SubResource("ShaderMaterial_f7qkh")
 position = Vector2(8832, -474)
 polygon = PackedVector2Array(81, -6, 66, 46, -239, 49, -247, 11)
 vertex_colors = PackedColorArray(0.89164, 0.189166, 0, 1, 0.802552, 0.898073, 0, 1, 0.186876, 0.889812, 0, 1, 0.103707, 0.19512, 0, 1)
 
 [node name="Polygon2D10" parent="." instance=ExtResource("1_6cgiy")]
-material = SubResource("ShaderMaterial_uy44r")
+material = SubResource("ShaderMaterial_07ad1")
 position = Vector2(8364, -852)
 polygon = PackedVector2Array(36, 24, 32, 63, -239, 49, -247, 11)
 vertex_colors = PackedColorArray(0.878743, 0.173574, 0, 1, 0.825343, 0.879673, 0, 1, 0.175048, 0.880008, 0, 1, 0.119065, 0.176135, 0, 1)
 
 [node name="Polygon2D11" parent="." instance=ExtResource("1_6cgiy")]
-material = SubResource("ShaderMaterial_fyj8x")
+material = SubResource("ShaderMaterial_j4yfn")
 position = Vector2(9300, -802)
 polygon = PackedVector2Array(81, -6, 66, 46, -239, 49, -247, 11)
 vertex_colors = PackedColorArray(0.89164, 0.189166, 0, 1, 0.802552, 0.898073, 0, 1, 0.186876, 0.889812, 0, 1, 0.103707, 0.19512, 0, 1)
 
 [node name="Polygon2D12" parent="." instance=ExtResource("1_6cgiy")]
-material = SubResource("ShaderMaterial_4ywvq")
+material = SubResource("ShaderMaterial_xe078")
 position = Vector2(8886, -966)
 polygon = PackedVector2Array(36, 24, 32, 63, -239, 49, -247, 11)
 vertex_colors = PackedColorArray(0.878743, 0.173574, 0, 1, 0.825343, 0.879673, 0, 1, 0.175048, 0.880008, 0, 1, 0.119065, 0.176135, 0, 1)
 
 [node name="Polygon2D13" parent="." instance=ExtResource("1_6cgiy")]
-material = SubResource("ShaderMaterial_8i62w")
+material = SubResource("ShaderMaterial_jeskl")
 position = Vector2(9364, -1041)
 polygon = PackedVector2Array(81, -6, 66, 46, -239, 49, -247, 11)
 vertex_colors = PackedColorArray(0.89164, 0.189166, 0, 1, 0.802552, 0.898073, 0, 1, 0.186876, 0.889812, 0, 1, 0.103707, 0.19512, 0, 1)
