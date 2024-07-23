@@ -1,6 +1,6 @@
 # Generic state machine. Initializes states and delegates engine callbacks
 # (_physics_process, _unhandled_input) to the active state.
-class_name CharacterStateMachine
+class_name BossStateMachine
 extends Node
 
 # Emitted when transitioning to a new state.
@@ -49,3 +49,10 @@ func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 	state = get_node(target_state_name)
 	state.enter(msg)
 	emit_signal("transitioned", state.name)
+
+
+func change_state():
+	if state.has_method("change_state"):
+		state.change_state()
+	else:
+		transition_to("Idle")

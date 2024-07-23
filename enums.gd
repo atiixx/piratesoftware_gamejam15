@@ -5,3 +5,12 @@ enum WALL_DIRECTION {
 	LEFT,
 	RIGHT
 }
+
+enum PROJECTILE_SPAWN {
+	LDOWN,
+	LMID,
+	LUP,
+	RDOWN,
+	RMID,
+	RUP
+}
