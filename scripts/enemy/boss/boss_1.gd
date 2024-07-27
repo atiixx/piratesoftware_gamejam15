@@ -8,7 +8,6 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var shoot_delay_timer: Timer = $ShootDelayTimer
 @onready var projectile_spawns = $ProjectileSpawns
 @onready var markers = owner.find_child("Markers")
-@onready var camera_path: Path2D = owner.find_child("Path2D")
 @onready var camera: Camera2D = owner.get_node("CharacterParent").find_child("Camera2D")
 var start_camera_pathing = false
 
@@ -24,13 +23,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if start_camera_pathing:
-		camera_path.get_child(0).progress_ratio += 0.01
-		if camera_path.get_child(0).progress_ratio >= 1:
-			start_camera_pathing= false
-	else:
-		if player.global_position.x == camera.global_position.x:
-			camera.reparent(player)
 	player_is_left = player.global_position.x < global_position.x
 	state_label.text = boss_state_machine.state.name
 	if player:
