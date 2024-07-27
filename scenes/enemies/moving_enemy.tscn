@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://b1txf47nse323"]
+[gd_scene load_steps=10 format=3 uid="uid://b1txf47nse323"]
 
 [ext_resource type="Script" path="res://scripts/enemy/moving_enemy.gd" id="1_y8t6s"]
 [ext_resource type="Texture2D" uid="uid://dorrmsbd0vg42" path="res://icon.svg" id="2_myx0w"]
+[ext_resource type="Script" path="res://scripts/states/characters/CharacterStateMachine.gd" id="3_a8bl3"]
+[ext_resource type="Script" path="res://scripts/states/characters/enemy/EnemyState.gd" id="4_ykvvs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lfew3"]
 size = Vector2(122, 122)
@@ -88,5 +90,12 @@ target_position = Vector2(0, 90)
 
 [node name="WallDetector" type="RayCast2D" parent="."]
 target_position = Vector2(75, 0)
+
+[node name="CharacterStateMachine" type="Node" parent="."]
+script = ExtResource("3_a8bl3")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("4_ykvvs")
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
