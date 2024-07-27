@@ -17,7 +17,7 @@ var fight_started = false
 const JUMP_ATTACK_VECTOR: Vector2 = Vector2(600, -600)
 
 signal finished_phase()
-signal player_hit(body)
+signal player_hit(from)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -114,7 +114,7 @@ func on_floor_again():
 func _on_hurtbox_body_entered(body):
 	var player_layer = body.get_collision_layer_value(2)
 	if player_layer:
-		player_hit.emit(body)
+		player_hit.emit(self)
 
 func start_fight():
 	fight_started = true
