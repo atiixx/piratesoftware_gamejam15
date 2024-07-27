@@ -214,7 +214,7 @@ scale = Vector2(1245.5, 102.353)
 mesh = SubResource("QuadMesh_uqggf")
 
 [node name="CollisionShape2D15" type="CollisionShape2D" parent="Map/StaticBody2D"]
-position = Vector2(668, -601)
+position = Vector2(657, -496)
 rotation = 1.5708
 scale = Vector2(1.87068, -2.43535)
 shape = SubResource("RectangleShape2D_dki53")
@@ -287,4 +287,4 @@ energy = 0.93
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_vnexx")]
-position = Vector2(2402, 504)
+position = Vector2(69, 456)

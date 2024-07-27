@@ -1,62 +1,63 @@
-[gd_scene load_steps=110 format=3 uid="uid://6n2wgches1ia"]
+[gd_scene load_steps=112 format=3 uid="uid://6n2wgches1ia"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_y3w28"]
 [ext_resource type="Texture2D" uid="uid://nu10fcvmpwba" path="res://art/character/Slide/Slide.png" id="2_87pik"]
-[ext_resource type="Texture2D" uid="uid://cpc7nmpuplyjh" path="res://art/character/Attack/attack1.png" id="2_fnghn"]
-[ext_resource type="Texture2D" uid="uid://bn1817gqfo1or" path="res://art/character/Wall/Wall.png" id="2_gce7p"]
-[ext_resource type="Texture2D" uid="uid://d1srqarhd7knp" path="res://art/character/Idle/basic.png" id="2_glryq"]
+[ext_resource type="Texture2D" uid="uid://b3nrjq86bvwl6" path="res://art/character/Attack/attack1.png" id="2_fnghn"]
+[ext_resource type="Texture2D" uid="uid://b7gwc4iubdche" path="res://art/character/Wall/Wall.png" id="2_gce7p"]
+[ext_resource type="Texture2D" uid="uid://dq5qquhepryg8" path="res://art/character/Idle/basic.png" id="2_glryq"]
 [ext_resource type="Script" path="res://scripts/states/characters/CharacterStateMachine.gd" id="3_h6vkd"]
-[ext_resource type="Texture2D" uid="uid://db1uxb4uko26j" path="res://art/character/Idle/basic2.png" id="3_v2sxa"]
-[ext_resource type="Texture2D" uid="uid://b4opbn43p600a" path="res://art/character/Idle/basic3.png" id="4_3quwx"]
-[ext_resource type="Texture2D" uid="uid://bdmpp7a2klcwp" path="res://art/character/DownAttack/downattack5.png" id="4_7umma"]
-[ext_resource type="Texture2D" uid="uid://c1l1nxiq2tmxp" path="res://art/character/DownAttack/downattack1.png" id="4_b3e87"]
+[ext_resource type="Texture2D" uid="uid://18pyhqj0e7te" path="res://art/character/Idle/basic2.png" id="3_v2sxa"]
+[ext_resource type="Texture2D" uid="uid://f0235ph2fn75" path="res://art/character/Idle/basic3.png" id="4_3quwx"]
+[ext_resource type="Texture2D" uid="uid://6romt26ef2ll" path="res://art/character/DownAttack/downattack1.png" id="4_b3e87"]
 [ext_resource type="Script" path="res://scripts/states/characters/player/PlayerIdleState.gd" id="4_df0j4"]
-[ext_resource type="Texture2D" uid="uid://bniraut8g20vy" path="res://art/character/Jump/jump.png" id="5_gdihi"]
+[ext_resource type="Texture2D" uid="uid://dpc1hc4gb8xnh" path="res://art/character/UpAttack/upattack3.png" id="5_7tt8q"]
+[ext_resource type="Texture2D" uid="uid://ckxrmb221cu7g" path="res://art/character/Jump/jump.png" id="5_gdihi"]
 [ext_resource type="Script" path="res://scripts/states/characters/player/PlayerWalkingState.gd" id="5_gmd6e"]
-[ext_resource type="Texture2D" uid="uid://co5aaxqde3h4" path="res://art/character/Walk/walk2.png" id="5_xhapd"]
-[ext_resource type="Texture2D" uid="uid://dd837w6jk1vlg" path="res://art/character/Jump/jump_start1.png" id="6_1midm"]
-[ext_resource type="Texture2D" uid="uid://conkt40qhc3x2" path="res://art/character/Walk/walk3.png" id="6_8pijl"]
+[ext_resource type="Texture2D" uid="uid://1afb61u1kq03" path="res://art/character/Walk/walk2.png" id="5_xhapd"]
+[ext_resource type="Texture2D" uid="uid://cq1cqh2wr5cv6" path="res://art/character/Jump/jump_start1.png" id="6_1midm"]
+[ext_resource type="Texture2D" uid="uid://cqbqaowc1lqf4" path="res://art/character/Walk/walk3.png" id="6_8pijl"]
 [ext_resource type="Script" path="res://scripts/states/characters/player/PlayerJumpState.gd" id="6_33hof"]
-[ext_resource type="Texture2D" uid="uid://cgqmg2xbxtg0v" path="res://art/character/Jump/jump_start2.png" id="7_esbxa"]
-[ext_resource type="Texture2D" uid="uid://23l51agh0fg1" path="res://art/character/Walk/walk_start.png" id="7_wo5kk"]
+[ext_resource type="Texture2D" uid="uid://btl1v0qbgq0kb" path="res://art/character/Jump/jump_start2.png" id="7_esbxa"]
+[ext_resource type="Texture2D" uid="uid://bkkcqhw5hj4hk" path="res://art/character/Walk/walk_start.png" id="7_wo5kk"]
 [ext_resource type="Script" path="res://scripts/states/characters/player/PlayerFallState.gd" id="7_yrxr1"]
 [ext_resource type="Script" path="res://scripts/states/characters/player/PlayerWallState.gd" id="8_6wpxx"]
-[ext_resource type="Texture2D" uid="uid://bqe0avfkfvya5" path="res://art/character/Walk/walk1.png" id="8_34l0x"]
+[ext_resource type="Texture2D" uid="uid://b64f2jhr7x2gl" path="res://art/character/Walk/walk1.png" id="8_34l0x"]
 [ext_resource type="Script" path="res://scripts/states/characters/player/modes/ModeStateMachine.gd" id="12_kpybu"]
 [ext_resource type="Script" path="res://scripts/states/characters/player/modes/BasicModeState.gd" id="13_7q07r"]
 [ext_resource type="Script" path="res://scripts/states/characters/player/modes/SkeletonModeState.gd" id="14_vlh21"]
 [ext_resource type="Script" path="res://scripts/states/characters/player/modes/SpiderModeState.gd" id="15_u2kuf"]
 [ext_resource type="Script" path="res://scripts/states/characters/player/modes/StoneModeState.gd" id="16_xnyk7"]
-[ext_resource type="Texture2D" uid="uid://cqqydlsf81226" path="res://art/character/Attack/attack2.png" id="21_vawyp"]
-[ext_resource type="Texture2D" uid="uid://dj44mncmtu4aq" path="res://art/character/Attack/attack3.png" id="22_2d40g"]
-[ext_resource type="Texture2D" uid="uid://utoelingev28" path="res://art/character/Attack/attack4.png" id="23_a5co6"]
-[ext_resource type="Texture2D" uid="uid://ntlsh2wqer0l" path="res://art/character/DownAttack/downattack2.png" id="26_toor1"]
-[ext_resource type="Texture2D" uid="uid://blksbr7k6xhyq" path="res://art/character/DownAttack/downattack3.png" id="27_echa3"]
-[ext_resource type="Texture2D" uid="uid://c2yo1eufcewkd" path="res://art/character/DownAttack/downattack4.png" id="28_sj6nu"]
+[ext_resource type="Texture2D" uid="uid://b1nlnp8suy5oy" path="res://art/character/Attack/character_attack.png" id="19_wbmbp"]
+[ext_resource type="Texture2D" uid="uid://bpko4f6i5j3w8" path="res://art/character/DownAttack/character_downattack.png" id="21_70nqy"]
+[ext_resource type="Texture2D" uid="uid://bdpirgm54iprr" path="res://art/character/Attack/attack2.png" id="21_vawyp"]
+[ext_resource type="Texture2D" uid="uid://cthlcx1wc01qj" path="res://art/character/Attack/attack3.png" id="22_2d40g"]
+[ext_resource type="Texture2D" uid="uid://djqb66i34lor0" path="res://art/character/DownAttack/downattack2.png" id="26_toor1"]
+[ext_resource type="Texture2D" uid="uid://gtm2nnp0f7r7" path="res://art/character/DownAttack/downattack3.png" id="27_echa3"]
+[ext_resource type="Texture2D" uid="uid://bbtmvui5ljxcj" path="res://art/character/UpAttack/upattack1.png" id="28_iwm0h"]
+[ext_resource type="Texture2D" uid="uid://dwdc2jycdr4mf" path="res://art/character/UpAttack/upattack2.png" id="29_rpfqk"]
+[ext_resource type="Texture2D" uid="uid://cb5g7t6nxmu85" path="res://art/character/UpAttack/character_upattack.png" id="30_1bdnt"]
 [ext_resource type="PackedScene" uid="uid://cqwuu7asnl4n4" path="res://scenes/ingame_ui.tscn" id="34_wisfe"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8oj0n"]
-radius = 50.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3rbp5"]
+radius = 22.0
+height = 44.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_orqac"]
-size = Vector2(60, 100)
+size = Vector2(44, 100)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_332yo"]
 size = Vector2(6.96149, 9.78521)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8yuee"]
-size = Vector2(9.68615, 5.79865)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_y8ycd"]
-size = Vector2(10.161, 6.52347)
+size = Vector2(9.68615, 5.51876)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a6y4r"]
 size = Vector2(94, 56)
 
 [sub_resource type="Animation" id="Animation_wvj73"]
 resource_name = "Attack"
-length = 0.2
-step = 0.05
+length = 0.12
+step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -64,10 +65,10 @@ tracks/0/path = NodePath("Sprite2D/AttackSprite2D:texture")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
-"transitions": PackedFloat32Array(1, 1, 1, 8.57419),
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ExtResource("2_fnghn"), ExtResource("21_vawyp"), ExtResource("22_2d40g"), ExtResource("23_a5co6")]
+"values": [ExtResource("2_fnghn"), ExtResource("21_vawyp"), ExtResource("22_2d40g")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -76,7 +77,7 @@ tracks/1/path = NodePath("Sprite2D/AttackSprite2D:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.2),
+"times": PackedFloat32Array(0, 0.1, 0.12),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, true, false]
@@ -88,7 +89,7 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.12),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [true],
@@ -105,16 +106,28 @@ tracks/3/path = NodePath("Hitboxes/AttackCollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.1, 0.15, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.03, 0.09, 0.11),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [true, false, true]
+"values": [true, false, false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("19_wbmbp")]
 }
 
 [sub_resource type="Animation" id="Animation_u4k4r"]
 resource_name = "DownAttack"
-length = 0.21
-step = 0.05
+length = 0.12
+step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -122,10 +135,10 @@ tracks/0/path = NodePath("Sprite2D/DownAttackSprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0001, 0.05, 0.1, 0.15, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.0001, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("4_b3e87"), ExtResource("4_b3e87"), ExtResource("26_toor1"), ExtResource("27_echa3"), ExtResource("28_sj6nu"), ExtResource("4_7umma")]
+"values": [ExtResource("4_b3e87"), ExtResource("4_b3e87"), ExtResource("26_toor1"), ExtResource("27_echa3")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -134,7 +147,7 @@ tracks/1/path = NodePath("Sprite2D/DownAttackSprite2D:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.21),
+"times": PackedFloat32Array(0, 0.1, 0.12),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, true, false]
@@ -146,10 +159,10 @@ tracks/2/path = NodePath("Hitboxes/DownAttackCollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.04, 0.1, 0.12),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [true, false, true]
+"values": [true, false, false, true]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
@@ -158,18 +171,27 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.21),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.12),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
-"args": [true],
-"method": &"set_attacking"
-}, {
 "args": [true],
 "method": &"set_attacking"
 }, {
 "args": [false],
 "method": &"set_attacking"
 }]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("21_70nqy")]
 }
 
 [sub_resource type="Animation" id="Animation_cnkmh"]
@@ -256,8 +278,8 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_qm7g4"]
 resource_name = "UpAttack"
-length = 0.21
-step = 0.05
+length = 0.12
+step = 0.01
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -265,12 +287,9 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.21),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
-"args": [true],
-"method": &"set_attacking"
-}, {
 "args": [true],
 "method": &"set_attacking"
 }, {
@@ -285,10 +304,10 @@ tracks/1/path = NodePath("Sprite2D/UpAttackSprite2D:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ExtResource("4_b3e87"), ExtResource("26_toor1"), ExtResource("27_echa3"), ExtResource("28_sj6nu"), ExtResource("4_7umma")]
+"values": [ExtResource("28_iwm0h"), ExtResource("29_rpfqk"), ExtResource("5_7tt8q")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -297,19 +316,31 @@ tracks/2/path = NodePath("Sprite2D/UpAttackSprite2D:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.2001, 0.2002, 0.21),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.12),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [true, true, true, true, false]
+"values": [true, true, false]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Hitboxes/UpAttackCollisionShape2D:disabled")
+tracks/3/path = NodePath("Sprite2D:texture")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("30_1bdnt")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hitboxes/UpAttackCollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -587,15 +618,16 @@ jump_speed = -1000.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 3.14159
-shape = SubResource("CircleShape2D_8oj0n")
+scale = Vector2(1.49976, 2.23809)
+shape = SubResource("CapsuleShape2D_3rbp5")
 
 [node name="WallCollisionShape2DLeft" type="CollisionShape2D" parent="."]
-position = Vector2(-17, 0)
+position = Vector2(-5, 0)
 shape = SubResource("RectangleShape2D_orqac")
 disabled = true
 
 [node name="WallCollisionShape2DRight" type="CollisionShape2D" parent="."]
-position = Vector2(17, 0)
+position = Vector2(4, 0)
 shape = SubResource("RectangleShape2D_orqac")
 disabled = true
 
@@ -604,23 +636,22 @@ collision_layer = 8
 collision_mask = 4
 
 [node name="AttackCollisionShape2D" type="CollisionShape2D" parent="Hitboxes"]
-position = Vector2(119.5, 5)
-scale = Vector2(18.5305, 5.51853)
+position = Vector2(130, 3)
+scale = Vector2(38.6212, 25.7007)
 shape = SubResource("RectangleShape2D_332yo")
-disabled = true
 debug_color = Color(0.984236, 0, 0.345506, 0.42)
 
 [node name="DownAttackCollisionShape2D" type="CollisionShape2D" parent="Hitboxes"]
-position = Vector2(2, 73)
-scale = Vector2(10.5305, 5.51853)
+position = Vector2(-5, 166)
+scale = Vector2(27.2866, 42.7572)
 shape = SubResource("RectangleShape2D_8yuee")
 disabled = true
 debug_color = Color(0.984236, 0, 0.345506, 0.42)
 
 [node name="UpAttackCollisionShape2D" type="CollisionShape2D" parent="Hitboxes"]
-position = Vector2(-1.5, -71)
-scale = Vector2(10.5305, 5.51853)
-shape = SubResource("RectangleShape2D_y8ycd")
+position = Vector2(4.76837e-07, -138)
+scale = Vector2(27.2866, 42.7572)
+shape = SubResource("RectangleShape2D_8yuee")
 disabled = true
 debug_color = Color(0.984236, 0, 0.345506, 0.42)
 
@@ -632,22 +663,22 @@ disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.24, 0.24)
-texture = ExtResource("2_glryq")
+texture = ExtResource("3_v2sxa")
 
 [node name="AttackSprite2D" type="Sprite2D" parent="Sprite2D"]
+visible = false
 position = Vector2(416, 24)
-texture = ExtResource("2_fnghn")
+texture = ExtResource("22_2d40g")
 
 [node name="DownAttackSprite2D" type="Sprite2D" parent="Sprite2D"]
 visible = false
 position = Vector2(0, 472)
-texture = ExtResource("4_7umma")
+texture = ExtResource("27_echa3")
 
 [node name="UpAttackSprite2D" type="Sprite2D" parent="Sprite2D"]
 visible = false
 position = Vector2(20, -380)
-rotation = 3.14159
-texture = ExtResource("4_7umma")
+texture = ExtResource("5_7tt8q")
 
 [node name="CharacterStateMachine" type="Node" parent="."]
 script = ExtResource("3_h6vkd")
@@ -731,19 +762,19 @@ target_position = Vector2(0, 80)
 
 [node name="LUpWallDetection" type="RayCast2D" parent="Raycasts"]
 position = Vector2(0, -30)
-target_position = Vector2(-55, 0)
+target_position = Vector2(-40, 0)
 
 [node name="RUpWallDetection" type="RayCast2D" parent="Raycasts"]
 position = Vector2(0, -30)
-target_position = Vector2(55, 0)
+target_position = Vector2(40, 0)
 
 [node name="LDownWallDetection" type="RayCast2D" parent="Raycasts"]
 position = Vector2(0, 30)
-target_position = Vector2(-55, 0)
+target_position = Vector2(-40, 0)
 
 [node name="RDownWallDetection" type="RayCast2D" parent="Raycasts"]
 position = Vector2(0, 30)
-target_position = Vector2(55, 0)
+target_position = Vector2(40, 0)
 
 [node name="StateLabel" type="Label" parent="."]
 anchors_preset = 5

@@ -22,12 +22,13 @@ func physics_update(_delta: float) -> void:
 # is a dictionary with arbitrary data the state can use to initialize itself.
 func enter(_msg := {}) -> void:
 	player.can_attack = false
+	player.sprite.flip_h = get_wall_press_state() == Enums.WALL_DIRECTION.RIGHT;
+	print(player.sprite.flip_h)
 	#Check where the wall is
 	match get_wall_press_state():
 		Enums.WALL_DIRECTION.LEFT:
 			player.r_wall_collision_shape.disabled = true
 			player.l_wall_collision_shape.disabled = false
-			player.sprite.flip_h = false
 			player.attack_sprite.flip_v = false
 			player.attack_sprite.flip_h = false
 			player.down_attack_sprite.flip_v = false
@@ -37,7 +38,6 @@ func enter(_msg := {}) -> void:
 		Enums.WALL_DIRECTION.RIGHT:
 			player.l_wall_collision_shape.disabled = true
 			player.r_wall_collision_shape.disabled = false
-			player.sprite.flip_h = true
 			player.attack_sprite.flip_v = false
 			player.attack_sprite.flip_h = true
 			player.down_attack_sprite.flip_v = false
