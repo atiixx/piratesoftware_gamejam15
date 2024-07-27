@@ -29,7 +29,6 @@ func physics_update(_delta: float) -> void:
 # is a dictionary with arbitrary data the state can use to initialize itself.
 func enter(_msg := {}) -> void:
 	jumped = false
-	print(name)
 	if state_machine.previous_state.name == "Wall":
 		if _msg.get("from_left"):
 			left = true			
@@ -52,6 +51,5 @@ func check_for_transition():
 		state_machine.transition_to("Walking")
 		player.anim_tree_playback.travel("Walk")
 	if(player.can_wallslide and get_wall_press_state() != Enums.WALL_DIRECTION.NONE):
-		print("can wallslide: ", player.can_wallslide)
 		state_machine.transition_to("Wall")
 		player.anim_tree_playback.travel("Wall")

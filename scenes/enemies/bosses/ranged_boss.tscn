@@ -1,0 +1,152 @@
+[gd_scene load_steps=12 format=3 uid="uid://cttn4mdx8m0wv"]
+
+[ext_resource type="Texture2D" uid="uid://dorrmsbd0vg42" path="res://icon.svg" id="1_28xhi"]
+[ext_resource type="Script" path="res://scripts/states/characters/CharacterStateMachine.gd" id="1_fehfr"]
+[ext_resource type="Script" path="res://scripts/enemy/boss/boss_1.gd" id="1_h1m8b"]
+[ext_resource type="Script" path="res://scripts/states/characters/enemy/boss/boss_1/BossIdleState.gd" id="3_t03s7"]
+[ext_resource type="Script" path="res://scripts/states/characters/enemy/boss/boss_1/BossShootState.gd" id="5_4avkm"]
+[ext_resource type="Script" path="res://scripts/states/characters/enemy/boss/boss_1/BossJumpState.gd" id="6_fgjq1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mhgy"]
+
+[sub_resource type="Animation" id="Animation_apmd5"]
+resource_name = "got_hit"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lc5go"]
+resource_name = "shoot_left"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 0.5),
+"update": 0,
+"values": [0.0, -0.174533, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_4gqt5"]
+resource_name = "shoot_right"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 0.5),
+"update": 0,
+"values": [0.0, 0.174533, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m3mwd"]
+_data = {
+"got_hit": SubResource("Animation_apmd5"),
+"shoot_left": SubResource("Animation_lc5go"),
+"shoot_right": SubResource("Animation_4gqt5")
+}
+
+[node name="RangedBoss" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_h1m8b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(18.7899, 19.4026)
+shape = SubResource("RectangleShape2D_7mhgy")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hurtbox"]
+scale = Vector2(18.7899, 19.4026)
+shape = SubResource("RectangleShape2D_7mhgy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(3, 3)
+texture = ExtResource("1_28xhi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_m3mwd")
+}
+
+[node name="DamageAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_m3mwd")
+}
+
+[node name="BossStateMachine" type="Node" parent="."]
+script = ExtResource("1_fehfr")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="BossStateMachine"]
+script = ExtResource("3_t03s7")
+
+[node name="Shoot" type="Node" parent="BossStateMachine"]
+script = ExtResource("5_4avkm")
+
+[node name="Jump" type="Node" parent="BossStateMachine"]
+script = ExtResource("6_fgjq1")
+
+[node name="StateLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -72.0
+offset_right = 1.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "CurrentState"
+
+[node name="ProjectileSpawns" type="Node2D" parent="."]
+
+[node name="L_DOWN" type="Marker2D" parent="ProjectileSpawns"]
+position = Vector2(-170, 130)
+
+[node name="L_MID" type="Marker2D" parent="ProjectileSpawns"]
+position = Vector2(-170, 0)
+
+[node name="L_UP" type="Marker2D" parent="ProjectileSpawns"]
+position = Vector2(-170, -130)
+
+[node name="R_DOWN" type="Marker2D" parent="ProjectileSpawns"]
+position = Vector2(170, 130)
+
+[node name="R_MID" type="Marker2D" parent="ProjectileSpawns"]
+position = Vector2(170, 0)
+
+[node name="R_UP" type="Marker2D" parent="ProjectileSpawns"]
+position = Vector2(170, -130)
+
+[node name="ShootDelayTimer" type="Timer" parent="."]
+
+[node name="PhaseChangeTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="BossStateMachine/Shoot" method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="PhaseChangeTimer" to="BossStateMachine" method="change_state"]

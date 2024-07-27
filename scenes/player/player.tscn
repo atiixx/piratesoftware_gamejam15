@@ -1,4 +1,4 @@
-[gd_scene load_steps=108 format=3 uid="uid://6n2wgches1ia"]
+[gd_scene load_steps=110 format=3 uid="uid://6n2wgches1ia"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_y3w28"]
 [ext_resource type="Texture2D" uid="uid://nu10fcvmpwba" path="res://art/character/Slide/Slide.png" id="2_87pik"]
@@ -33,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://ntlsh2wqer0l" path="res://art/character/DownAttack/downattack2.png" id="26_toor1"]
 [ext_resource type="Texture2D" uid="uid://blksbr7k6xhyq" path="res://art/character/DownAttack/downattack3.png" id="27_echa3"]
 [ext_resource type="Texture2D" uid="uid://c2yo1eufcewkd" path="res://art/character/DownAttack/downattack4.png" id="28_sj6nu"]
+[ext_resource type="PackedScene" uid="uid://cqwuu7asnl4n4" path="res://scenes/ingame_ui.tscn" id="34_wisfe"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8oj0n"]
 radius = 50.0
@@ -364,6 +365,23 @@ tracks/0/keys = {
 "values": [ExtResource("2_gce7p")]
 }
 
+[sub_resource type="Animation" id="Animation_wust6"]
+resource_name = "get_hit"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4vww3"]
 _data = {
 "Attack": SubResource("Animation_wvj73"),
@@ -376,7 +394,8 @@ _data = {
 "UpAttack": SubResource("Animation_qm7g4"),
 "Walk": SubResource("Animation_sipai"),
 "WalkStart": SubResource("Animation_molko"),
-"Wall": SubResource("Animation_8svj6")
+"Wall": SubResource("Animation_8svj6"),
+"get_hit": SubResource("Animation_wust6")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ce68n"]
@@ -559,7 +578,8 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(22, 59)
 
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 7
+collision_layer = 2
+collision_mask = 3
 floor_snap_length = 9.0
 script = ExtResource("1_y3w28")
 speed = 750.0
@@ -580,8 +600,8 @@ shape = SubResource("RectangleShape2D_orqac")
 disabled = true
 
 [node name="Hitboxes" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 8
+collision_mask = 4
 
 [node name="AttackCollisionShape2D" type="CollisionShape2D" parent="Hitboxes"]
 position = Vector2(119.5, 5)
@@ -611,14 +631,12 @@ shape = SubResource("RectangleShape2D_a6y4r")
 disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -2)
 scale = Vector2(0.24, 0.24)
-texture = ExtResource("3_v2sxa")
+texture = ExtResource("2_glryq")
 
 [node name="AttackSprite2D" type="Sprite2D" parent="Sprite2D"]
-visible = false
 position = Vector2(416, 24)
-texture = ExtResource("23_a5co6")
+texture = ExtResource("2_fnghn")
 
 [node name="DownAttackSprite2D" type="Sprite2D" parent="Sprite2D"]
 visible = false
@@ -668,13 +686,21 @@ script = ExtResource("16_xnyk7")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -81)
-offset = Vector2(0, -55)
+scale = Vector2(11.7806, 2.79423)
+offset = Vector2(0, -150)
+zoom = Vector2(0.7, 0.7)
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
 [node name="Animations" type="Node" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Animations"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_4vww3")
+}
+
+[node name="DamageAnimationPlayer" type="AnimationPlayer" parent="Animations"]
 root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_4vww3")
@@ -719,5 +745,18 @@ target_position = Vector2(-55, 0)
 position = Vector2(0, 30)
 target_position = Vector2(55, 0)
 
+[node name="StateLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = -63.0
+offset_right = 20.0
+offset_bottom = -40.0
+grow_horizontal = 2
+
+[node name="IngameUi" parent="." instance=ExtResource("34_wisfe")]
+
+[connection signal="body_entered" from="Hitboxes" to="." method="_on_attack_hit"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_cd_timer_timeout"]
 [connection signal="timeout" from="WallSlideCooldown" to="." method="_on_wallslide_cd_timer_timeout"]
