@@ -1,4 +1,4 @@
-[gd_scene load_steps=112 format=3 uid="uid://6n2wgches1ia"]
+[gd_scene load_steps=113 format=3 uid="uid://6n2wgches1ia"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_y3w28"]
 [ext_resource type="Texture2D" uid="uid://nu10fcvmpwba" path="res://art/character/Slide/Slide.png" id="2_87pik"]
@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://b64f2jhr7x2gl" path="res://art/character/Walk/walk1.png" id="8_34l0x"]
 [ext_resource type="Script" path="res://scripts/states/characters/player/modes/ModeStateMachine.gd" id="12_kpybu"]
 [ext_resource type="Script" path="res://scripts/states/characters/player/modes/BasicModeState.gd" id="13_7q07r"]
+[ext_resource type="Script" path="res://scripts/states/characters/player/modes/ShootingModeState.gd" id="14_1ia42"]
 [ext_resource type="Script" path="res://scripts/states/characters/player/modes/SkeletonModeState.gd" id="14_vlh21"]
 [ext_resource type="Script" path="res://scripts/states/characters/player/modes/SpiderModeState.gd" id="15_u2kuf"]
 [ext_resource type="Script" path="res://scripts/states/characters/player/modes/StoneModeState.gd" id="16_xnyk7"]
@@ -555,7 +556,7 @@ states/WalkStart/position = Vector2(198, 287)
 states/Wall/node = SubResource("AnimationNodeAnimation_hmor2")
 states/Wall/position = Vector2(490, 127)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_nvxts"), "WalkStart", "Walk", SubResource("AnimationNodeStateMachineTransition_istqd"), "Idle", "WalkStart", SubResource("AnimationNodeStateMachineTransition_n4im7"), "Walk", "WalkEnd", SubResource("AnimationNodeStateMachineTransition_30qf2"), "WalkEnd", "Idle", SubResource("AnimationNodeStateMachineTransition_4thnb"), "JumpStart", "Jump", SubResource("AnimationNodeStateMachineTransition_opfuw"), "Idle", "JumpStart", SubResource("AnimationNodeStateMachineTransition_aj3g6"), "JumpEnd", "Idle", SubResource("AnimationNodeStateMachineTransition_fgshy"), "Walk", "JumpStart", SubResource("AnimationNodeStateMachineTransition_ayimj"), "JumpEnd", "Walk", SubResource("AnimationNodeStateMachineTransition_07yre"), "Idle", "Fall", SubResource("AnimationNodeStateMachineTransition_l1mvx"), "Walk", "Fall", SubResource("AnimationNodeStateMachineTransition_45c5c"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_4ps5y"), "Fall", "JumpEnd", SubResource("AnimationNodeStateMachineTransition_lkwuh"), "Wall", "Fall", SubResource("AnimationNodeStateMachineTransition_fs4hv"), "Wall", "Jump", SubResource("AnimationNodeStateMachineTransition_34s3w"), "Wall", "Walk", SubResource("AnimationNodeStateMachineTransition_5cv26"), "Wall", "Idle", SubResource("AnimationNodeStateMachineTransition_exk20"), "Idle", "Wall", SubResource("AnimationNodeStateMachineTransition_vb6s6"), "Fall", "Wall", SubResource("AnimationNodeStateMachineTransition_aosfh"), "Walk", "Wall", SubResource("AnimationNodeStateMachineTransition_qrbnf"), "Jump", "Wall", SubResource("AnimationNodeStateMachineTransition_7auke"), "Walk", "Slide", SubResource("AnimationNodeStateMachineTransition_3dm4o"), "Slide", "Fall", SubResource("AnimationNodeStateMachineTransition_2fcv6"), "Slide", "Idle", SubResource("AnimationNodeStateMachineTransition_j3hvt"), "Slide", "Walk", SubResource("AnimationNodeStateMachineTransition_l1psu"), "Slide", "Jump", SubResource("AnimationNodeStateMachineTransition_wbxn3"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_wdyip"), "Walk", "Attack", SubResource("AnimationNodeStateMachineTransition_rv5o6"), "Jump", "Attack", SubResource("AnimationNodeStateMachineTransition_6w0v1"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_eddxb"), "Jump", "DownAttack", SubResource("AnimationNodeStateMachineTransition_fxeoi"), "Fall", "DownAttack", SubResource("AnimationNodeStateMachineTransition_7sh38"), "DownAttack", "Jump", SubResource("AnimationNodeStateMachineTransition_n65j3"), "DownAttack", "Fall", SubResource("AnimationNodeStateMachineTransition_dxorb"), "DownAttack", "Walk", SubResource("AnimationNodeStateMachineTransition_ilg5g"), "DownAttack", "Idle", SubResource("AnimationNodeStateMachineTransition_exchf"), "UpAttack", "Idle", SubResource("AnimationNodeStateMachineTransition_cl52q"), "Jump", "UpAttack", SubResource("AnimationNodeStateMachineTransition_jnsvc"), "Fall", "UpAttack", SubResource("AnimationNodeStateMachineTransition_qb8fi"), "Walk", "UpAttack", SubResource("AnimationNodeStateMachineTransition_qmh1u"), "Idle", "UpAttack", SubResource("AnimationNodeStateMachineTransition_2d1eu")]
-graph_offset = Vector2(22, 59)
+graph_offset = Vector2(68, 22)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -652,10 +653,14 @@ script = ExtResource("8_6wpxx")
 
 [node name="ModeStateMachine" type="Node" parent="."]
 script = ExtResource("12_kpybu")
-initial_state = NodePath("Basic")
+initial_state = NodePath("Shooting")
+all_states = Array[NodePath]([NodePath("Basic"), NodePath("Shooting")])
 
 [node name="Basic" type="Node" parent="ModeStateMachine"]
 script = ExtResource("13_7q07r")
+
+[node name="Shooting" type="Node" parent="ModeStateMachine"]
+script = ExtResource("14_1ia42")
 
 [node name="Skeleton" type="Node" parent="ModeStateMachine"]
 script = ExtResource("14_vlh21")
