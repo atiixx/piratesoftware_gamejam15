@@ -12,8 +12,8 @@ signal transitioned(state_name)
 @export var all_states: Array[NodePath] = []
 
 # The current active state. At the start of the game, we get the `initial_state`.
-@onready var state: StateBase = get_node(initial_state)
-var previousState: StateBase
+@onready var state: ModeState = null
+var previousState: ModeState
 
 
 func _ready() -> void:
@@ -21,8 +21,7 @@ func _ready() -> void:
 	# The state machine assigns itself to the State objects' state_machine property.
 	for child in get_children():
 		child.state_machine = self
-	state.enter()
-	print(state)
+	setup_state(initial_state)
 
 
 # The state machine subscribes to node callbacks and delegates them to the state objects.
@@ -42,6 +41,11 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	state.physics_update(delta)
 
+func setup_state(target_state_name: String, msg: Dictionary = {}):
+	state = get_node(target_state_name)
+	state.enter(msg)
+	var mode_label = state.player.get_node("IngameUi").find_child("ModeLabel") as Label
+	mode_label.text = "👊" if state.name == "Basic" else "🏹" if state.name == "Shooting" else String(state.name)
 
 # This function calls the current state's exit() function, then changes the active state,
 # and calls its enter function.
@@ -54,6 +58,5 @@ func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 		return
 	state.exit()
 	previousState = state
-	state = get_node(target_state_name)
-	state.enter(msg)
+	setup_state(target_state_name, msg)
 	emit_signal("transitioned", state.name)
