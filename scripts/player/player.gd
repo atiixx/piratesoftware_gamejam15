@@ -56,7 +56,7 @@ func _process(delta):
 		elif(Input.is_action_just_pressed("Attack")):
 			can_attack = false
 			anim_tree_playback.travel("Attack")
-	if velocity.x != 0 and !is_on_wall():
+	if velocity.x != 0 and character_state_machine.state.name != "Wall":
 		sprite.flip_v = false
 		sprite.flip_h = velocity.x < 0
 		attack_sprite.flip_v = false

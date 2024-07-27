@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://18pyhqj0e7te"
-path="res://.godot/imported/basic2.png-cc028af3f8abca979ebb29578d57403d.ctex"
+uid="uid://cb5g7t6nxmu85"
+path="res://.godot/imported/character_upattack.png-2f42b781ea6558cbe752b6fd12537d71.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/character/Idle/basic2.png"
-dest_files=["res://.godot/imported/basic2.png-cc028af3f8abca979ebb29578d57403d.ctex"]
+source_file="res://art/character/UpAttack/character_upattack.png"
+dest_files=["res://.godot/imported/character_upattack.png-2f42b781ea6558cbe752b6fd12537d71.ctex"]
 
 [params]
 

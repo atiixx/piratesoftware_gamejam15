@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://levels/character_parent.gd" id="3_p5p2s"]
 [ext_resource type="PackedScene" uid="uid://cttn4mdx8m0wv" path="res://scenes/enemies/bosses/ranged_boss.tscn" id="4_cqp1j"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_iv27l"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_icynt"]
 shader = ExtResource("2_fp2l4")
 shader_parameter/color = null
 shader_parameter/highlight_color = null
@@ -20,7 +20,7 @@ script = ExtResource("1_t4fda")
 [node name="Map" type="Node2D" parent="."]
 
 [node name="Polygon2D" parent="Map" instance=ExtResource("1_2vaxj")]
-material = SubResource("ShaderMaterial_iv27l")
+material = SubResource("ShaderMaterial_icynt")
 polygon = PackedVector2Array(-1642, -425, 78, -421, 78, 1033, 3426, 1024, 3371, -471, 4990, -493, 5062, 2008, -740, 2063, -2231, 2042)
 vertex_colors = PackedColorArray(0.190663, 0.107176, 0, 1, 0.853964, 0.146858, 0, 1, 0.853078, 0.145972, 0, 1, 0.13954, 0.153491, 0, 1, 0.137657, 0.15546, 0, 1, 0.845985, 0.139037, 0, 1, 0.860252, 0.846726, 0, 1, 0.498849, 0.999999, 0, 1, 0.105364, 0.807022, 0, 1)
 
