@@ -3,7 +3,8 @@ class_name Enemy
 
 @onready var collision_shape = $CollisionShape2D
 @onready var sprite = $AnimatedSprite2D
-
+@onready var enemy_state_machine: CharacterStateMachine = $CharacterStateMachine
+@onready var player: CharacterBody2D = get_parent().find_child("Player")
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var health = 3
 

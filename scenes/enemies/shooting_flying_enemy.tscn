@@ -1,7 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://b1txf47nse323"]
+[gd_scene load_steps=11 format=3 uid="uid://de7gbqs7t1ttr"]
 
-[ext_resource type="Script" path="res://scripts/enemy/moving_enemy.gd" id="1_y8t6s"]
-[ext_resource type="Texture2D" uid="uid://dorrmsbd0vg42" path="res://icon.svg" id="2_myx0w"]
+[ext_resource type="Script" path="res://scripts/enemy/shooting_flying_enemy.gd" id="1_sxea8"]
+[ext_resource type="Texture2D" uid="uid://dorrmsbd0vg42" path="res://icon.svg" id="2_4j71r"]
+[ext_resource type="Script" path="res://scripts/states/characters/CharacterStateMachine.gd" id="3_etto7"]
+[ext_resource type="Script" path="res://scripts/states/characters/enemy/flyingshooting/ShootingFlyingEnemyIdleState.gd" id="4_tckw3"]
+[ext_resource type="Script" path="res://scripts/states/characters/enemy/flyingshooting/ShootingFlyingEnemyPursuingState.gd" id="5_770an"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lfew3"]
 size = Vector2(122, 122)
@@ -10,7 +13,7 @@ size = Vector2(122, 122)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_myx0w")
+"texture": ExtResource("2_4j71r")
 }],
 "loop": true,
 "name": &"Idle",
@@ -41,11 +44,12 @@ _data = {
 "got_hit": SubResource("Animation_glhm7")
 }
 
-[node name="Movingenemy" type="CharacterBody2D"]
+[node name="ShootingFlyingEnemy" type="CharacterBody2D"]
 scale = Vector2(0.7, 0.7)
 collision_layer = 4
 collision_mask = 5
-script = ExtResource("1_y8t6s")
+script = ExtResource("1_sxea8")
+flying_speed = 15000
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_lfew3")
@@ -68,7 +72,17 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(3.19942, 3.10907)
 mouse_filter = 2
-color = Color(1, 0, 0, 0.403922)
+color = Color(1.49205e-06, 0.650265, 0.0270356, 0.403922)
+
+[node name="CharacterStateMachine" type="Node" parent="."]
+script = ExtResource("3_etto7")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("4_tckw3")
+
+[node name="Pursuing" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("5_770an")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 8
@@ -82,11 +96,18 @@ libraries = {
 "": SubResource("AnimationLibrary_7yex2")
 }
 
-[node name="LedgeDetector" type="RayCast2D" parent="."]
-position = Vector2(60, 15)
-target_position = Vector2(0, 90)
+[node name="PlayerDetector" type="RayCast2D" parent="."]
+collision_mask = 3
 
-[node name="WallDetector" type="RayCast2D" parent="."]
-target_position = Vector2(75, 0)
+[node name="StateLabel" type="Label" parent="."]
+offset_left = -18.5714
+offset_top = -68.5714
+offset_right = 21.4286
+offset_bottom = -45.5714
+text = "State"
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 2.0
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="timeout" from="ShootTimer" to="." method="shoot"]

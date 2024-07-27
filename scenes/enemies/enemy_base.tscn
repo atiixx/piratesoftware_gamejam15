@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/enemy/enemy_base.gd" id="1_rpjxa"]
 [ext_resource type="Texture2D" uid="uid://dorrmsbd0vg42" path="res://icon.svg" id="2_vgqkk"]
 [ext_resource type="Script" path="res://scripts/states/characters/CharacterStateMachine.gd" id="3_sia5t"]
-[ext_resource type="Script" path="res://scripts/states/characters/enemy/EnemyIdleState.gd" id="4_irod3"]
+[ext_resource type="Script" path="res://scripts/states/characters/enemy/flying/FlyingEnemyIdleState.gd" id="4_irod3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4rsh5"]
 size = Vector2(122, 122)
