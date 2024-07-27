@@ -639,6 +639,7 @@ collision_mask = 4
 position = Vector2(130, 3)
 scale = Vector2(38.6212, 25.7007)
 shape = SubResource("RectangleShape2D_332yo")
+disabled = true
 debug_color = Color(0.984236, 0, 0.345506, 0.42)
 
 [node name="DownAttackCollisionShape2D" type="CollisionShape2D" parent="Hitboxes"]
@@ -663,7 +664,7 @@ disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.24, 0.24)
-texture = ExtResource("3_v2sxa")
+texture = ExtResource("4_3quwx")
 
 [node name="AttackSprite2D" type="Sprite2D" parent="Sprite2D"]
 visible = false
@@ -743,7 +744,7 @@ tree_root = SubResource("AnimationNodeStateMachine_bcaem")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="AttackCooldown" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.3
 one_shot = true
 
 [node name="WallSlideCooldown" type="Timer" parent="."]
@@ -789,5 +790,6 @@ grow_horizontal = 2
 [node name="IngameUi" parent="." instance=ExtResource("34_wisfe")]
 
 [connection signal="body_entered" from="Hitboxes" to="." method="_on_attack_hit"]
+[connection signal="body_shape_entered" from="Hitboxes" to="." method="_on_hitboxes_body_shape_entered"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_cd_timer_timeout"]
 [connection signal="timeout" from="WallSlideCooldown" to="." method="_on_wallslide_cd_timer_timeout"]

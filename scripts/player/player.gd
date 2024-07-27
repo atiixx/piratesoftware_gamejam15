@@ -30,7 +30,11 @@ class_name Player
 @onready var slide_collision_shape = $SlideCollisionShape2D
 @onready var attack_collision_shape = $Hitboxes/AttackCollisionShape2D
 @onready var attack_collision_shape_pos = attack_collision_shape.position
+@onready var down_attack_coll: CollisionShape2D = $Hitboxes/DownAttackCollisionShape2D
+
+var getting_hit = false
 var is_attacking := false
+var can_input := true
 var can_attack := true
 var acc := 200
 var can_wallslide := true
@@ -49,14 +53,14 @@ func _process(delta):
 	if can_attack:
 		if(Input.is_action_pressed("Attack") and Input.is_action_pressed("down") and !is_on_floor()):
 			can_attack = false
-			anim_tree_playback.travel("DownAttack")
+			anim_tree_playback.travel("DownAttack")				
 		elif (Input.is_action_pressed("Attack") and Input.is_action_pressed("up")):
 			can_attack = false
 			anim_tree_playback.travel("UpAttack")
 		elif(Input.is_action_just_pressed("Attack")):
 			can_attack = false
 			anim_tree_playback.travel("Attack")
-	if velocity.x != 0 and character_state_machine.state.name != "Wall":
+	if velocity.x != 0 and character_state_machine.state.name != "Wall" and !getting_hit:
 		sprite.flip_v = false
 		sprite.flip_h = velocity.x < 0
 		attack_sprite.flip_v = false
@@ -94,7 +98,14 @@ func _on_attack_hit(body: Node2D):
 	if enemy_layer:
 		enemy_hit.emit(body)
 
-func get_hit():
+func get_hit(source: Node2D):
+	can_input = false
+	can_attack = false
+	getting_hit = true
+	if !sprite.flip_h:
+		velocity = Vector2(-400, -1000)
+	else:
+		velocity = Vector2(400, -1000)
 	$Animations/DamageAnimationPlayer.play("get_hit")
 	var healthbar = $IngameUi.find_child("HealthBar")	
 	var health_outline_path = 	"res://art/UI/health_outline.png"
@@ -102,11 +113,20 @@ func get_hit():
 	for i in range(healthbar.get_child_count()):
 		if i > health -1:
 			healthbar.get_child(i).texture = load(health_outline_path)
-			
 	if health <= 0:
 		die()
-		
+	await get_tree().create_timer(1.0).timeout
+	can_input = true
+	can_attack = true
+	getting_hit = false
+	
 func die():
 	print("you died")
 	health = 3
 	
+
+
+func _on_hitboxes_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+	if body.get_collision_layer_value(3):
+		if local_shape_index == 1:
+			velocity.y += jump_speed * 2

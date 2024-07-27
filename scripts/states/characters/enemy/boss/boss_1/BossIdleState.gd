@@ -30,6 +30,6 @@ func exit() -> void:
 	pass
 
 func change_state():
-	#state_machine.transition_to("Shoot")
-	state_machine.transition_to("Jump")
+	state_machine.transition_to("Shoot")
+	#state_machine.transition_to("Jump")
 
