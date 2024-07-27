@@ -20,11 +20,18 @@ func handle_input(_event: InputEvent) -> void:
 # Virtual function. Corresponds to the `_process()` callback.
 func update(_delta: float) -> void:
 	if prepare_attack_projectile:
-		var relative_mouse_pos = get_viewport().get_mouse_position() - player.get_global_transform_with_canvas().origin
-		var rotation = relative_mouse_pos.angle() + deg_to_rad(90)
+		var rotation = get_aim_vector().angle() + deg_to_rad(90)
 		prepare_attack_projectile.rotation = rotation
 		prepare_attack_projectile.position = player.global_position + Vector2.UP.rotated(rotation) * 100
 	pass
+
+func get_aim_vector():
+	var controller_aim = Input.get_vector("Controller Aim Left", "Controller Aim Right", "Controller Aim Up", "Controller Aim Down")
+	if controller_aim.length() > 0.1:
+		return controller_aim
+	else:
+		var relative_mouse_pos = get_viewport().get_mouse_position() - player.get_global_transform_with_canvas().origin
+		return relative_mouse_pos
 
 
 # Virtual function. Corresponds to the `_physics_process()` callback.
