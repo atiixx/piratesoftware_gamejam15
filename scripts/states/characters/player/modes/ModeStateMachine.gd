@@ -28,7 +28,6 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("Switch Mode"):
 		var current_index = all_states.find(get_path_to(state))
-		# print(current_index, state, all_states, get_path_to(state))
 		if current_index >= 0:
 			transition_to(all_states[(current_index + 1) % all_states.size()])
 	state.handle_input(event)
