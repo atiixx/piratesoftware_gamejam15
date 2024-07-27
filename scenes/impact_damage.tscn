@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bop5efmf4jr2v"]
+
+[ext_resource type="Script" path="res://scripts/impact_damage.gd" id="1_mk3hk"]
+
+[node name="ImpactDamage" type="Area2D"]
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("1_mk3hk")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
