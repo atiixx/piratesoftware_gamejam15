@@ -1,8 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://dwnqr56buo87y"]
+[gd_scene load_steps=17 format=3 uid="uid://dwnqr56buo87y"]
 
 [ext_resource type="Texture2D" uid="uid://clhkxk2kg33i3" path="res://art/2d_lights_and_shadows_neutral_point_light.webp" id="1_mdrwf"]
 [ext_resource type="PackedScene" uid="uid://6n2wgches1ia" path="res://scenes/player/player.tscn" id="1_vnexx"]
 [ext_resource type="Texture2D" uid="uid://dorrmsbd0vg42" path="res://icon.svg" id="2_dl6bu"]
+[ext_resource type="Script" path="res://scripts/character_parent.gd" id="3_3vl8d"]
+[ext_resource type="PackedScene" uid="uid://b1txf47nse323" path="res://scenes/enemies/moving_enemy.tscn" id="5_d1nw7"]
+[ext_resource type="PackedScene" uid="uid://pwnyc7tauv7p" path="res://scenes/enemies/flying_enemy.tscn" id="6_pdcrf"]
+[ext_resource type="PackedScene" uid="uid://de7gbqs7t1ttr" path="res://scenes/enemies/shooting_flying_enemy.tscn" id="7_yl8ij"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_uqggf"]
 
@@ -286,5 +290,20 @@ color = Color(0.318063, 0.419498, 0.679895, 1)
 energy = 0.93
 shadow_enabled = true
 
-[node name="Player" parent="." instance=ExtResource("1_vnexx")]
-position = Vector2(69, 456)
+[node name="Characters" type="Node2D" parent="."]
+script = ExtResource("3_3vl8d")
+
+[node name="Player" parent="Characters" instance=ExtResource("1_vnexx")]
+position = Vector2(1771, -195)
+
+[node name="EnemyBase" parent="Characters" instance=ExtResource("5_d1nw7")]
+position = Vector2(736, -108)
+
+[node name="EnemyBase2" parent="Characters" instance=ExtResource("5_d1nw7")]
+position = Vector2(1636, 192)
+
+[node name="FlyingEnemy" parent="Characters" instance=ExtResource("6_pdcrf")]
+position = Vector2(2395, -141)
+
+[node name="ShootingFlyingEnemy" parent="Characters" instance=ExtResource("7_yl8ij")]
+position = Vector2(1384, -241)

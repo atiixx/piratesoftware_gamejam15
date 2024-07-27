@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bhjxi1xsw0wgc"]
+[gd_scene load_steps=12 format=3 uid="uid://bhjxi1xsw0wgc"]
 
 [ext_resource type="Script" path="res://scripts/enemy/enemy_base.gd" id="1_rpjxa"]
 [ext_resource type="Texture2D" uid="uid://dorrmsbd0vg42" path="res://icon.svg" id="2_vgqkk"]
 [ext_resource type="Script" path="res://scripts/states/characters/CharacterStateMachine.gd" id="3_sia5t"]
-[ext_resource type="Script" path="res://scripts/states/characters/enemy/EnemyIdleState.gd" id="4_irod3"]
+[ext_resource type="Script" path="res://scripts/states/characters/enemy/flying/FlyingEnemyIdleState.gd" id="4_irod3"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfew3"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4rsh5"]
 size = Vector2(122, 122)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kb3yf"]
@@ -19,11 +19,69 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qikb2"]
+size = Vector2(122, 122)
+
+[sub_resource type="Animation" id="Animation_apmd5"]
+resource_name = "got_hit"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lc5go"]
+resource_name = "shoot_left"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 0.5),
+"update": 0,
+"values": [0.0, -0.174533, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_4gqt5"]
+resource_name = "shoot_right"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 0.5),
+"update": 0,
+"values": [0.0, 0.174533, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m3mwd"]
+_data = {
+"got_hit": SubResource("Animation_apmd5"),
+"shoot_left": SubResource("Animation_lc5go"),
+"shoot_right": SubResource("Animation_4gqt5")
+}
+
 [node name="EnemyBase" type="CharacterBody2D"]
 script = ExtResource("1_rpjxa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_lfew3")
+shape = SubResource("RectangleShape2D_4rsh5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_kb3yf")
@@ -51,3 +109,15 @@ initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("4_irod3")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_qikb2")
+
+[node name="DamageAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_m3mwd")
+}
