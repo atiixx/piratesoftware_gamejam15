@@ -666,7 +666,7 @@ disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.24, 0.24)
-texture = ExtResource("3_v2sxa")
+texture = ExtResource("4_3quwx")
 
 [node name="AttackSprite2D" type="Sprite2D" parent="Sprite2D"]
 visible = false
@@ -714,7 +714,7 @@ script = ExtResource("13_7q07r")
 script = ExtResource("14_1ia42")
 
 [node name="Cooldown" type="Timer" parent="ModeStateMachine/Shooting"]
-wait_time = 0.3
+wait_time = 0.5
 one_shot = true
 
 [node name="Skeleton" type="Node" parent="ModeStateMachine"]

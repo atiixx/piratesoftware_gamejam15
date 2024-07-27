@@ -1,14 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://co1cm8i6khg1i"]
+[gd_scene load_steps=11 format=3 uid="uid://co1cm8i6khg1i"]
 
 [ext_resource type="Script" path="res://scripts/player/projectile.gd" id="1_revnl"]
 [ext_resource type="Shader" path="res://shaders/player/projectile.gdshader" id="2_a0ewp"]
-
-[sub_resource type="Curve" id="Curve_mnem7"]
-_data = [Vector2(0, 0.119355), 0.0, 0.0, 0, 0, Vector2(0.890244, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_51aki"]
-radius = 5.0
+[ext_resource type="PackedScene" uid="uid://bop5efmf4jr2v" path="res://scenes/impact_damage.tscn" id="3_8upb2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gfv0q"]
 shader = ExtResource("2_a0ewp")
@@ -33,6 +27,17 @@ scale_min = 6.15
 scale_max = 10.33
 scale_curve = SubResource("CurveTexture_ejusr")
 
+[sub_resource type="Curve" id="Curve_mnem7"]
+_data = [Vector2(0, 0.119355), 0.0, 0.0, 0, 0, Vector2(0.890244, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_51aki"]
+radius = 4.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o5vn7"]
+radius = 5.0
+height = 26.0
+
 [node name="Projectile" type="RigidBody2D"]
 collision_layer = 0
 collision_mask = 5
@@ -42,6 +47,14 @@ continuous_cd = 1
 max_contacts_reported = 10
 contact_monitor = true
 script = ExtResource("1_revnl")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_gfv0q")
+position = Vector2(0, 16)
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_fyruf")
+lifetime = 2.0
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
 
 [node name="Line2D" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 0, 24)
@@ -54,17 +67,12 @@ end_cap_mode = 2
 position = Vector2(0, 6)
 shape = SubResource("CircleShape2D_51aki")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-material = SubResource("ShaderMaterial_gfv0q")
-position = Vector2(0, 16)
-amount = 50
-process_material = SubResource("ParticleProcessMaterial_fyruf")
-lifetime = 2.0
-visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+[node name="ImpactDamage" parent="." instance=ExtResource("3_8upb2")]
+damage_matching = 4
 
-[node name="DespawnTimer" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ImpactDamage"]
+position = Vector2(0, 13)
+shape = SubResource("CapsuleShape2D_o5vn7")
+debug_color = Color(1, 0.00441436, 0.0654834, 0.42)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]

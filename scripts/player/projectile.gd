@@ -1,27 +1,25 @@
 extends RigidBody2D
 class_name PlayerProjectile
 
-var in_air = false
-var update_after_landing = true
-var prev_pos: Vector2
+@export var time_to_despawn: float = 5
 
 @onready var collider: CollisionShape2D = $CollisionShape2D
 @onready var particles: GPUParticles2D = $GPUParticles2D
 @onready var despawn_timer: Timer = $DespawnTimer
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+var in_air = false
+var update_after_landing = true
+var prev_pos: Vector2
+
+var attached_to: Node2D
+var attachment_offset: Vector2
+var attachment_prev_relative_pos: Vector2
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if in_air or not update_after_landing:
 		update_after_landing = true
-		# rotation = linear_velocity.angle() + deg_to_rad(90)
 		if prev_pos.length() > 10:
 			var diff = position - prev_pos
 			var diff_length = diff.length()
@@ -32,6 +30,14 @@ func _physics_process(delta):
 			prev_pos = position
 	else:
 		prev_pos = Vector2.ZERO
+	if attached_to:
+		if is_instance_valid(attached_to):
+			position = attached_to.global_position + attachment_offset
+		else:
+			attached_to = null
+			in_air = true
+			set_deferred("freeze", false)
+			prev_pos = global_position + attachment_prev_relative_pos
 
 func launch(force: float):
 	freeze = false
@@ -46,11 +52,14 @@ func _on_body_entered(body:Node):
 	set_deferred("freeze", true)
 	linear_velocity = Vector2.ZERO
 
-	despawn_timer.start()
+	if body is Node2D:
+		var position_offset = global_position - body.global_position
+		attached_to = body
+		attachment_offset = position_offset
+		attachment_prev_relative_pos = prev_pos - global_position
+
+	await get_tree().create_timer(time_to_despawn).timeout
 	var tween = get_tree().create_tween()
-	# tween.tween_property($Line2D, "width", 0, 1)
-	tween.tween_property($Line2D, "default_color", Color(0, 0, 0, 0), 1)
-
-
-func _on_despawn_timer_timeout():
+	tween.tween_property($Line2D, "scale", Vector2.ZERO, 1)
+	await get_tree().create_timer(1).timeout
 	queue_free()

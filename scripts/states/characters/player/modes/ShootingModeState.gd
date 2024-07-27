@@ -9,7 +9,7 @@ var prepare_attack_projectile: PlayerProjectile
 # Virtual function. Receives events from the `_unhandled_input()` callback.
 func handle_input(_event: InputEvent) -> void:
 	if Input.is_action_just_released("Attack") and prepare_attack_projectile:
-		prepare_attack_projectile.launch(60)
+		prepare_attack_projectile.launch(30)
 		prepare_attack_projectile = null
 		cooldown_timer.start()
 	if Input.is_action_pressed("Attack") and not prepare_attack_projectile and cooldown_timer.is_stopped():
