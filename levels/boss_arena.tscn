@@ -1,30 +1,54 @@
-[gd_scene load_steps=7 format=3 uid="uid://kvfem1qqyijh"]
+[gd_scene load_steps=9 format=3 uid="uid://kvfem1qqyijh"]
 
 [ext_resource type="PackedScene" uid="uid://srkw64ecilf1" path="res://scenes/terrain/polygon_terrain.tscn" id="1_2vaxj"]
+[ext_resource type="Script" path="res://levels/boss_arena.gd" id="1_t4fda"]
 [ext_resource type="Shader" path="res://shaders/terrain/polygon_inside.gdshader" id="2_fp2l4"]
 [ext_resource type="PackedScene" uid="uid://6n2wgches1ia" path="res://scenes/player/player.tscn" id="3_k88kd"]
 [ext_resource type="Script" path="res://levels/character_parent.gd" id="3_p5p2s"]
 [ext_resource type="PackedScene" uid="uid://cttn4mdx8m0wv" path="res://scenes/enemies/bosses/ranged_boss.tscn" id="4_cqp1j"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rp4eq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iv27l"]
 shader = ExtResource("2_fp2l4")
 shader_parameter/color = null
 shader_parameter/highlight_color = null
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i6ah0"]
+
 [node name="BossArena" type="Node2D"]
+script = ExtResource("1_t4fda")
 
 [node name="Map" type="Node2D" parent="."]
 
 [node name="Polygon2D" parent="Map" instance=ExtResource("1_2vaxj")]
-material = SubResource("ShaderMaterial_rp4eq")
+material = SubResource("ShaderMaterial_iv27l")
 polygon = PackedVector2Array(-1642, -425, 78, -421, 78, 1033, 3426, 1024, 3371, -471, 4990, -493, 5062, 2008, -740, 2063, -2231, 2042)
 vertex_colors = PackedColorArray(0.190663, 0.107176, 0, 1, 0.853964, 0.146858, 0, 1, 0.853078, 0.145972, 0, 1, 0.13954, 0.153491, 0, 1, 0.137657, 0.15546, 0, 1, 0.845985, 0.139037, 0, 1, 0.860252, 0.846726, 0, 1, 0.498849, 0.999999, 0, 1, 0.105364, 0.807022, 0, 1)
+
+[node name="BossFightTrigger" type="Area2D" parent="Map"]
+position = Vector2(818, 122)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/BossFightTrigger"]
+position = Vector2(1058, 175)
+scale = Vector2(7.48672, -176.292)
+shape = SubResource("RectangleShape2D_i6ah0")
+
+[node name="Markers" type="Node2D" parent="Map"]
+
+[node name="CamLimitLeft" type="Marker2D" parent="Map/Markers"]
+position = Vector2(-80, 864)
+
+[node name="CamLimitRight" type="Marker2D" parent="Map/Markers"]
+position = Vector2(3552, 852)
 
 [node name="CharacterParent" type="Node2D" parent="."]
 script = ExtResource("3_p5p2s")
 
-[node name="Player" parent="CharacterParent" instance=ExtResource("3_k88kd")]
-position = Vector2(188, 888)
-
 [node name="RangedBoss" parent="CharacterParent" instance=ExtResource("4_cqp1j")]
-position = Vector2(1135, 684)
+position = Vector2(2770, 811)
+
+[node name="Player" parent="CharacterParent" instance=ExtResource("3_k88kd")]
+position = Vector2(176, 896)
+
+[connection signal="body_entered" from="Map/BossFightTrigger" to="." method="_on_boss_fight_trigger_body_entered"]

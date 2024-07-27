@@ -146,7 +146,6 @@ position = Vector2(170, -130)
 
 [node name="PhaseChangeTimer" type="Timer" parent="."]
 one_shot = true
-autostart = true
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="BossStateMachine/Shoot" method="_on_animation_player_animation_finished"]

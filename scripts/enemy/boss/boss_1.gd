@@ -7,7 +7,13 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var state_change_timer: Timer = $PhaseChangeTimer
 @onready var shoot_delay_timer: Timer = $ShootDelayTimer
 @onready var projectile_spawns = $ProjectileSpawns
+@onready var markers = owner.find_child("Markers")
+@onready var camera_path: Path2D = owner.find_child("Path2D")
+@onready var camera: Camera2D = owner.get_node("CharacterParent").find_child("Camera2D")
+var start_camera_pathing = false
+
 var player_is_left = true
+var fight_started = false
 const JUMP_ATTACK_VECTOR: Vector2 = Vector2(600, -600)
 
 signal finished_phase()
@@ -18,6 +24,13 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if start_camera_pathing:
+		camera_path.get_child(0).progress_ratio += 0.01
+		if camera_path.get_child(0).progress_ratio >= 1:
+			start_camera_pathing= false
+	else:
+		if player.global_position.x == camera.global_position.x:
+			camera.reparent(player)
 	player_is_left = player.global_position.x < global_position.x
 	state_label.text = boss_state_machine.state.name
 	if player:
@@ -89,6 +102,7 @@ func jump_attack():
 	velocity = JUMP_ATTACK_VECTOR
 	velocity.x = velocity.x * direction
 	await on_floor_again()
+	velocity = Vector2.ZERO
 	finished_phase.emit()
 
 func on_floor_again():
@@ -101,3 +115,9 @@ func _on_hurtbox_body_entered(body):
 	var player_layer = body.get_collision_layer_value(2)
 	if player_layer:
 		player_hit.emit(body)
+
+func start_fight():
+	fight_started = true
+	camera.limit_left = markers.find_child("CamLimitLeft").position.x
+	camera.limit_right = markers.find_child("CamLimitRight").position.x
+	boss_state_machine.transition_to("Idle")

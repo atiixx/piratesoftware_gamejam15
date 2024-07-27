@@ -20,7 +20,8 @@ func physics_update(_delta: float) -> void:
 # is a dictionary with arbitrary data the state can use to initialize itself.
 func enter(_msg := {}) -> void:
 	print(name)
-	boss.state_change_timer.start()
+	if boss.fight_started:
+		boss.state_change_timer.start()
 
 
 # Virtual function. Called by the state machine before changing the active state. Use this function

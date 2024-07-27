@@ -96,12 +96,13 @@ func _on_attack_hit(body: Node2D):
 
 func get_hit():
 	$Animations/DamageAnimationPlayer.play("get_hit")
-	var healthbar = $IngameUi.find_child("HealthBar")		
+	var healthbar = $IngameUi.find_child("HealthBar")	
+	var health_outline_path = 	"res://art/UI/health_outline.png"
 	health -= 1
 	for i in range(healthbar.get_child_count()):
-		healthbar.get_child(i).visible = true
 		if i > health -1:
-			healthbar.get_child(i).visible = false
+			healthbar.get_child(i).texture = load(health_outline_path)
+			
 	if health <= 0:
 		die()
 		
