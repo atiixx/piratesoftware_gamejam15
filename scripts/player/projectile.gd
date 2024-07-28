@@ -5,7 +5,7 @@ class_name PlayerProjectile
 
 @onready var collider: CollisionShape2D = $CollisionShape2D
 @onready var particles: GPUParticles2D = $GPUParticles2D
-@onready var despawn_timer: Timer = $DespawnTimer
+@onready var damager: ImpactDamage = $ImpactDamage
 
 var in_air = false
 var update_after_landing = true
@@ -34,18 +34,29 @@ func _physics_process(_delta):
 		if is_instance_valid(attached_to):
 			position = attached_to.global_position + attachment_offset
 		else:
-			attached_to = null
-			in_air = true
-			set_deferred("freeze", false)
-			prev_pos = global_position + attachment_prev_relative_pos
+			detach()
 
 func launch(force: float):
 	freeze = false
 	in_air = true
 	apply_central_impulse(Vector2.UP.rotated(rotation) * force)
 
+func attach_to(node: Node2D):
+	var position_offset = global_position - node.global_position
+	attached_to = node
+	attachment_offset = position_offset
+	attachment_prev_relative_pos = prev_pos - global_position
+	await get_tree().create_timer(0.1).timeout
+	damager.active = false
 
-func _on_body_entered(body:Node):
+func detach():
+	attached_to = null
+	in_air = true
+	set_deferred("freeze", false)
+	prev_pos = global_position + attachment_prev_relative_pos
+	damager.active = true
+
+func _on_body_entered(body: Node):
 	in_air = false
 	update_after_landing = false
 	particles.emitting = false
@@ -53,10 +64,7 @@ func _on_body_entered(body:Node):
 	linear_velocity = Vector2.ZERO
 
 	if body is Node2D:
-		var position_offset = global_position - body.global_position
-		attached_to = body
-		attachment_offset = position_offset
-		attachment_prev_relative_pos = prev_pos - global_position
+		attach_to(body)
 
 	await get_tree().create_timer(time_to_despawn).timeout
 	var tween = get_tree().create_tween()
