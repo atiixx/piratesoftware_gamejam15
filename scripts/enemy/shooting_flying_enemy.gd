@@ -14,15 +14,23 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	state_label.text = enemy_state_machine.state.name
-	sprite.flip_h = velocity.x < 0
+	if health > 0:
+		sprite.flip_h = velocity.x > 0
+	if health == 0:
+		sprite.play("Death")
+		shoot_timer.stop()
 	var direction_to_player = global_position.direction_to(player.global_position)
 	player_detector.target_position = direction_to_player * PLAYER_RAYCAST_LENGTH
 	
 func _physics_process(delta):
-	pass
-		
+	if health == 0:
+		velocity = Vector2.ZERO
+
+	
 			
 func shoot():
+	
+	sprite.play("Shoot")
 	var player_pos = player.global_position
 	var projectile_scene = load("res://scenes/enemies/enemy_projectile.tscn")
 	var bullet = projectile_scene.instantiate()

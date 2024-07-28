@@ -67,17 +67,11 @@ func _process(delta):
 func _physics_process(delta):
 	# Add the gravity.
 	velocity.y += gravity * delta
-
-	
-func set_attacking(value):
-	is_attacking = value
-	if !value:
-		attack_cd_timer.start()
 		
 
 func _on_cd_timer_timeout():
-	if character_state_machine.state.name != "Wall":
-		can_attack = true
+	is_attacking = false
+	can_attack = true
 		
 func _on_wallslide_cd_timer_timeout():
 	can_wallslide = true
@@ -119,4 +113,4 @@ func die():
 func _on_hitboxes_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	if body.get_collision_layer_value(3):
 		if local_shape_index == 1:
-			velocity.y += jump_speed * 2
+			velocity.y = jump_speed * 2

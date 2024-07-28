@@ -1,22 +1,57 @@
-[gd_scene load_steps=10 format=3 uid="uid://b1txf47nse323"]
+[gd_scene load_steps=14 format=3 uid="uid://b1txf47nse323"]
 
 [ext_resource type="Script" path="res://scripts/enemy/moving_enemy.gd" id="1_y8t6s"]
-[ext_resource type="Texture2D" uid="uid://dorrmsbd0vg42" path="res://icon.svg" id="2_myx0w"]
 [ext_resource type="Script" path="res://scripts/states/characters/CharacterStateMachine.gd" id="3_a8bl3"]
+[ext_resource type="Texture2D" uid="uid://cuqp8njno6o31" path="res://art/enemies/enemies.svg" id="3_x2886"]
 [ext_resource type="Script" path="res://scripts/states/characters/enemy/EnemyState.gd" id="4_ykvvs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lfew3"]
 size = Vector2(122, 122)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0vhr"]
+atlas = ExtResource("3_x2886")
+region = Rect2(219, 46, 73, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glpip"]
+atlas = ExtResource("3_x2886")
+region = Rect2(73, 46, 73, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5eoxw"]
+atlas = ExtResource("3_x2886")
+region = Rect2(73, 50, 73, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0jae"]
+atlas = ExtResource("3_x2886")
+region = Rect2(146, 50, 73, 42)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_kb3yf"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_myx0w")
+"texture": SubResource("AtlasTexture_d0vhr")
+}],
+"loop": true,
+"name": &"Death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glpip")
 }],
 "loop": true,
 "name": &"Idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5eoxw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0jae")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 4.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ljuon"]
@@ -44,52 +79,36 @@ _data = {
 }
 
 [node name="Movingenemy" type="CharacterBody2D"]
-scale = Vector2(0.7, 0.7)
+scale = Vector2(2, 2)
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_y8t6s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3.16456)
+scale = Vector2(0.327491, 0.27765)
 shape = SubResource("RectangleShape2D_lfew3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1, 0.943043)
 sprite_frames = SubResource("SpriteFrames_kb3yf")
-animation = &"Idle"
-
-[node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -126.0
-offset_right = -88.0
-offset_bottom = -86.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(3.19942, 3.10907)
-mouse_filter = 2
-color = Color(1, 0, 0, 0.403922)
+animation = &"Death"
 
 [node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(1.26582, -2.53165)
 collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+scale = Vector2(0.34594, 0.278929)
 shape = SubResource("RectangleShape2D_ljuon")
 
-[node name="DamageAnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_7yex2")
-}
-
 [node name="LedgeDetector" type="RayCast2D" parent="."]
-position = Vector2(60, 15)
-target_position = Vector2(0, 90)
+position = Vector2(20.8861, 2.53164)
+target_position = Vector2(0, 20)
 
 [node name="WallDetector" type="RayCast2D" parent="."]
-target_position = Vector2(75, 0)
+target_position = Vector2(30, 0)
 
 [node name="CharacterStateMachine" type="Node" parent="."]
 script = ExtResource("3_a8bl3")
@@ -97,5 +116,10 @@ initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("4_ykvvs")
+
+[node name="DamageAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7yex2")
+}
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]

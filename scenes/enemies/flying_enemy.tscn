@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://pwnyc7tauv7p"]
+[gd_scene load_steps=14 format=3 uid="uid://pwnyc7tauv7p"]
 
 [ext_resource type="Script" path="res://scripts/enemy/flying_enemy.gd" id="1_s6h6w"]
-[ext_resource type="Texture2D" uid="uid://dorrmsbd0vg42" path="res://icon.svg" id="2_vcgv2"]
+[ext_resource type="Texture2D" uid="uid://cuqp8njno6o31" path="res://art/enemies/enemies.svg" id="2_mmup0"]
 [ext_resource type="Script" path="res://scripts/states/characters/CharacterStateMachine.gd" id="3_b3a26"]
 [ext_resource type="Script" path="res://scripts/states/characters/enemy/flying/FlyingEnemyIdleState.gd" id="4_q42it"]
 [ext_resource type="Script" path="res://scripts/states/characters/enemy/flying/FlyingEnemyPursuingState.gd" id="5_elkwo"]
@@ -9,15 +9,38 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lfew3"]
 size = Vector2(122, 122)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_44ytv"]
+atlas = ExtResource("2_mmup0")
+region = Rect2(209, 396, 68, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kf2nt"]
+atlas = ExtResource("2_mmup0")
+region = Rect2(48, 402, 70, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_adeqx"]
+atlas = ExtResource("2_mmup0")
+region = Rect2(119, 402, 89, 56)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_kb3yf"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_vcgv2")
+"texture": SubResource("AtlasTexture_44ytv")
+}],
+"loop": true,
+"name": &"Death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kf2nt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_adeqx")
 }],
 "loop": true,
 "name": &"Idle",
-"speed": 5.0
+"speed": 8.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ljuon"]
@@ -55,24 +78,10 @@ flying_speed = 15000
 shape = SubResource("RectangleShape2D_lfew3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_kb3yf")
-animation = &"Idle"
-
-[node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -126.0
-offset_right = -88.0
-offset_bottom = -86.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(3.19942, 3.10907)
-mouse_filter = 2
-color = Color(0.833079, 0.387335, 0.0785698, 0.403922)
+animation = &"Death"
+autoplay = "Idle"
 
 [node name="CharacterStateMachine" type="Node" parent="."]
 script = ExtResource("3_b3a26")

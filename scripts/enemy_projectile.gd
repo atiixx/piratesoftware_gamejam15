@@ -1,6 +1,6 @@
 extends Area2D
 
-var speed = 1500
+var speed = 1250
 
 var target_dir: Vector2 = Vector2.ZERO
 # Called when the node enters the scene tree for the first time.
@@ -19,3 +19,7 @@ func _on_projectile_body_entered(body: Node2D):
 	var hit_player_layer = body.get_collision_layer_value(2)
 	if hit_player_layer and body.has_method("get_hit"):
 		body.get_hit(self)
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	queue_free()

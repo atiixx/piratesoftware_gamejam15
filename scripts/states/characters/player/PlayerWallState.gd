@@ -5,7 +5,7 @@ func handle_input(_event: InputEvent) -> void:
 	pass
 # Virtual function. Corresponds to the `_process()` callback.
 func update(_delta: float) -> void:
-	pass
+	player.can_attack = false
 		
 # Virtual function. Corresponds to the `_physics_process()` callback.
 func physics_update(_delta: float) -> void:	
@@ -23,7 +23,6 @@ func physics_update(_delta: float) -> void:
 func enter(_msg := {}) -> void:
 	player.can_attack = false
 	player.sprite.flip_h = get_wall_press_state() == Enums.WALL_DIRECTION.RIGHT;
-	print(player.sprite.flip_h)
 	#Check where the wall is
 	match get_wall_press_state():
 		Enums.WALL_DIRECTION.LEFT:
