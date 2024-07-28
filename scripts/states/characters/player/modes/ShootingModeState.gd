@@ -33,7 +33,6 @@ func get_aim_vector():
 		var relative_mouse_pos = get_viewport().get_mouse_position() - player.get_global_transform_with_canvas().origin
 		return relative_mouse_pos
 
-
 # Virtual function. Corresponds to the `_physics_process()` callback.
 func physics_update(_delta: float) -> void:
 	check_for_transitions()
@@ -43,11 +42,12 @@ func physics_update(_delta: float) -> void:
 func enter(_msg := {}) -> void:
 	pass
 
-
 # Virtual function. Called by the state machine before changing the active state. Use this function
 # to clean up the state.
 func exit() -> void:
-	pass
+	if prepare_attack_projectile:
+		prepare_attack_projectile.queue_free()
+		prepare_attack_projectile = null
 
 func check_for_transitions():
 	#How to switch between modes?
