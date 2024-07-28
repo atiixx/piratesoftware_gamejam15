@@ -1,28 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://djjg8ai5rxmti"]
+[gd_scene load_steps=4 format=3 uid="uid://djjg8ai5rxmti"]
 
 [ext_resource type="Script" path="res://scripts/enemy_projectile.gd" id="1_mt1qg"]
 [ext_resource type="Texture2D" uid="uid://bkv166gqwrb3f" path="res://art/enemies/ghost_projectile.png" id="2_01lu2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4wwva"]
-
-[sub_resource type="Curve" id="Curve_7t3g6"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_yu8s5"]
-curve = SubResource("Curve_7t3g6")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1e7g3"]
-particle_flag_disable_z = true
-inherit_velocity_ratio = 0.061
-initial_velocity_min = 32.2
-initial_velocity_max = 32.3
-gravity = Vector3(0, 0, 0)
-damping_min = 10.77
-damping_max = 10.77
-scale_min = 6.15
-scale_max = 10.33
-scale_curve = SubResource("CurveTexture_yu8s5")
 
 [node name="EnemyProjectile" type="Area2D"]
 z_index = -10
@@ -38,8 +19,7 @@ texture = ExtResource("2_01lu2")
 scale = Vector2(18.459, 18.4446)
 shape = SubResource("CircleShape2D_4wwva")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-amount = 50
-process_material = SubResource("ParticleProcessMaterial_1e7g3")
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [connection signal="body_entered" from="." to="." method="_on_projectile_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
