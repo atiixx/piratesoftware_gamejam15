@@ -614,7 +614,7 @@ disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.24, 0.24)
-texture = ExtResource("30_1bdnt")
+texture = ExtResource("3_v2sxa")
 
 [node name="AttackSprite2D" type="Sprite2D" parent="Sprite2D"]
 visible = false
