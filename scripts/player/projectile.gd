@@ -4,7 +4,7 @@ class_name PlayerProjectile
 @export var time_to_despawn: float = 5
 
 @onready var collider: CollisionShape2D = $CollisionShape2D
-@onready var particles: GPUParticles2D = $GPUParticles2D
+@onready var particles: GPUParticles2D = $ParticleTrail
 @onready var damager: ImpactDamage = $ImpactDamage
 
 var in_air = false
@@ -41,6 +41,12 @@ func launch(force: float):
 	apply_central_impulse(Vector2.UP.rotated(rotation) * force)
 
 func attach_to(node: Node2D):
+	in_air = false
+	update_after_landing = false
+	particles.emitting = false
+	set_deferred("freeze", true)
+	linear_velocity = Vector2.ZERO
+
 	var position_offset = global_position - node.global_position
 	attached_to = node
 	attachment_offset = position_offset
@@ -49,19 +55,15 @@ func attach_to(node: Node2D):
 	damager.active = false
 
 func detach():
-	attached_to = null
 	in_air = true
+	particles.emitting = true
 	set_deferred("freeze", false)
+
 	prev_pos = global_position + attachment_prev_relative_pos
+	attached_to = null
 	damager.active = true
 
 func _on_body_entered(body: Node):
-	in_air = false
-	update_after_landing = false
-	particles.emitting = false
-	set_deferred("freeze", true)
-	linear_velocity = Vector2.ZERO
-
 	if body is Node2D:
 		attach_to(body)
 
