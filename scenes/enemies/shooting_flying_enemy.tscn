@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://de7gbqs7t1ttr"]
+[gd_scene load_steps=13 format=3 uid="uid://de7gbqs7t1ttr"]
 
 [ext_resource type="Script" path="res://scripts/enemy/shooting_flying_enemy.gd" id="1_sxea8"]
-[ext_resource type="Texture2D" uid="uid://dorrmsbd0vg42" path="res://icon.svg" id="2_4j71r"]
+[ext_resource type="Texture2D" uid="uid://ct8vsqyomts3q" path="res://art/enemies/ghost_normal.png" id="2_ckgjx"]
+[ext_resource type="Texture2D" uid="uid://cpl8x4f0wv00s" path="res://art/enemies/ghost_dead.png" id="2_i2cwj"]
 [ext_resource type="Script" path="res://scripts/states/characters/CharacterStateMachine.gd" id="3_etto7"]
+[ext_resource type="Texture2D" uid="uid://ell6bkoupilo" path="res://art/enemies/ghost.png" id="3_kexp6"]
 [ext_resource type="Script" path="res://scripts/states/characters/enemy/flyingshooting/ShootingFlyingEnemyIdleState.gd" id="4_tckw3"]
 [ext_resource type="Script" path="res://scripts/states/characters/enemy/flyingshooting/ShootingFlyingEnemyPursuingState.gd" id="5_770an"]
 
@@ -13,10 +15,29 @@ size = Vector2(122, 122)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_4j71r")
+"texture": ExtResource("2_i2cwj")
+}],
+"loop": true,
+"name": &"Death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ckgjx")
 }],
 "loop": true,
 "name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_kexp6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ckgjx")
+}],
+"loop": false,
+"name": &"Shoot",
 "speed": 5.0
 }]
 
@@ -55,24 +76,11 @@ flying_speed = 15000
 shape = SubResource("RectangleShape2D_lfew3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_kb3yf")
-animation = &"Idle"
-
-[node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -126.0
-offset_right = -88.0
-offset_bottom = -86.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(3.19942, 3.10907)
-mouse_filter = 2
-color = Color(1.49205e-06, 0.650265, 0.0270356, 0.403922)
+animation = &"Shoot"
+frame = 1
+frame_progress = 1.0
 
 [node name="CharacterStateMachine" type="Node" parent="."]
 script = ExtResource("3_etto7")

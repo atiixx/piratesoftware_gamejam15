@@ -11,7 +11,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	sprite.flip_h = velocity.x < 0
+	if health > 0:
+		sprite.flip_h = velocity.x > 0
+	if health == 0:
+		sprite.play("Death")
+	if velocity.x != 0:
+		sprite.play("Walk")
 	if !ledge_detector.is_colliding() or is_on_obstacle():
 		ledge_detector.position.x *= -1
 		wall_detector.target_position.x *= -1
@@ -20,6 +25,8 @@ func _process(delta):
 func _physics_process(delta):
 	velocity.y += gravity * delta
 	velocity.x = walking_speed * direction
+	if health == 0:
+		velocity = Vector2.ZERO
 	move_and_slide()
 
 func is_on_obstacle():
