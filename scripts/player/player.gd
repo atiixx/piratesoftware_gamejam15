@@ -53,13 +53,19 @@ func _process(delta):
 	if can_attack:
 		if(Input.is_action_pressed("Attack") and Input.is_action_pressed("down") and !is_on_floor()):
 			can_attack = false
+			is_attacking = true
 			anim_tree_playback.travel("DownAttack")				
+			attack_cd_timer.start()
 		elif (Input.is_action_pressed("Attack") and Input.is_action_pressed("up")):
 			can_attack = false
+			is_attacking = true
 			anim_tree_playback.travel("UpAttack")
+			attack_cd_timer.start()
 		elif(Input.is_action_just_pressed("Attack")):
 			can_attack = false
+			is_attacking = true
 			anim_tree_playback.travel("Attack")
+			attack_cd_timer.start()
 	if velocity.x != 0 and character_state_machine.state.name != "Wall" and !getting_hit:
 		sprite.flip_v = false
 		sprite.flip_h = velocity.x < 0
@@ -77,17 +83,11 @@ func _process(delta):
 func _physics_process(delta):
 	# Add the gravity.
 	velocity.y += gravity * delta
-
-	
-func set_attacking(value):
-	is_attacking = value
-	if !value:
-		attack_cd_timer.start()
 		
 
 func _on_cd_timer_timeout():
-	if character_state_machine.state.name != "Wall":
-		can_attack = true
+	is_attacking = false
+	can_attack = true
 		
 func _on_wallslide_cd_timer_timeout():
 	can_wallslide = true
