@@ -617,14 +617,17 @@ scale = Vector2(0.24, 0.24)
 texture = ExtResource("30_1bdnt")
 
 [node name="AttackSprite2D" type="Sprite2D" parent="Sprite2D"]
+visible = false
 position = Vector2(416, 24)
 texture = ExtResource("2_fnghn")
 
 [node name="DownAttackSprite2D" type="Sprite2D" parent="Sprite2D"]
+visible = false
 position = Vector2(0, 472)
 texture = ExtResource("4_b3e87")
 
 [node name="UpAttackSprite2D" type="Sprite2D" parent="Sprite2D"]
+visible = false
 position = Vector2(20, -380)
 texture = ExtResource("28_iwm0h")
 
@@ -691,7 +694,7 @@ tree_root = SubResource("AnimationNodeStateMachine_bcaem")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="AttackCooldown" type="Timer" parent="."]
-wait_time = 0.3
+wait_time = 0.4
 one_shot = true
 
 [node name="WallSlideCooldown" type="Timer" parent="."]

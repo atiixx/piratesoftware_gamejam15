@@ -129,4 +129,4 @@ func die():
 func _on_hitboxes_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	if body.get_collision_layer_value(3):
 		if local_shape_index == 1:
-			velocity.y += jump_speed * 2
+			velocity.y = jump_speed * 2
