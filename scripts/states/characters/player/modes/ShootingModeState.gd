@@ -14,16 +14,16 @@ func handle_input(_event: InputEvent) -> void:
 		cooldown_timer.start()
 	if Input.is_action_pressed("Attack") and not prepare_attack_projectile and cooldown_timer.is_stopped():
 		prepare_attack_projectile = projectile.instantiate()
-		prepare_attack_projectile.position = player.global_position
-		owner.owner.add_child(prepare_attack_projectile)
+		var root_node = get_tree().current_scene
+		root_node.add_child(prepare_attack_projectile)
 
 # Virtual function. Corresponds to the `_process()` callback.
 func update(_delta: float) -> void:
 	if prepare_attack_projectile:
 		var rotation = get_aim_vector().angle() + deg_to_rad(90)
 		prepare_attack_projectile.rotation = rotation
-		prepare_attack_projectile.position = player.global_position + Vector2.UP.rotated(rotation) * 100
-	pass
+		var root_node = get_tree().current_scene
+		prepare_attack_projectile.position = player.global_position - root_node.global_position + Vector2.UP.rotated(rotation) * 100
 
 func get_aim_vector():
 	var controller_aim = Input.get_vector("Controller Aim Left", "Controller Aim Right", "Controller Aim Up", "Controller Aim Down")

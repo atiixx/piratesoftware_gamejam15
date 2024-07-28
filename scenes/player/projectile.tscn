@@ -69,6 +69,7 @@ shape = SubResource("CircleShape2D_51aki")
 
 [node name="ImpactDamage" parent="." instance=ExtResource("3_8upb2")]
 damage_matching = 4
+active = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ImpactDamage"]
 position = Vector2(0, 13)

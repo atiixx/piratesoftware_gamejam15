@@ -15,8 +15,6 @@ var attached_to: Node2D
 var attachment_offset: Vector2
 var attachment_prev_relative_pos: Vector2
 
-
-
 func _physics_process(_delta):
 	if in_air or not update_after_landing:
 		update_after_landing = true
@@ -32,13 +30,14 @@ func _physics_process(_delta):
 		prev_pos = Vector2.ZERO
 	if attached_to:
 		if is_instance_valid(attached_to):
-			position = attached_to.global_position + attachment_offset
+			position = attached_to.global_position + attachment_offset - (global_position - position)
 		else:
 			detach()
 
 func launch(force: float):
 	freeze = false
 	in_air = true
+	damager.active = true
 	apply_central_impulse(Vector2.UP.rotated(rotation) * force)
 
 func attach_to(node: Node2D):
