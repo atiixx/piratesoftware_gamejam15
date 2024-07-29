@@ -85,30 +85,37 @@ collision_mask = 5
 script = ExtResource("1_y8t6s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3.16456)
-scale = Vector2(0.327491, 0.27765)
+scale = Vector2(0.3, 0.3)
 shape = SubResource("RectangleShape2D_lfew3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1, 0.943043)
 sprite_frames = SubResource("SpriteFrames_kb3yf")
-animation = &"Death"
+animation = &"Idle"
 
 [node name="Hurtbox" type="Area2D" parent="."]
-position = Vector2(1.26582, -2.53165)
 collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-scale = Vector2(0.34594, 0.278929)
+scale = Vector2(0.3, 0.3)
 shape = SubResource("RectangleShape2D_ljuon")
 
-[node name="LedgeDetector" type="RayCast2D" parent="."]
-position = Vector2(20.8861, 2.53164)
-target_position = Vector2(0, 20)
+[node name="RLedgeDetector" type="RayCast2D" parent="."]
+position = Vector2(18, 0)
+target_position = Vector2(0, 25)
 
-[node name="WallDetector" type="RayCast2D" parent="."]
+[node name="LLedgeDetector" type="RayCast2D" parent="."]
+position = Vector2(-18, 0)
+target_position = Vector2(0, 25)
+
+[node name="RWallDetector" type="RayCast2D" parent="."]
 target_position = Vector2(30, 0)
+collision_mask = 5
+
+[node name="LWallDetector" type="RayCast2D" parent="."]
+target_position = Vector2(-30, 0)
+collision_mask = 5
 
 [node name="CharacterStateMachine" type="Node" parent="."]
 script = ExtResource("3_a8bl3")
