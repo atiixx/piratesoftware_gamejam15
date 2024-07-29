@@ -19,7 +19,7 @@ func set_target(target_pos: Vector2):
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	position += direction * speed * delta
+	position.x += direction * speed * delta
 
 
 func _on_projectile_body_entered(body: Node2D):
