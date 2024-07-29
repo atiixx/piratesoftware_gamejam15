@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://csvwyejai5hoe"]
+
+[ext_resource type="PackedScene" uid="uid://srkw64ecilf1" path="res://scenes/terrain/polygon_terrain.tscn" id="1_n4u5k"]
+[ext_resource type="Shader" path="res://shaders/terrain/polygon_inside.gdshader" id="2_ncjw7"]
+[ext_resource type="PackedScene" uid="uid://6n2wgches1ia" path="res://scenes/player/player.tscn" id="3_33lm6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sfy4u"]
+shader = ExtResource("2_ncjw7")
+shader_parameter/color = null
+shader_parameter/highlight_color = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qq56y"]
+shader = ExtResource("2_ncjw7")
+shader_parameter/color = null
+shader_parameter/highlight_color = null
+
+[node name="Level2" type="Node2D"]
+
+[node name="Terrain" type="Node2D" parent="."]
+
+[node name="Polygon2D" parent="Terrain" instance=ExtResource("1_n4u5k")]
+material = SubResource("ShaderMaterial_sfy4u")
+polygon = PackedVector2Array(3, 5, 623, -1, 625, 1151, -3021, 1149, -3002, -1779, -424, -1798, -398, 17)
+vertex_colors = PackedColorArray(0.490102, 9.79602e-05, 0, 1, 0.85153, 0.144435, 0, 1, 0.853763, 0.853343, 0, 1, 0.145205, 0.852307, 0, 1, 0.146291, 0.146602, 0, 1, 0.849698, 0.142632, 0, 1, 0.845647, 0.138713, 0, 1)
+
+[node name="PolygonTerrain" parent="Terrain" instance=ExtResource("1_n4u5k")]
+material = SubResource("ShaderMaterial_qq56y")
+position = Vector2(595, -5)
+polygon = PackedVector2Array(1458, 9, 2481, 4, 2481, 1156, 1439, 1175)
+vertex_colors = PackedColorArray(0.148469, 0.144436, 0, 1, 0.852688, 0.145584, 0, 1, 0.856762, 0.850316, 0, 1, 0.146789, 0.853896, 0, 1)
+
+[node name="Characters" type="Node2D" parent="."]
+
+[node name="Player" parent="Characters" instance=ExtResource("3_33lm6")]
+position = Vector2(32, -80)
