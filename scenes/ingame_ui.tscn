@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqwuu7asnl4n4"]
+[gd_scene load_steps=3 format=3 uid="uid://cqwuu7asnl4n4"]
 
 [ext_resource type="Texture2D" uid="uid://cv78btrebtn4k" path="res://art/UI/health.png" id="1_i3kws"]
+[ext_resource type="FontFile" uid="uid://hki4nj63ji3h" path="res://ui/fonts/Noto/NotoColorEmoji-Regular.ttf" id="2_sqvk5"]
 
 [node name="IngameUi" type="Control"]
 layout_mode = 3
@@ -18,20 +19,33 @@ offset_bottom = 178.0
 theme_override_constants/margin_left = 75
 theme_override_constants/margin_top = 50
 
-[node name="HealthBar" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+
+[node name="HealthBar" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_constants/separation = -30
 
-[node name="Health1" type="TextureRect" parent="CanvasLayer/MarginContainer/HealthBar"]
+[node name="Health1" type="TextureRect" parent="CanvasLayer/MarginContainer/VBoxContainer/HealthBar"]
 layout_mode = 2
 texture = ExtResource("1_i3kws")
 
-[node name="Health2" type="TextureRect" parent="CanvasLayer/MarginContainer/HealthBar"]
+[node name="Health2" type="TextureRect" parent="CanvasLayer/MarginContainer/VBoxContainer/HealthBar"]
 layout_mode = 2
 texture = ExtResource("1_i3kws")
 
-[node name="Health3" type="TextureRect" parent="CanvasLayer/MarginContainer/HealthBar"]
+[node name="Health3" type="TextureRect" parent="CanvasLayer/MarginContainer/VBoxContainer/HealthBar"]
 layout_mode = 2
 texture = ExtResource("1_i3kws")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 35
+
+[node name="ModeLabel" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_sqvk5")
+theme_override_font_sizes/font_size = 56
+text = "👊🏹"

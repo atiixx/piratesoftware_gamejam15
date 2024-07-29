@@ -51,22 +51,6 @@ func _ready():
 	
 func _process(delta):
 	state_label.text = character_state_machine.state.name
-	if can_attack:
-		if(Input.is_action_pressed("Attack") and Input.is_action_pressed("down") and !is_on_floor()):
-			can_attack = false
-			is_attacking = true
-			anim_tree_playback.travel("DownAttack")				
-			attack_cd_timer.start()
-		elif (Input.is_action_pressed("Attack") and Input.is_action_pressed("up")):
-			can_attack = false
-			is_attacking = true
-			anim_tree_playback.travel("UpAttack")
-			attack_cd_timer.start()
-		elif(Input.is_action_just_pressed("Attack")):
-			can_attack = false
-			is_attacking = true
-			anim_tree_playback.travel("Attack")
-			attack_cd_timer.start()
 	if velocity.x != 0 and character_state_machine.state.name != "Wall" and !getting_hit:
 		sprite.flip_v = false
 		sprite.flip_h = velocity.x < 0
