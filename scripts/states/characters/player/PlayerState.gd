@@ -27,6 +27,7 @@ func handle_basic_movement(delta):
 	
 	#long and short jump
 	if Input.is_action_just_pressed("jump"):
+		player.audio_streamer.get_node("JumpSound").play()
 		player.gravity = player.base_gravity * 0.6
 	elif Input.is_action_just_released("jump"):
 		player.gravity = player.base_gravity

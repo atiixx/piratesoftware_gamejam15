@@ -5,7 +5,6 @@ class_name Player
 @export var jump_speed = -700.0
 @onready var anim_tree_playback:AnimationNodeStateMachinePlayback = $Animations/AnimationTree["parameters/playback"]
 @onready var anim_player: AnimationPlayer = $Animations/AnimationPlayer
-@onready var state_label = $StateLabel
 #Sprites
 @onready var sprite := $Sprite2D
 @onready var attack_sprite := $Sprite2D/AttackSprite2D
@@ -32,6 +31,8 @@ class_name Player
 @onready var attack_collision_shape_pos = attack_collision_shape.position
 @onready var down_attack_coll: CollisionShape2D = $Hitboxes/DownAttackCollisionShape2D
 
+@onready var audio_streamer = $Audio
+
 var getting_hit = false
 var is_attacking := false
 var can_input := true
@@ -50,7 +51,6 @@ func _ready():
 	pass
 	
 func _process(delta):
-	state_label.text = character_state_machine.state.name
 	if velocity.x != 0 and character_state_machine.state.name != "Wall" and !getting_hit:
 		sprite.flip_v = false
 		sprite.flip_h = velocity.x < 0
@@ -84,6 +84,7 @@ func _on_attack_hit(body: Node2D):
 		enemy_hit.emit(body)
 
 func get_hit(source: Node2D):
+	audio_streamer.get_node("DamageSound").play()
 	can_input = false
 	can_attack = false
 	getting_hit = true

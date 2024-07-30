@@ -9,6 +9,7 @@ var prepare_attack_projectile: PlayerProjectile
 # Virtual function. Receives events from the `_unhandled_input()` callback.
 func handle_input(_event: InputEvent) -> void:
 	if Input.is_action_just_released("Attack") and prepare_attack_projectile:
+		player.audio_streamer.get_node("ShootSound")
 		prepare_attack_projectile.launch(45)
 		prepare_attack_projectile = null
 		cooldown_timer.start()

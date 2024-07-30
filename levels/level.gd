@@ -6,7 +6,7 @@ extends Node2D
 @onready var anim_player = $AnimationPlayer
 var boss_trigger
 func _ready():
-	if $BossFightTrigger:
+	if has_node("BossFightTrigger"):
 		boss_trigger= $BossFightTrigger
 	player.player_died.connect(_on_player_died)
 

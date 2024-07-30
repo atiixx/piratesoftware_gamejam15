@@ -2,8 +2,6 @@ extends Boss
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-@onready var state_label: Label = $StateLabel
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var state_change_timer: Timer = $PhaseChangeTimer
 @onready var shoot_delay_timer: Timer = $ShootDelayTimer
 @onready var projectile_spawns = $ProjectileSpawns
@@ -12,12 +10,14 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var rng = RandomNumberGenerator.new()
 var start_camera_pathing = false
 
+
 var player_is_left = true
 var fight_started = false
 const JUMP_ATTACK_VECTOR: Vector2 = Vector2(600, -600)
 
 signal finished_phase()
 signal player_hit(from)
+signal change_theme()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	health = 35
@@ -30,7 +30,6 @@ func _process(delta):
 		sprite.play("FLYING")
 		
 	player_is_left = player.global_position.x < global_position.x
-	state_label.text = boss_state_machine.state.name
 	if player:
 		sprite.flip_v = false
 		sprite.flip_h = !player_is_left
@@ -67,6 +66,7 @@ func shoot():
 		owner.add_child(bullet)
 		bullet.position = projectile_spawns.find_child(spawn % spawn_point_string).global_position
 		bullet.set_target(player_pos)
+		audio_streamer.get_node("ShootSound").play()
 		shoot_delay_timer.start()
 		await shoot_delay_timer.timeout
 	
@@ -81,16 +81,19 @@ func jump_attack():
 	velocity = JUMP_ATTACK_VECTOR
 	velocity.x = velocity.x * direction
 	await on_floor_again()
+	audio_streamer.get_node("GroundPound").play()
 	velocity = Vector2.ZERO
 	await get_tree().create_timer(0.2).timeout
 	velocity = JUMP_ATTACK_VECTOR
 	velocity.x = velocity.x * direction
 	await on_floor_again()
+	audio_streamer.get_node("GroundPound").play()
 	velocity = Vector2.ZERO
 	await get_tree().create_timer(0.2).timeout
 	velocity = JUMP_ATTACK_VECTOR
 	velocity.x = velocity.x * direction
 	await on_floor_again()
+	audio_streamer.get_node("GroundPound").play()
 	velocity = Vector2.ZERO
 	finished_phase.emit()
 
@@ -106,6 +109,7 @@ func _on_hurtbox_body_entered(body):
 		player_hit.emit(self)
 
 func start_fight():
+	change_theme.emit()
 	fight_started = true
 	boss_health.set_deferred("visible", true)
 	camera.limit_left = markers.find_child("CamLimitLeft").global_position.x
