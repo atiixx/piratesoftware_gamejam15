@@ -8,29 +8,27 @@ class_name PlayerProjectile
 @onready var damager: ImpactDamage = $ImpactDamage
 
 var in_air = false
-var update_after_landing = true
 var prev_pos: Vector2
 
 var attached_to: Node2D
-var attachment_offset: Vector2
-var attachment_prev_relative_pos: Vector2
+var attachment_transform: Transform2D
 
 func _physics_process(_delta):
-	if in_air or not update_after_landing:
-		update_after_landing = true
+	if in_air:
 		if prev_pos.length() > 10:
 			var diff = position - prev_pos
 			var diff_length = diff.length()
 			rotation = diff.angle() + deg_to_rad(90)
 			# smooth the position from the previous position to prevent it jittering at the end
-			prev_pos = position - min(diff_length, 40) / diff_length * diff
+			prev_pos = position - min(diff_length, 30) / diff_length * diff
 		else:
 			prev_pos = position
 	else:
 		prev_pos = Vector2.ZERO
 	if attached_to:
 		if is_instance_valid(attached_to):
-			position = attached_to.global_position + attachment_offset - (global_position - position)
+			var current_transform = attached_to.global_transform * attachment_transform
+			transform = current_transform.scaled(Vector2.ONE / current_transform.get_scale())
 		else:
 			detach()
 
@@ -42,15 +40,14 @@ func launch(force: float):
 
 func attach_to(node: Node2D):
 	in_air = false
-	update_after_landing = false
 	particles.emitting = false
 	set_deferred("freeze", true)
 	linear_velocity = Vector2.ZERO
 
-	var position_offset = global_position - node.global_position
 	attached_to = node
-	attachment_offset = position_offset
-	attachment_prev_relative_pos = prev_pos - global_position
+	var diff = position - prev_pos
+	rotation = diff.angle() + deg_to_rad(90)
+	attachment_transform = node.global_transform.affine_inverse() * transform
 	await get_tree().create_timer(0.1).timeout
 	damager.active = false
 
@@ -59,11 +56,13 @@ func detach():
 	particles.emitting = true
 	set_deferred("freeze", false)
 
-	prev_pos = global_position + attachment_prev_relative_pos
+	prev_pos = position - Vector2.UP.rotated(rotation) * 100
 	attached_to = null
 	damager.active = true
 
 func _on_body_entered(body: Node):
+	if not in_air:
+		return
 	if body is Node2D:
 		attach_to(body)
 
