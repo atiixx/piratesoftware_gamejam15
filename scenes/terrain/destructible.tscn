@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://71lrbbcptcrc"]
+
+[ext_resource type="Script" path="res://scripts/terrain/destructible.gd" id="1_1bv10"]
+
+[node name="Destructible" type="RigidBody2D"]
+collision_mask = 8
+freeze = true
+freeze_mode = 1
+max_contacts_reported = 5
+contact_monitor = true
+script = ExtResource("1_1bv10")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
