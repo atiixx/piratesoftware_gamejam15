@@ -22,7 +22,7 @@ func physics_update(_delta: float) -> void:
 # Virtual function. Called by the state machine upon changing the active state. The `msg` parameter
 # is a dictionary with arbitrary data the state can use to initialize itself.
 func enter(_msg := {}) -> void:
-	pass
+	print(name)
 
 
 # Virtual function. Called by the state machine before changing the active state. Use this function

@@ -11,7 +11,7 @@ signal transitioned(state_name)
 
 # The current active state. At the start of the game, we get the `initial_state`.
 @onready var state: StateBase = get_node(initial_state)
-var previousState: StateBase
+var previous_state: StateBase
 
 
 func _ready() -> void:
@@ -45,7 +45,7 @@ func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 	if not has_node(target_state_name):
 		return
 	state.exit()
-	previousState = state
+	previous_state = state
 	state = get_node(target_state_name)
 	state.enter(msg)
 	emit_signal("transitioned", state.name)
