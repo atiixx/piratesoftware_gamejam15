@@ -4,8 +4,10 @@ extends Node2D
 @onready var respawn = $RespawnMarker
 @onready var checkpoints = $Checkpoints
 @onready var anim_player = $AnimationPlayer
-@onready var boss_trigger= $BossFightTrigger
 func _ready():
+	var boss_trigger
+	if $BossFightTrigger:
+		boss_trigger= $BossFightTrigger
 	player.player_died.connect(_on_player_died)
 
 func _on_killboxes_body_entered(body):

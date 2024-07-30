@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b4sqt0mxihxqw" path="res://scenes/effects/particle_trail.tscn" id="3_hdrg3"]
 [ext_resource type="Shader" path="res://shaders/effects/trail_particle.gdshader" id="4_f1xsy"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dbr5k"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j86n8"]
 shader = ExtResource("4_f1xsy")
 shader_parameter/color = null
 shader_parameter/fall_off = 1.0
@@ -17,7 +17,7 @@ point_count = 2
 [sub_resource type="CurveTexture" id="CurveTexture_ejusr"]
 curve = SubResource("Curve_tyrr8")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ji80k"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o844h"]
 particle_flag_disable_z = true
 inherit_velocity_ratio = 0.061
 spread = 180.0
@@ -39,8 +39,8 @@ collision_mask = 2
 script = ExtResource("1_a3m8j")
 
 [node name="ParticleTrail" parent="." instance=ExtResource("3_hdrg3")]
-material = SubResource("ShaderMaterial_dbr5k")
-process_material = SubResource("ParticleProcessMaterial_ji80k")
+material = SubResource("ShaderMaterial_j86n8")
+process_material = SubResource("ParticleProcessMaterial_o844h")
 color = Color(1, 0, 0, 1)
 fall_off = 1.0
 particle_size = 18.06
