@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
+var punch_sound = preload("res://audio/HitEffect.mp3")
+
 @export var speed = 400.0
 @export var jump_speed = -700.0
 @onready var anim_tree_playback:AnimationNodeStateMachinePlayback = $Animations/AnimationTree["parameters/playback"]
@@ -42,6 +44,8 @@ func _ready():
 	
 func _process(delta):
 	if can_attack:
+		if(Input.is_action_pressed("Attack")):
+			$AudioStreamPlayer2D.play()
 		if(Input.is_action_pressed("Attack") and Input.is_action_pressed("down") and !is_on_floor()):
 			can_attack = false
 			anim_tree_playback.travel("DownAttack")
