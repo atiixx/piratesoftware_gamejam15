@@ -1,6 +1,6 @@
 extends BossState
 
-
+var rng = RandomNumberGenerator.new()
 # Virtual function. Receives events from the `_unhandled_input()` callback.
 func handle_input(_event: InputEvent) -> void:
 	pass
@@ -19,7 +19,6 @@ func physics_update(_delta: float) -> void:
 # Virtual function. Called by the state machine upon changing the active state. The `msg` parameter
 # is a dictionary with arbitrary data the state can use to initialize itself.
 func enter(_msg := {}) -> void:
-	print(name)
 	if boss.fight_started:
 		boss.state_change_timer.start()
 
@@ -30,6 +29,10 @@ func exit() -> void:
 	pass
 
 func change_state():
-	state_machine.transition_to("Shoot")
-	#state_machine.transition_to("Jump")
+	var random_number = rng.randi_range(0, 1)
+	match random_number:
+		0:
+			state_machine.transition_to("Shoot")
+		1:
+			state_machine.transition_to("Jump")
 

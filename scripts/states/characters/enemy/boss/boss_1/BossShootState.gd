@@ -21,7 +21,8 @@ func physics_update(_delta: float) -> void:
 func enter(_msg := {}) -> void:
 	if !boss.finished_phase.is_connected(change_state):
 		boss.finished_phase.connect(change_state)
-	boss.shoot()
+	if boss.health > 0:
+		boss.shoot()
 	
 		
 
@@ -31,7 +32,6 @@ func exit() -> void:
 	boss.state_change_timer.start()
 
 func change_state():
-	print("Signal received")
 	state_machine.transition_to("Idle")
 	
 
