@@ -275,21 +275,26 @@ position = Vector2(8172, -919)
 
 [node name="Movingenemy" parent="CharacterParent" instance=ExtResource("8_7nkcs")]
 position = Vector2(1780, -340)
+walking_speed = null
 
 [node name="Movingenemy2" parent="CharacterParent" instance=ExtResource("8_7nkcs")]
 position = Vector2(1422, -378)
+walking_speed = null
 
 [node name="FlyingEnemy" parent="CharacterParent" instance=ExtResource("9_gv5bx")]
 position = Vector2(4385, -1036)
 
 [node name="Movingenemy3" parent="CharacterParent" instance=ExtResource("8_7nkcs")]
 position = Vector2(8150, -270)
+walking_speed = null
 
 [node name="Movingenemy4" parent="CharacterParent" instance=ExtResource("8_7nkcs")]
 position = Vector2(9020, -277)
+walking_speed = null
 
 [node name="Movingenemy5" parent="CharacterParent" instance=ExtResource("8_7nkcs")]
 position = Vector2(9374, -286)
+walking_speed = null
 
 [node name="FlyingEnemy2" parent="CharacterParent" instance=ExtResource("9_gv5bx")]
 position = Vector2(9901, -954)

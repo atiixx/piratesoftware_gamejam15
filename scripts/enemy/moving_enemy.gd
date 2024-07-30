@@ -7,6 +7,7 @@ var direction = 1
 @onready var r_wall_detector: RayCast2D = $RWallDetector
 @onready var l_wall_detector: RayCast2D = $LWallDetector
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	health = 2

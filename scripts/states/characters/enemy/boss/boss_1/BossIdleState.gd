@@ -19,6 +19,7 @@ func physics_update(_delta: float) -> void:
 # Virtual function. Called by the state machine upon changing the active state. The `msg` parameter
 # is a dictionary with arbitrary data the state can use to initialize itself.
 func enter(_msg := {}) -> void:
+	boss.audio_streamer.get_node("IdleSound").play()
 	if boss.fight_started:
 		boss.state_change_timer.start()
 
@@ -26,7 +27,7 @@ func enter(_msg := {}) -> void:
 # Virtual function. Called by the state machine before changing the active state. Use this function
 # to clean up the state.
 func exit() -> void:
-	pass
+	boss.audio_streamer.get_node("IdleSound").stop()
 
 func change_state():
 	var random_number = rng.randi_range(0, 1)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://pwnyc7tauv7p"]
+[gd_scene load_steps=15 format=3 uid="uid://pwnyc7tauv7p"]
 
 [ext_resource type="Script" path="res://scripts/enemy/flying_enemy.gd" id="1_s6h6w"]
 [ext_resource type="Texture2D" uid="uid://cuqp8njno6o31" path="res://art/enemies/enemies.svg" id="2_mmup0"]
 [ext_resource type="Script" path="res://scripts/states/characters/CharacterStateMachine.gd" id="3_b3a26"]
 [ext_resource type="Script" path="res://scripts/states/characters/enemy/flying/FlyingEnemyIdleState.gd" id="4_q42it"]
 [ext_resource type="Script" path="res://scripts/states/characters/enemy/flying/FlyingEnemyPursuingState.gd" id="5_elkwo"]
+[ext_resource type="AudioStream" uid="uid://dfrt2lj1g52im" path="res://music/bat.wav" id="6_xdc6a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lfew3"]
 size = Vector2(122, 122)
@@ -108,11 +109,8 @@ libraries = {
 [node name="PlayerDetector" type="RayCast2D" parent="."]
 collision_mask = 3
 
-[node name="StateLabel" type="Label" parent="."]
-offset_left = -18.5714
-offset_top = -68.5714
-offset_right = 21.4286
-offset_bottom = -45.5714
-text = "State"
+[node name="noticedsound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_xdc6a")
+volume_db = -15.0
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]

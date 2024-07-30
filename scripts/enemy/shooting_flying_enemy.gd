@@ -6,6 +6,8 @@ extends Enemy
 @onready var state_label = $StateLabel
 @onready var shoot_timer = $ShootTimer
 var target: Vector2 = Vector2.ZERO
+@onready var shoot_audio = $shootaudio
+@onready var spotted_audio = $spottedaudio
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	health = 2
@@ -29,7 +31,7 @@ func _physics_process(delta):
 	
 			
 func shoot():
-	
+	shoot_audio.play()
 	sprite.play("Shoot")
 	var player_pos = player.global_position
 	var projectile_scene = load("res://scenes/enemies/enemy_projectile.tscn")
@@ -39,7 +41,6 @@ func shoot():
 	bullet.set_target(player_pos)
 
 func _on_bullet_hit_player():
-	print("hee")
 	player_hit.emit(self)
 	
 func _on_hurtbox_body_entered(body: Node2D):

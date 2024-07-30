@@ -33,6 +33,7 @@ func physics_update(_delta: float) -> void:
 # is a dictionary with arbitrary data the state can use to initialize itself.
 func enter(_msg := {}) -> void:
 	enemy.shoot_timer.start()
+	enemy.spotted_audio.play()
 
 
 # Virtual function. Called by the state machine before changing the active state. Use this function

@@ -3,8 +3,8 @@ extends Enemy
 @export var flying_speed = 8000
 @onready var player_detector: RayCast2D = $PlayerDetector
 @export var PLAYER_RAYCAST_LENGTH = 1600
-@onready var state_label = $StateLabel
 var target: Vector2 = Vector2.ZERO
+@onready var noticed_sound = $noticedsound
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -12,7 +12,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	state_label.text = enemy_state_machine.state.name
 	if health > 0:
 		sprite.flip_h = velocity.x > 0
 	if health == 0:

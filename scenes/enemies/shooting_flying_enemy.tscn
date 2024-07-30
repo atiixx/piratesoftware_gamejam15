@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://de7gbqs7t1ttr"]
+[gd_scene load_steps=15 format=3 uid="uid://de7gbqs7t1ttr"]
 
 [ext_resource type="Script" path="res://scripts/enemy/shooting_flying_enemy.gd" id="1_sxea8"]
 [ext_resource type="Texture2D" uid="uid://ct8vsqyomts3q" path="res://art/enemies/ghost_normal.png" id="2_ckgjx"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://ell6bkoupilo" path="res://art/enemies/ghost.png" id="3_kexp6"]
 [ext_resource type="Script" path="res://scripts/states/characters/enemy/flyingshooting/ShootingFlyingEnemyIdleState.gd" id="4_tckw3"]
 [ext_resource type="Script" path="res://scripts/states/characters/enemy/flyingshooting/ShootingFlyingEnemyPursuingState.gd" id="5_770an"]
+[ext_resource type="AudioStream" uid="uid://xfqgm233wm5f" path="res://music/ghost_shoot.wav" id="8_1tg4t"]
+[ext_resource type="AudioStream" uid="uid://c7g3edn5hpxxs" path="res://music/ghost_player_spot.wav" id="8_2dcer"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lfew3"]
 size = Vector2(122, 122)
@@ -116,6 +118,14 @@ text = "State"
 
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 2.0
+
+[node name="spottedaudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_2dcer")
+volume_db = -15.0
+
+[node name="shootaudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_1tg4t")
+volume_db = -15.0
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="timeout" from="ShootTimer" to="." method="shoot"]
