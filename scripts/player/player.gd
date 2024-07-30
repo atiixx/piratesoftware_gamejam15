@@ -44,6 +44,7 @@ var base_gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
 var gravity = base_gravity
 
 signal enemy_hit(body)
+signal player_died
 
 func _ready():
 	pass
@@ -105,12 +106,16 @@ func get_hit(source: Node2D):
 	getting_hit = false
 	
 func die():
-	print("you died")
-	health = 3
+	player_died.emit()
 	
 
+func respawn(respawn_marker):
+	health = 3
+	await get_tree().create_timer(0.5).timeout
+	global_position = respawn_marker.global_position
+	velocity = Vector2.ZERO
 
 func _on_hitboxes_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	if body.get_collision_layer_value(3):
 		if local_shape_index == 1:
-			velocity.y = jump_speed * 2
+			velocity.y = jump_speed

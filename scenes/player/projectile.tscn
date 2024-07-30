@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bop5efmf4jr2v" path="res://scenes/impact_damage.tscn" id="3_8upb2"]
 [ext_resource type="PackedScene" uid="uid://b4sqt0mxihxqw" path="res://scenes/effects/particle_trail.tscn" id="4_vhv8v"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vv2sp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tf4y0"]
 shader = ExtResource("2_wgbed")
 shader_parameter/color = null
 shader_parameter/fall_off = 2.0
@@ -17,7 +17,7 @@ point_count = 2
 [sub_resource type="CurveTexture" id="CurveTexture_ejusr"]
 curve = SubResource("Curve_2qqpw")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n4oob"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p0rye"]
 particle_flag_disable_z = true
 inherit_velocity_ratio = 0.061
 spread = 180.0
@@ -43,7 +43,7 @@ height = 26.0
 
 [node name="Projectile" type="RigidBody2D"]
 z_index = -10
-collision_layer = 0
+collision_layer = 8
 collision_mask = 5
 mass = 0.03
 freeze = true
@@ -53,9 +53,9 @@ contact_monitor = true
 script = ExtResource("1_revnl")
 
 [node name="ParticleTrail" parent="." instance=ExtResource("4_vhv8v")]
-material = SubResource("ShaderMaterial_vv2sp")
+material = SubResource("ShaderMaterial_tf4y0")
 position = Vector2(0, 16)
-process_material = SubResource("ParticleProcessMaterial_n4oob")
+process_material = SubResource("ParticleProcessMaterial_p0rye")
 particle_size = 7.0
 
 [node name="Line2D" type="Line2D" parent="."]

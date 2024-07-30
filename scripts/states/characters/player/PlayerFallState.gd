@@ -31,6 +31,9 @@ func exit() -> void:
 	player.gravity = player.base_gravity
 
 func check_for_transition():
+	if(player.velocity.y < 0):
+		state_machine.transition_to("Jump")
+		player.anim_tree_playback.travel("Jump")
 	if(player.is_on_floor() and player.velocity.x == 0):
 		state_machine.transition_to("Idle")
 		player.anim_tree_playback.travel("Idle")
