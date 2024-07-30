@@ -5,7 +5,9 @@ class_name Boss
 @onready var boss_state_machine = $BossStateMachine
 @onready var characters: Node2D = get_parent()
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
-@onready var dmg_anim_player: AnimationPlayer = $DamageAnimationPlayer
+@onready var boss_health = $CanvasLayer/Container/ProgressBar
+@onready var sprite := $Sprite2D
+var getting_hit = false
 var health: int = 5
 
 # Called when the node enters the scene tree for the first time.
@@ -18,12 +20,16 @@ func _process(delta):
 	pass
 
 func get_hit():
-	print(self, " got hit")
+	getting_hit = true
+	sprite.play("HURT")
 	health -= 1
-	if dmg_anim_player:
-		dmg_anim_player.play("got_hit")
+	boss_health.value = health
 	if health == 0:
 		die()
+	await get_tree().create_timer(0.2).timeout
+	getting_hit = false
 		
 func die():
-	queue_free()
+	sprite.play("DEATH")
+	sprite.animation_finished.connect(func(): queue_free())
+	

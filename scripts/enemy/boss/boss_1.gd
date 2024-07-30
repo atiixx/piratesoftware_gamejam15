@@ -1,7 +1,7 @@
 extends Boss
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-@onready var sprite := $Sprite2D
+
 @onready var state_label: Label = $StateLabel
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var state_change_timer: Timer = $PhaseChangeTimer
@@ -9,6 +9,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var projectile_spawns = $ProjectileSpawns
 @onready var markers = owner.find_child("Markers")
 @onready var camera: Camera2D = owner.get_node("CharacterParent").find_child("Camera2D")
+var rng = RandomNumberGenerator.new()
 var start_camera_pathing = false
 
 var player_is_left = true
@@ -19,15 +20,20 @@ signal finished_phase()
 signal player_hit(from)
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	health = 35
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if boss_state_machine.state.name == "Idle" and !getting_hit and health > 0:
+		sprite.play("IDLE")
+	elif boss_state_machine.state.name == "Jump" and !getting_hit and health > 0:
+		sprite.play("FLYING")
+		
 	player_is_left = player.global_position.x < global_position.x
 	state_label.text = boss_state_machine.state.name
 	if player:
 		sprite.flip_v = false
-		sprite.flip_h = player_is_left
+		sprite.flip_h = !player_is_left
 		
 
 func _physics_process(delta):
@@ -38,41 +44,32 @@ func shoot():
 	var spawn = ""
 	var player_pos = player.global_position
 	var player_left_on_shoot_start = player_pos.x < global_position.x
+	var projectile_scene = load("res://scenes/enemies/bosses/boss_projectile.tscn")
 	if player_left_on_shoot_start:
 		spawn = "R_%s"
 	else:
 		spawn = "L_%s"
-	var projectile_scene = load("res://scenes/enemies/bosses/boss_projectile.tscn")
-	var bullet = projectile_scene.instantiate()
-	owner.add_child(bullet)
-	bullet.position = projectile_spawns.find_child(spawn % "DOWN").global_position
-	bullet.set_target(player_pos)
-	if player_left_on_shoot_start:
-		anim_player.play("shoot_left")
-	else:
-		anim_player.play("shoot_right")
-	shoot_delay_timer.start()
-	await shoot_delay_timer.timeout
-	bullet = projectile_scene.instantiate()
-	owner.add_child(bullet)
-	bullet.position = projectile_spawns.find_child(spawn % "MID").global_position
-	bullet.set_target(player_pos)
-	if player_left_on_shoot_start:
-		anim_player.play("shoot_left")
-	else:
-		anim_player.play("shoot_right")
-	shoot_delay_timer.start()
-	await shoot_delay_timer.timeout
-	bullet = projectile_scene.instantiate()
-	owner.add_child(bullet)
-	bullet.position = projectile_spawns.find_child(spawn % "DOWN").global_position
-	bullet.set_target(player_pos)
-	if player_left_on_shoot_start:
-		anim_player.play("shoot_left")
-	else:
-		anim_player.play("shoot_right")
-	shoot_delay_timer.start()
-	await shoot_delay_timer.timeout
+	var shot_number = rng.randi_range(2, 6)
+	var spawn_point_string = "DOWN"
+	for i in range(shot_number):
+		sprite.play("ATTACK")
+		var rand_num = rng.randi_range(0, 3)
+		match rand_num:
+			0:
+				spawn_point_string = "DOWN"
+			1:
+				spawn_point_string = "MID"
+			2:
+				spawn_point_string = "UP"
+			3:
+				spawn_point_string = "DOWN"
+		var bullet = projectile_scene.instantiate()
+		owner.add_child(bullet)
+		bullet.position = projectile_spawns.find_child(spawn % spawn_point_string).global_position
+		bullet.set_target(player_pos)
+		shoot_delay_timer.start()
+		await shoot_delay_timer.timeout
+	
 	finished_phase.emit()
 		
 func jump_attack():
@@ -110,6 +107,7 @@ func _on_hurtbox_body_entered(body):
 
 func start_fight():
 	fight_started = true
-	camera.limit_left = markers.find_child("CamLimitLeft").position.x
-	camera.limit_right = markers.find_child("CamLimitRight").position.x
+	boss_health.set_deferred("visible", true)
+	camera.limit_left = markers.find_child("CamLimitLeft").global_position.x
+	camera.limit_right = markers.find_child("CamLimitRight").global_position.x
 	boss_state_machine.transition_to("Idle")
