@@ -6,14 +6,19 @@ func handle_input(_event: InputEvent) -> void:
 	if player.can_attack:
 		if(Input.is_action_pressed("Attack") and Input.is_action_pressed("down") and !player.is_on_floor()):
 			player.can_attack = false
+			player.is_attacking = true
 			player.anim_tree_playback.travel("DownAttack")				
+			player.attack_cd_timer.start()
 		elif (Input.is_action_pressed("Attack") and Input.is_action_pressed("up")):
 			player.can_attack = false
+			player.is_attacking = true
 			player.anim_tree_playback.travel("UpAttack")
+			player.attack_cd_timer.start()
 		elif(Input.is_action_just_pressed("Attack")):
 			player.can_attack = false
+			player.is_attacking = true
 			player.anim_tree_playback.travel("Attack")
-	pass
+			player.attack_cd_timer.start()
 
 
 # Virtual function. Corresponds to the `_process()` callback.
