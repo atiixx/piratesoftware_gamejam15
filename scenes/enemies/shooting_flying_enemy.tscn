@@ -109,13 +109,6 @@ libraries = {
 [node name="PlayerDetector" type="RayCast2D" parent="."]
 collision_mask = 3
 
-[node name="StateLabel" type="Label" parent="."]
-offset_left = -18.5714
-offset_top = -68.5714
-offset_right = 21.4286
-offset_bottom = -45.5714
-text = "State"
-
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 2.0
 

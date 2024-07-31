@@ -1,0 +1,21 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://bn7hp4da4jt8m"]
+
+[sub_resource type="SystemFont" id="SystemFont_mva81"]
+font_names = PackedStringArray("Bahnschrift")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jt0sh"]
+bg_color = Color(0.518268, 0, 0.0623655, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mwask"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SystemFont" id="SystemFont_nfawc"]
+font_names = PackedStringArray("Bahnschrift")
+
+[resource]
+Button/font_sizes/font_size = 32
+Button/fonts/font = SubResource("SystemFont_mva81")
+Button/styles/hover = SubResource("StyleBoxFlat_jt0sh")
+Button/styles/normal = SubResource("StyleBoxFlat_mwask")
+Label/fonts/font = SubResource("SystemFont_nfawc")
+VBoxContainer/constants/separation = 25

@@ -620,7 +620,7 @@ disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.24, 0.24)
-texture = ExtResource("2_glryq")
+texture = ExtResource("3_v2sxa")
 
 [node name="AttackSprite2D" type="Sprite2D" parent="Sprite2D"]
 visible = false
@@ -659,7 +659,7 @@ script = ExtResource("8_6wpxx")
 [node name="ModeStateMachine" type="Node" parent="."]
 script = ExtResource("12_kpybu")
 initial_state = NodePath("Basic")
-all_states = Array[NodePath]([NodePath("Basic"), NodePath("Shooting")])
+all_states = Array[String](["Basic", "Shooting"])
 
 [node name="Basic" type="Node" parent="ModeStateMachine"]
 script = ExtResource("13_7q07r")
