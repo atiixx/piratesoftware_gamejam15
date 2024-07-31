@@ -20,6 +20,8 @@ func reset():
 	current_level.queue_free()
 	current_level = scene.instantiate()
 	await add_child(current_level)
+	if current_level.player:
+		current_level.player.player_died.connect(_on_player_died)
 	current_level.level_one_finished.connect(_on_level_one_finished)
 	current_level.killboxes.body_entered.connect(_on_killboxes_body_entered)
 	
