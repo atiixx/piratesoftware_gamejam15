@@ -30,10 +30,11 @@ func exit() -> void:
 	boss.audio_streamer.get_node("IdleSound").stop()
 
 func change_state():
-	var random_number = rng.randi_range(0, 1)
-	match random_number:
-		0:
-			state_machine.transition_to("Shoot")
-		1:
-			state_machine.transition_to("Jump")
+	if boss.health > 0:
+		var random_number = rng.randi_range(0, 1)
+		match random_number:
+			0:
+				state_machine.transition_to("Shoot")
+			1:
+				state_machine.transition_to("Jump")
 

@@ -3,6 +3,7 @@ extends ModeState
 
 # Virtual function. Receives events from the `_unhandled_input()` callback.
 func handle_input(_event: InputEvent) -> void:
+	super.handle_input(_event)
 	if player.can_attack:
 		if(Input.is_action_pressed("Attack") and Input.is_action_pressed("down") and !player.is_on_floor()):
 			player.audio_streamer.get_node("AttackSound").play()

@@ -9,7 +9,7 @@ signal transitioned(state_name)
 # Path to the initial active state. We export it to be able to pick the initial state in the inspector.
 @export var initial_state = NodePath()
 
-@export var all_states: Array[NodePath] = []
+@export var all_states: Array[String] = []
 
 # The current active state. At the start of the game, we get the `initial_state`.
 @onready var state: ModeState = null
@@ -26,10 +26,6 @@ func _ready() -> void:
 
 # The state machine subscribes to node callbacks and delegates them to the state objects.
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("Switch Mode"):
-		var current_index = all_states.find(get_path_to(state))
-		if current_index >= 0:
-			transition_to(all_states[(current_index + 1) % all_states.size()])
 	state.handle_input(event)
 
 

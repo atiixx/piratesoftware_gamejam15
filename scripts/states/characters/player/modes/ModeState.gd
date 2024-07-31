@@ -11,7 +11,13 @@ enum WALL_DIRECTION {
 # Typed reference to the player node.
 var player: Player
 
-
+# The state machine subscribes to node callbacks and delegates them to the state objects.
+func handle_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("Switch Mode") and PlayerUnlocks.unlocked_shooting:
+		var current_index = state_machine.all_states.find(state_machine.state.name)
+		if current_index >= 0:
+			state_machine.transition_to(state_machine.all_states[(current_index + 1) % state_machine.all_states.size()])
+	
 func _ready() -> void:
 	# The states are children of the `Player` node so their `_ready()` callback will execute first.
 	# That's why we wait for the `owner` to be ready first.

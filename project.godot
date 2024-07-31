@@ -11,13 +11,15 @@ config_version=5
 [application]
 
 config/name="Piratesoftware_GameJam"
-run/main_scene="res://scenes/test_area.tscn"
+run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Enums="*res://enums.gd"
+SpawnPoint="*res://spawn_point.gd"
+PlayerUnlocks="*res://player_unlocks.gd"
 
 [display]
 

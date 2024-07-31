@@ -13,6 +13,8 @@ class_name Boss
 var getting_hit = false
 var health: int = 5
 
+signal boss_died()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -34,8 +36,13 @@ func get_hit():
 	getting_hit = false
 		
 func die():
+	player.unlock_shooting()
+	velocity = Vector2.ZERO
+	boss_state_machine.transition_to("Idle")
 	collision_shape.set_deferred("disable", true)
 	hurtbox.set_deferred("monitoring", false)
+	sprite.stop()
 	sprite.play("DEATH")
-	sprite.animation_finished.connect(func(): queue_free())
+	sprite.animation_finished.connect(func(): boss_died.emit())
+	
 	

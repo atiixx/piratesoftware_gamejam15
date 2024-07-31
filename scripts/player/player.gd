@@ -48,7 +48,8 @@ signal enemy_hit(body)
 signal player_died
 
 func _ready():
-	pass
+	if has_node("RespawnMarker"):
+		global_position = get_node("RespawnMarker").global_position
 	
 func _process(delta):
 	if velocity.x != 0 and character_state_machine.state.name != "Wall" and !getting_hit:
@@ -110,13 +111,10 @@ func die():
 	player_died.emit()
 	
 
-func respawn(respawn_marker):
-	health = 3
-	await get_tree().create_timer(0.5).timeout
-	global_position = respawn_marker.global_position
-	velocity = Vector2.ZERO
-
 func _on_hitboxes_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	if body.get_collision_layer_value(3):
 		if local_shape_index == 1:
 			velocity.y = jump_speed
+
+func unlock_shooting():
+	PlayerUnlocks.unlocked_shooting = true
