@@ -5,21 +5,13 @@ extends Node
 var current_level
 var scene
 func _ready():
-	var boss 
-	var player
-	if has_node("RangedBoss"):
-		boss = get_node("RangedBoss")
-		if boss:
-			boss.change_theme.connect(_on_change_theme)
-	if has_node("Player"):
-		player = get_node("Player")
-		if player:
-			player.player_died.connect(_on_player_died)
+	pass
 
 func _on_killboxes_body_entered(body):
 	reset()
 	
 func _on_player_died():
+	
 	reset()
 	
 func reset():
@@ -36,6 +28,8 @@ func _on_start_pressed():
 	current_level = scene.instantiate()
 	canvas_layer.set_deferred("visible", false)
 	await add_child(current_level)
+	if current_level.player:
+		current_level.player.player_died.connect(_on_player_died)
 	current_level.level_one_finished.connect(_on_level_one_finished)
 	current_level.killboxes.body_entered.connect(_on_killboxes_body_entered)
 
